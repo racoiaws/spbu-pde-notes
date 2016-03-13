@@ -1,0 +1,43 @@
+\documentclass[12pt, a4paper]{report}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{underscore}
+\setdefaultlanguage{russian}
+\usepackage[cm]{fullpage}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{esint}
+
+\setmainfont[Mapping=tex-text]{CMU Serif}
+
+\newcommand{\real}{\mathds{R}}
+\newcommand{\dsint}{\displaystyle \int}
+\newcommand{\eps}{\varepsilon}
+
+\DeclareMathOperator{\supp}{supp}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+
+\newtheorem{theorem}{Теорема}
+\newtheorem*{lemma}{Лемма}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+\newtheorem*{example}{Пример}
+
+\theoremstyle{remark}
+\newtheorem*{note}{Замечание}
+
+
+\begin{document}
+
+\title{Конспект лекций по уравнениям математической физики}
+\maketitle
+
+
+\input{part1.tex}
+\input{part2.tex}
+
+\end{document}
