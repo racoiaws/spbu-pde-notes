@@ -1,3 +1,4 @@
+% !TEX encoding = UTF-8 Unicode
 \documentclass[12pt, a4paper]{report}
 \usepackage{fontspec}
 \usepackage{polyglossia}
@@ -7,15 +8,20 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{mathtools}
-\usepackage{amssymb}
 \usepackage{dsfont}
 \usepackage{esint}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.12} 
+
 
 \setmainfont[Mapping=tex-text]{CMU Serif}
 
 \newcommand{\real}{\mathds{R}}
 \newcommand{\dsint}{\displaystyle \int}
+\newcommand{\intO}{\int \limits_{\Omega}}
 \newcommand{\eps}{\varepsilon}
+\newcommand{\ssubset}{\subset\joinrel\subset}
 
 \DeclareMathOperator{\supp}{supp}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
@@ -34,6 +40,7 @@
 \begin{document}
 
 \title{Конспект лекций по уравнениям математической физики}
+\author{Лектор: Степанов Евгений Олегович}
 \maketitle
 
 
