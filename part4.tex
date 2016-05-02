@@ -1,0 +1,232 @@
+% !TEX encoding = UTF-8 Unicode
+% лекция 4, 5 апреля 2016
+% Принцип максимума для уравнения теплопроводности во всем пространстве для функций, ограниченных в каждой полосе.
+% 2 следствия. Фундаментальное решение для уравнения теплопроводности. Теорема интегральная формула для решения 
+% задачи Коши для однородного уравнения теплопроводности в пространстве. Свойства решения. Решение задачи Коши для
+% неоднородного уравнения теплопроводности в пространстве. Метод Дюамеля.
+
+\section{Принцип максимума для уравнения теплопроводности во всем пространстве}
+Поставим задачу Коши для уравнения теплопроводности во всем пространстве:
+\begin{align}
+    \begin{cases} 
+        u_t - a^2 u_x = 0, \\
+        u (0, x) = \varphi (x).
+    \end{cases}
+\label{transcalency}
+\end{align}
+[рисунок, относится к цилиндрам]
+Будем рассматривать решения на бесконечных цилиндрах $u : \real^+ \times \real^n \rightarrow \real,$ считаем, что все производные существуют вплоть до $t = T$, поскольку решение рассматриваем на всем $\real^+ \times \real^n $.Ограничим класс интересующих нас функций, т.е. дополнительно потребуем: $ \forall T > 0 \quad \exists C = C(T) > 0 : |u(t, x)| \leq C(T) \quad \forall t \in [0, T] \quad \forall x \in \real^n$ (в каждой ограниченной полосе решение $u(t, x)$ - ограничено, ясно, что ограниченность зависит от $t$). Тогда имеем теорему в наших условиях:
+
+\begin{theorem}{(Принцип максимума для уравнения тепопроводности \\ в $\real^n$ для функций, ограниченных в каждой полосе).}
+
+Пусть $T > 0$ $$ M_+ = \sup_{\stackrel{x \in \real^n,} {t \in [0, T]}}u(t,x), \quad N_+ = \sup_{x \in \real^n} u(0, x), $$ то $M_+ = N_+$ (супремум по всей полосе есть супремум при $t = 0$)
+
+\begin{note}Очевидно, что $-\infty < N_+ \leq M_+ < +\infty.$ Почему очевидно? Потому что ограничено в полосе.\end{note}
+\end{theorem}
+
+\begin{proof}
+Рассмотрим произвольное $\eps.$
+$$v_\eps(t, x) = u(t, x) - \eps(2na^2t + \abs{x}^2), \qquad Lu = u_t - a^2v$$
+$$Lv_\eps = \underbrace{Lu}_{0} - \eps L(2na^2t + \abs{x}^2) = -\eps(2na^2 - 2n\bigtriangleup x^2) = -\eps(2na^2 - 2na^2) = 0,$$
+т.~к. $\bigtriangleup \abs{x}^2 = \bigtriangleup(x_1^2 + x_2^2 + \dots + x_n^2) = \sum_{i = 1}^{n} \dfrac{\partial^2 |x|^2}{\partial x_i^2} = 2n$, т.~о. $v_\eps$ --- тоже решение уравнения теплопроводности во всем пространстве.
+
+[picture] Теперь будем рассматривать открытые цилиндры $Q_{T,R} = (O,T)\times B_R(0)$, полоса --- объединение всех таких цилиндров по $R$. По принципу максимума для решения уравнения теплопроводности в ограниченной области (можем применить, т.к. цилиндр компактен) [здесь будет номер теормы вместо огромного названия] максимум и минимум достигаются на параболической границе. Посмотрим на поведение функции на параболической границе.
+Нижняя граница:
+$$ v_\eps (0,x) = u(0,x) - \eps |x|^2 \leq N_+ \forall x$$
+Боковая поверхность:
+$$v_\eps(t,x)\Bigl|_{\abs{x} = R} = u(t,x) \Bigl|_{\abs{x} = R} - \eps(2na^2t + R^2) \leq u(t,x)\Bigl|_{\abs{x} = R} - \eps R^2 \leq M_+ - \eps R^2 \leq N_+$$
+Подберем $R: \, M_+ - \eps R^2 \leq N_+$ (Почему так можно сделать? Использовали то, что $M_+$ и $N_+$ --- это числа, ни одно из них не бесконечность, $R(\eps)$ можно выразить как ${R(\eps) = \dfrac{\sqrt{M_+ - N_+}}{\eps} \stackrel{\eps \rightarrow 0} \longrightarrow \infty}$).
+
+Т.~о. $ v_\eps (t, x) \leq N_+ \, \forall (t,x) \in {Q_{T,R(\eps)}};$
+$(t,x) \in [0,T] \times \real^n$ нужно доказать, что $u(t,x) \leq N_+.$
+$$\text{При }\eps \rightarrow 0, \, \text{начиная с какого-то }\eps \, (t,x) \in Q_{T,R} \Rightarrow$$
+$$v_\eps(t,x) = u(t,x) - \eps(2na^2t - \abs{x}^2) \leq N_+ \forall \eps \geq \eps_0 \Rightarrow$$
+$$u(t,x) \leq N_+ + \eps\underbrace{(2na^2t + |x|^2)}_{const} \stackrel{\eps \rightarrow 0}{\Rightarrow} u(t,x) \leq N_+$$
+Т.~о. $M_+ = N_+.$
+\end{proof}
+
+\begin{consequence}{(Принцип минимума для уравнения теплопроводности во всем пространстве)}
+$$M_- = \inf_{\stackrel{x \in \real^n, \,} {t \in [0, T]}}u(t,x); \qquad N_- = \inf_{x \in \real^n}u(0,x),$$
+то $M_-=N_-$ (инфимум по полосе равен инфимуму по нижней границе).
+\end{consequence}
+
+\begin{consequence}{(Единственность)}
+Рассмотрим задачу Коши для неоднородного уравнения:
+\begin{align}
+    \begin{cases} 
+        u_t - a^2 \bigtriangleup u = q, \\
+        u (0, x) = \varphi (x).
+    \end{cases}
+\label{transcalencynonhom}
+\end{align}
+Классическое решение для задачи \eqref{transcalencynonhom} --- единственное в классе функций, ограниченных в каждой полосе.
+\end{consequence}
+
+\begin{proof}
+Пусть $u_1, \, u_2 $ --- два решения. $L$ --- оператор теплопроводности.
+$$Lu_1=Lu_2=q \Rightarrow L(u_1 - u_2) = 0;$$
+$$u_1\Bigl|_{t=0} = u_2\Bigl|_{t=0}=\varphi(x) \Rightarrow (u_1-u_2)\Bigl|_{t=0}=0,$$
+т.~о. $u = u_1 - u_2$ --- решение однородной задачи с нулевыми начальными условиями (в том же классе ограниченных в полосе функций), т.~о. по теореме 3 $\sup u = 0 \, \text{и} \, \inf u = 0 \Rightarrow u \equiv 0 \Rightarrow u_1 = u_2.$
+\end{proof}
+
+\begin{note}
+Условие ограниченности в каждой полосе необходимо, т.к. если его убрать, решение не будет единственным, будет решение в полосе и еще какое-то быстрорастущее решение, единственности нет. Неединственность относится уже не к теплопроводности, поэтому физики тоже накладывают ограничения, чтобы получать единственное решение, относящееся к теплопроводности.
+\end{note}
+
+\section{Фундаментальное решение для уравнения теплопроводности}
+
+Хотим получить решение для системы \eqref{transcalency}. Получим --- фундаментальное решение уравнения теплопроводности (в ходе решения будем накладывать некоторые специфические условия на решение).
+
+Рассмотрим $a = 1$ иначе можно сделать замену $x \rightarrow \dfrac{x}{a}$ (делаем это для упрощения вычислений).
+
+\begin{enumerate}
+\item $u(t,x) = \lambda^\alpha u(\lambda t, \lambda^\beta x) \quad \forall \lambda$ (т.~е. хотим частичную линейность решения)
+
+Рассмотрим $\lambda = \dfrac{1} {t}. \, \alpha, \, \beta$ --- неизвестны.
+$$u(t,x) = \dfrac{1}{t^\alpha}(1, \dfrac{x}{t^\beta}) \text{. Обозначим } \, u(1,z) = v(z) \Rightarrow u(t,x) = \dfrac{1}{t^\alpha} v(\dfrac{x}{t^\beta}).$$
+Посчитаем $Lu = 0$:
+$$-\dfrac{\alpha}{t^{\alpha + 1}} v\left( \dfrac{x}{t^\beta}\right) - \dfrac{\beta}{t^{\alpha + \beta + 1}}\nabla v\left( \dfrac{x}{t^\beta}\right)\cdot x - \dfrac{1}{t^\alpha t^{2\beta}}\bigtriangleup v\left( \dfrac{x}{t^\beta}\right) = 0.$$
+$$\left(\text{т.к.} \, \dfrac{\partial}{\partial t} \left(v\left( \dfrac{x}{t^\beta}\right)\right) = \sum \dfrac{ \partial v}{\partial x_i}\left(\dfrac{x}{t^\beta}\right) \cdot \dfrac{-\beta x_i}{t^{\beta + 1}} = -\dfrac{\beta}{t^{\beta + 1}}\nabla v\left( \dfrac{x}{t^\beta}\right) \cdot x \right)$$
+
+Сделаем замену $ y = \dfrac{x} {t^\beta}.$
+$$ \dfrac{\alpha}{t^{\alpha + 1}} v(y) + \dfrac{\beta}{t^{\alpha + 1}} \nabla v(y) \cdot y + \dfrac{1}{t^\alpha  t^{2\beta}}\bigtriangleup v(y)=0.$$
+
+Пусть $\beta = \dfrac{1}{2}$ и умножаем полученное выражение на $t^{\alpha + 1}:$
+$$\alpha v(y) + \dfrac{1}{2} \nabla v(y) \cdot y + \bigtriangleup v(y) = 0.$$
+
+\item $u(t,x) = \tilde{u}(t,|x|)$ --- хотим симметрии относительно 0, т.~о. $v(y) = w(|y|), |y| = r.$ Тогда получим:
+$$ \alpha w(r) + \dfrac{1}{2} w'(r) \cdot r + w''(r) + \dfrac{n}{r}w'(r) = 0;$$
+$$\text{т.~к.} \quad \bigtriangleup v(y) = \dfrac{\partial^2v}{\partial y_1^2} + \dots + \dfrac{\partial^2v}{\partial y_n^2};$$
+$$\dfrac{\partial w}{\partial y_i} = w' \dfrac{\partial |y|}{\partial y_i} = w' \dfrac{y_i}{r} \Rightarrow 
+\dfrac{\partial^2 w}{\partial y_i^2} = w''\dfrac{y_i^2}{r^2} + w'\left(\dfrac{1}{r} - \dfrac{y_i^2}{r^2}\right) \Rightarrow$$
+$$\bigtriangleup w(r) = \dfrac{w''}{r^2}\sum y_i^2 + \dfrac{w'}{r}\sum (1 - \dfrac{y_i^2}{r^2}) = w'' + \dfrac{w'n}{r}.$$
+
+Пусть $\alpha = \dfrac{n}{2}.$
+$$\dfrac{n}{2}w(r) + \dfrac{1}{2}w'(r) \cdot r + w''(r) + \dfrac{n-1}{r}w'(r) = 0 \Rightarrow$$$$ \dfrac{1}{2}\left(r^nw\right)' + \left(r^{n-1}w'\right)' = 0 \Rightarrow \dfrac{1}{2}\left(r^nw\right)+ \left(r^{n-1}w'\right) = \gamma.$$
+
+\item $r^aw_n' + r^bw \rightarrow 0 \, \text{при} \, n \rightarrow \infty$ --- хотим, чтобы это выполнялось, такое возможно только при $\gamma = 0,$ т.~о.
+$$r^{n-1}w_r' + \dfrac{1}{2}r^nw = 0 \Rightarrow w_r' + \dfrac{r}{2}w = 0 \Rightarrow$$
+$$\dfrac{dw}{w} = -\dfrac{r}{2}dr \Rightarrow w = be^{-\dfrac{r^2}{4}},$$
+$$\text{т.~о.} \, u(t,x) = \dfrac{1}{\sqrt{t^n}}u\left(1, \dfrac{x}{\sqrt{t}}\right) = \dfrac{1}{\sqrt{t^n}}w\left(\dfrac{x}{\sqrt{t}}\right) = \dfrac{b}{\sqrt{t^n}}e^{-\dfrac{|x|^2}{4t}}.$$
+
+Получили однопараметрическое семейство решений.
+\begin{note}Если зафиксируем $t$, то полученное выражение --- гауссова функция(нормальное распределение)[рисунок], чем $t$ меньше, тем выше "пика" на графике, соответственно, чем больше, тем более сглаженным будет график.
+\end{note}
+Теперь определенным образом выберем константу, пусть $b\,:\,b>0; \, \int\limits_{\real^n} u(t,x)dx = 1.$
+
+\begin{note}
+Нужно уметь вычислять $b$.
+\end{note}
+
+$$b = \dfrac{1}{(4\pi)^{n/2}} \Rightarrow$$$$ u(t,x) = \dfrac{1}{(4\pi t)^{n/2}} \exp\left(-\dfrac{|x|^2}{4t}\right) = \Phi(t,x) \,\text{--- фундаментальное решение уравнения теплопроводности.}$$
+\begin{note}
+Что если $a \not= 1$?
+\end{note}
+\end{enumerate}
+
+\begin{theorem}(Интегральная формула для решения задачи Коши)
+$ \varphi\in C_b(\real^n)$ --- ограниченная и непрерывная(начальное распределение). Тогда
+$$u(t,x) = \int\limits_{\real^n}\Phi(t, x-y)\varphi(y)dy (= \left(\Phi(t,\cdot)*\varphi\right)(x) \text{ --- свертка.})$$
+\begin{enumerate}
+\item $u \in C^\infty\left(\left(0, +\infty\right)\times \real^n\right);$
+\item $ u_t - \bigtriangleup u = 0$ --- т.~е. решение уравнения теплороводности;
+\item $\lim\limits_{(t,\,y) \rightarrow (0,\,x)}u(t,x) = \varphi (x).$
+\end{enumerate}
+\end{theorem}
+\begin{note}{Физический смысл фундаментального решения.} %%%слишком много сказано, нужно ли писать, вроде смысла нет.
+$\Phi$ - распределение температуры от единичного источника (источник с температурой единица), сосредоточенного в одной точке. 
+\end{note}
+\begin{proof}
+\begin{enumerate}
+\item $\Phi \in  C^\infty\left(\left(0, +\infty\right)\times \real^n\right)$ --- очевидно.
+$$u_t = \int\limits_{\real^n} \Phi_t(t,x-y)\varphi(y)dy, \qquad u_{x_i} = \int\limits_{\real^n} \Phi_{x_i}(t, x-y)\varphi(y)dy$$
+
+Очевидно, $u \in C^\infty.$
+\item $Lu = u_t - \bigtriangleup u = \int\limits_{\real^n} \underbrace{(\Phi_t - \bigtriangleup \Phi)(t, x-y)}_{0}\varphi(y) dy = 0.$
+\item Пусть $x_0 \in \real^n.$
+$$|u(t,x) - \varphi(x_0)| = \Bigl|\int\limits_{\real^n}{\Phi(t,x-y)\varphi(y)dy} - \varphi(x_0)\Bigl| = \Bigl|\int\limits_{\real^n}\Phi(t,x-y)\varphi(y)dy - \varphi(x_0)\int\limits_{\real^n}\Phi(t,x-y)dy\Bigl|=$$
+$$=\Bigl|\int\limits_{\real^n}\Phi(t,x-y)(\varphi(y) - \varphi(x_0))dy\Bigl| \leq \int\limits_{\real^n}\Phi(t,x-y)\bigl|\varphi(y) - \varphi(x_0)\bigl|dy = $$
+$$= \underbrace{\int\limits_{B_\delta(x_0)}\Phi(t,x-y)\bigl|\varphi(y) - \varphi(x_0)\bigl|dy}_{I_\delta} + \underbrace{\int\limits_{\real^n \setminus B_\delta(x_0)}\Phi(t,x-y)\bigl|\varphi(y) - \varphi(x_0)\bigl|dy}_{J_\delta}.$$
+
+Пусть $\eps > 0.$ Выберем такое $\delta,$ что $\bigl|\varphi(y) - \varphi(x_0)\bigl|<\dfrac{\eps}{2}$ при $y \in B_\delta(x_0)$ (Такое $\delta \, \exists,$ т.~к. $\varphi$ --- непрерывна).
+
+Тогда $I_\delta \leq \dfrac{\eps}{2}, \, \text{т.к.} \int\limits_{\real^n}\Phi = 1.$
+
+Пусть $|x - x_0| < \dfrac{\delta}{2}, \, y \notin B_\delta(x_0) \Rightarrow |x - y| \geq \dfrac{1}{2}|x_0 - y|.$
+$$J_\delta \leq 2||\varphi||_\infty \cdot \int\limits_{\real^n \setminus B_\delta(x_0)} \Phi(t,x-y)dy = 2||\varphi||_\infty \dfrac{1}{(4\pi t)^{n / 2}} \int\limits_{B_{\delta}^c} e^{-\dfrac{|x-y|^2}{4t}}dy \leq $$$$\leq 2||\varphi||_\infty \dfrac{1}{(4\pi t)^{n / 2}} \int\limits_{B_{\delta}^c} e^{-\dfrac{|x_0-y|^2}{16t}}dy \leq \dfrac{C}{(4\pi t)^{n / 2}} \int\limits_\delta^{+\infty} e^{-\dfrac{\rho^2}{16t}}\rho^{n-1}d\rho =  $$$$ = C\int\limits_{\delta / \sqrt{t}}^{+\infty} e^{-\dfrac{\rho^2}{16t}}\rho^{n-1}d\rho \stackrel{t\rightarrow 0}{\longrightarrow} 0$$
+$$\delta: \, t < \dfrac{\delta}{2}, \, J_\delta \leq \dfrac{\eps}{2}, \Rightarrow I = I_\delta + J_\delta \leq \eps, \, |x-x_0| < \dfrac{\delta}{2}, \, 0<t<\dfrac{\delta}{2} \Rightarrow $$$$ |u(t,x) - \varphi(x_0)|<\eps$$
+\end{enumerate}
+\end{proof}
+
+\section{Решение задачи Коши для неоднородного уравнения теплопроводности в пространстве. Метод Дюамеля}
+\begin{align}
+    \begin{cases} 
+        u_t - \bigtriangleup u = f, \\
+        u (0, x) = \varphi (x).
+    \end{cases}
+\label{transcalencynonhom2}
+\end{align}
+$t \in \real^+,\, x \in \real^n, f=f(t,x)$
+
+\begin{note}
+
+Достаточно решать для случая $\varphi = 0, \, f \not= 0 \, \text{и} \, \varphi \not=, \, f = 0,$ т. е. пусть $u_1, \, u_2 :$
+\begin{equation*}
+\begin{cases} 
+        Lu_1 = f, \\
+        u_1\Bigl|_{t=0} = 0.
+    \end{cases}
+    \qquad
+    \begin{cases} 
+        Lu_2 = 0, \\
+        u_2\Bigl|_{t=0} = \varphi (x).
+    \end{cases}
+\end{equation*}
+Тогда $u = u_1+u_2:$
+\begin{align}
+\begin{cases} 
+        Lu = f, \\
+        u\Bigl|_{t=0} = \varphi (x).
+    \end{cases}
+    \end{align}
+\end{note}
+
+{\itshape Принцип Дюамеля.} Пусть $\varphi = 0$
+\begin{equation*}
+v(t,x,s) : \quad
+    \begin{cases} 
+        v_t - \bigtriangleup v = 0, \\
+        v\Bigl|_{t=s} = f(s, \,).
+    \end{cases}
+\end{equation*}
+$$u(t,x) = \int\limits_0^tv(t,x,s)ds = \int\limits_0^t ds \int\limits_{\real^n}\Phi(t-s, x-y)f(s,y)dy.$$
+
+\begin{theorem}
+Пусть $ u(t,x) = \int\limits_0^t ds \int\limits_{\real^n}\Phi(t-s, x-y)f(s,y)dy,$ тогда при $f\in C_x^2, \, C_t^1, f $ --- финитная $\in C_0^\infty( (0,+\infty) \times \real^n),$
+\begin{enumerate}
+\item $u \in C_t^1, \, u \in C_x^2;$
+\item $u_t(t,x) - \bigtriangleup u(t,x) = f, \, u(0,x) = 0;$
+\item $\lim u(t,x) = 0$ при $(t,x) \rightarrow (0,x_0) \forall x_0 \in \real^n.$
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+
+$$u(t,x) = \int\limits_0^t ds \int\limits_{\real^n} \Phi(s,y)f(t-s, x-y)dy \, \text{--- свертка},$$ т.к. $f\in C_x^2, \, C_t^1, f $ --- финитная и $\Phi(s,y)$ гладкая в окрестности $s = t >0:$
+$$\dfrac{\partial^2u}{\partial x_i^2} = \int\limits_0^t ds \int\limits_{\real^n} \Phi(s,y)f_{x_i x_i}(t-s, x-y)dy;$$
+$$u_t = \int\limits_{\real^n} \Phi(t,y)f(0,x-y)dy + \int\limits_0^t ds\int\limits_{\real^n} \Phi(s,y)f_t(t-s, x-y)dy,$$ т.е. $u \in C_t^1, \, u \in C_x^2.$
+
+$$u_t - \bigtriangleup u = \int\limits_{\real^n} \Phi(t,y)f(0,x-y)dy + \int\limits_0^t ds\int\limits_{\real^n} \Phi(s,y)f_t(t-s, x-y)dy-$$$$ - \int\limits_0^t ds \int\limits_{\real^n}dy\underbrace{\sum \Phi(s,y)f_{x_i x_i}(t-s, x-y)}_{\Phi(s,y)\bigtriangleup f(t-s, x-y)} = $$
+$$= \int\limits_{\real^n} \Phi(t,y)f(0,x-y)dy + \int\limits_0^t ds \int\limits_{\real^n}dy \Phi(s,y)(-\dfrac{\partial}{\partial s} - \bigtriangleup y) = $$ $$= \underbrace{ \int\limits_0^\eps ds \int\limits_{\real^n}\Phi(s,y)\left(\left(-\dfrac{\partial}{\partial s} - \bigtriangleup y\right)f(t-s, x-y)\right)dy}_{I_\eps} + \underbrace{\int\limits_{\real^n} \Phi(t,y)f(0,x-y)dy}_{k} + $$
+$$+ \underbrace{\int\limits_\eps^t ds \int\limits_{\real^n} \Phi(s,y)\left(\left(-\dfrac{\partial}{\partial s} - \bigtriangleup y\right)f(t-s, x-y)\right)dy}_{J_\eps}.$$
+$$\abs{I_\eps} \leq \left(||f_t||_\infty + ||\bigtriangleup_x f||_\infty\right)\int\limits_0^\eps ds \int\limits_{\real^n}\Phi(s,y)dy = C\eps.$$
+$$J_\eps = \int\limits_\eps^t ds \underbrace{\int\limits_{\real^n}\left(\left(\dfrac{\partial}{\partial s} - \bigtriangleup y\right)\Phi(s,y)\right)f(t-s, x-y)dy}_{0, \, \text{т.к.} \, \Phi \, \text{--- решение однородного уравнения}} + \int\limits_{\real^n} \Phi(\eps, y)f(t-\eps, x-y)dy - $$ $$-\underbrace{\int\limits_{\real^n} \Phi(t,y)f(0,x-y)dy}_{\text{это} \, k}.$$
+При $\eps \rightarrow 0:$
+$$u_t - \bigtriangleup u = \lim_{\eps \rightarrow 0} \int\limits_{\real^n}\Phi(\eps, y)f(t-\eps, x-y)dy = \lim_{\eps \rightarrow 0} \int\limits_{\real^n}\Phi(\eps, x-y)f(t-\eps, y)dy = f(t,x) \Rightarrow$$ $\Rightarrow u$ --- решение.
+
+$$\abs{u(t,x)} \leq \int\limits_0^t ds \int\limits_{\real^n}\Phi(s,y)\underbrace{\abs{f(t-s, x-y)}}_{\leq C, \, \text{т.к. финитная}}dy \leq C\int\limits_0^t ds \int\limits_{\real^n}\Phi(s,y)dy = Ct \stackrel{t \rightarrow 0} \longrightarrow 0. $$
+\end{proof}
+
+
+
+
