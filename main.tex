@@ -5,15 +5,20 @@
 \usepackage{underscore}
 \setdefaultlanguage{russian}
 \usepackage[cm]{fullpage}
+\usepackage{latexsym}
 \usepackage{amsthm}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{mathtools}
 \usepackage{dsfont}
 \usepackage{esint}
-
+\usepackage{mathrsfs}
+%\usepackage[parfill]{parskip}
 \usepackage{pgfplots}
+\usepackage{graphicx}
 \pgfplotsset{compat=1.12} 
 
+\graphicspath{ {illustrations/} }
 
 \setmainfont[Mapping=tex-text]{CMU Serif}
 
@@ -22,20 +27,31 @@
 \newcommand{\intO}{\int \limits_{\Omega}}
 \newcommand{\eps}{\varepsilon}
 \newcommand{\ssubset}{\subset\joinrel\subset}
+\newcommand{\beauD}{\mathscr{D}}
+\newcommand{\unicom}{\overrightarrow{\rightarrow}}
+\newcommand\pder[2][]{\ensuremath{\frac{\partial#1}{\partial#2}}} 
+% гамильтониан - \nabla
+% лапласиан - \Delta
+% даламбертиан - \square
 
 \DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Div}{div}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\action{<}{>}
 
 \newtheorem{theorem}{Теорема}
 \newtheorem*{lemma}{Лемма}
-\newtheorem*{consequence}{Следствие}
+\newtheorem*{corollary}{Следствие}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Определение}
 \newtheorem*{example}{Пример}
+\newtheorem*{examples}{Примеры}
 
-\theoremstyle{remark}
+%\theoremstyle{remark}
 \newtheorem*{note}{Замечание}
+\newtheorem*{exercise}{Упражнение}
 
 
 \begin{document}
@@ -47,6 +63,8 @@
 
 \input{part1.tex}
 \input{part2.tex}
+\input{part3.tex}
 \input{part4.tex}
+\input{part5.tex}
 
 \end{document}
