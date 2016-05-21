@@ -10,24 +10,97 @@
 % 26. Функция Грина внутренней задачи Дирихле для уравнения Пуассона. Функция Грина для шара
 
 \section{Гармонические функции}
-\subsection{Свойства гармонических функций}
-\begin{definition}
-$u$ --- гармоническая функция в $\Omega$, если является решением уравнения Лапласа $-\Delta u = 0.$
+\begin{definition} Пусть $\Omega \subset \real^n$ - область. Функция называется гармонической в $\Omega$, если она является классическим решением уравнения Лапласа:
+$$-\Delta u = 0, \quad u \in C^2(\Omega)$$
 \end{definition}
 \begin{note}
-$u\in C^2(\Omega)\cap C(\overline{\Omega}), \Omega$ --- ограничена, тогда 
-$$0 = \int\limits_\Omega \Delta u dx = \int\limits_\Omega 1\cdot \Delta udx = -\int\limits_\Omega\underbrace{\nabla 1}_{0}\nabla udx+\int\limits_{\partial\Omega}1\cdot\dfrac{\partial u}{\partial \nu}d\sigma\,\Rightarrow\, \int\limits_{\partial\Omega}\dfrac{\partial u}{\partial \nu}d\sigma = 0.$$
+Очевидно, в $\real$ функция будет гармонической тогда и только тогда, когда она линейна.
 \end{note}
 
-\begin{theorem}[Теорема о среднем для гармонических функций]
-Пусть $u\in C^2(\Omega), -\Delta u = 0,$ тогда $$u(x_0)=\fint\limits_{\partial B_\eps(x_0)}u(x)d\sigma(x)=\fint\limits_{B_\eps(x_0)}u(x)dx\quad \forall\eps\,:\,\overline{B}_\eps(x_0)\subset\Omega.$$
+\subsection{Свойства гармонических функций}
 \begin{note}
-Если $u\in C(\overline{\Omega}), \, \eps_0\,:\,B_\eps(x_0)$ касается границы, то утверждение верно $\forall \eps\leq\eps_0.$ 
+Пусть $\Omega \subset \real^n$ - ограниченная область, а $u \in C^2(\Omega)\cap C(\overline{\Omega})$ - гармоническая. Тогда 
+$$0 = \int \limits_\Omega \Delta \, u dx = -\int \limits_\Omega \underbrace {\nabla 1}_{0} \cdot \nabla u dx + \int \limits_{\partial\Omega} 1 \cdot \dfrac{\partial u}{\partial \nu}d\sigma\,\Rightarrow\, \int\limits_{\partial\Omega}\dfrac{\partial u}{\partial \nu}d\sigma = 0.$$
+Дадим физическую интерпретацию этому замечанию. Уравнение Лапласа задаёт стационарное температурное поле без источников и стоков теплоты. Чтобы такое поле существовало, необходимо, чтобы суммарный поток тепла через границу области должен быть равен нулю.
 \end{note}
+
+\begin{theorem}[о среднем для гармонических функций]
+Пусть $\Omega \subset \real^n$, $n > 2$, $u$ - гармоническая в $\Omega$, тогда для любого $x_0 \in \Omega$ верно следующее:
+$$u(x_0) = \fint \limits_{\partial B_\eps(x_0)} u(x) d\sigma(x) = \fint \limits_{B_\eps(x_0)} u(x)dx, \quad \forall \eps > 0 \,:\, \overline{B}_\eps(x_0)\subset\Omega.$$
+То есть, значение гармонической функции в точке равно как среднему по границе шара, так и среднему по шару с центром в этой точке для любого шара в $\Omega$.
 \end{theorem}
-\begin{proof}
-$u(x_0)\stackrel{\text{по } \MakeUppercase{\romannumeral3}\text{ ф. Грина}}= $
+
+\begin{proof}Для начала докажем первое равенство. Пользуясь третьей формулой Грина, получаем
+
+\begin{align*}
+u(x_0) & = \int \limits_{\partial B_{\eps}(x_0)} \Phi(x-x_0) \pder[u]{\nu} d\sigma - \int \limits_{\partial B_{\eps}(x_0)} u \pder[\Phi]{\nu} d\sigma - \underbrace {\int \limits_{B_{\eps}(x_0)} \Delta u \Phi (x-x_0) dx}_{=0} = \\
+& = \frac {1} {n(n-2)\omega_n}\left(\int \limits_{\partial B_{\eps}(x_0)} \frac {1} {\abs{x - x_0}}^{n-2} \pder[u]{\nu} d \sigma - \int \limits_{\partial B_{\eps}(x_0)} u \pder[]{\nu}\left(\frac {1} {\abs{x-x_0}^{n-2}}\right) d \sigma \right) = \\
+& = \frac {1} {n(n-2)\omega_n} \left( \frac {1} {\eps^{n-2}} \underbrace {\int \limits_{\partial B_{\eps}(x_0)} \pder[u]{\nu} d \sigma}_{=0 \text{ по замечанию}} - \int \limits_{\partial B_{\eps}(x_0)} u \frac {n-2} {\eps^{n-1}} d \sigma  \right) = \\
+& = \frac {1} {n \omega_n \eps^{n-1}} \int \limits_{\partial B_{\eps} (x_0)} u d \sigma = \fint \limits_{\partial B_{\eps} (x_0)} u d \sigma.
+\end{align*}
+Первое равенство доказано. Докажем второе. Перепишем интеграл по шару в сферической системе координат:
+\begin{align*}
+\int \limits_{B_{\eps} (x_0)} u dx &= \int \limits_0^\eps r^{n-1} dr \int \limits_{\partial B_1 (0)} u(\underbrace {x_0 + rs}_{=z}) d \sigma(s) = \int \limits_0^\eps dr \underbrace {\int \limits_{\partial B_r (x_0)} u(z) d \sigma(z)}_{\text{площадь поверхности } \cdot u(x_0)} = \\
+& = \int \limits_0^\eps u(x_0) \sigma(\partial B_r(x_0)) dr = u(x_0) \abs{B_\eps (x_0)}.
+\end{align*}
+Итого,
+$$u(x_0) = \fint \limits_{B_{\eps} (x_0)} u dx.$$
+
 \end{proof}
 
+\begin{note}
+При $n = 2$ счёт происходит аналогично.
+\end{note}
+
+\begin{note}
+Пусть $u \in C(\overline{\Omega})$ (непрерывна вплоть до границы). Тогда если есть шар $B_{\eps_0}$, касающийся границы $\Omega$, то утверждение теоремы верно для $\eps \leq \eps_0$. 
+\end{note}
+\begin{proof}
+Пользуясь формулой (*) (?????) и непрерывностью $u$, переходим к пределу.
+
+\end{proof}
+
+\begin{theorem}[Обратная теорема о среднем]
+Пусть $\Omega \subset \real^n$ - область, $u \in C(\Omega)$. Если для любого шара $B_\rho (x_0)$, замыкание которого лежит в $\Omega$, выполняется
+$$ u(x_0) = \fint \limits_{B_\rho(x_0)} u(x) dx,$$
+то $u$ - гармоническая. 
+\end{theorem}
+\begin{note}
+Пусть выполняются условия теоремы, тогда $u$ удовлетворяет соотношению
+$$ u(x_0) = \fint \limits_{\partial B_\rho(x_0)} u(x) dx$$
+\end{note}
+\begin{proof}[Доказательство первого замечания]
+Снова воспользуемся сферическими координатами:
+$$u(x_0) \cdot \abs{B_\rho (x_0)} = \int \limits_{B_\rho (x_0)} u(x) dx = \int \limits_0^\rho dr \int \limits_{\partial B_r (x_0)} u(z) d \sigma(z).$$
+В то же время
+$$ u(x_0) \cdot \abs{B_\rho (x_0)} = u(x_0) \cdot \omega_n \rho^n.$$
+Приравняем и продифференцируем по $\rho$:
+$$ u(x_0) \cdot \underbrace {\omega_n n \rho^{n-1}}_{= \sigma(\partial B_\rho (x_0))} = \int \limits_{\partial B_\rho (x_0)} u(z) d\sigma(z).$$
+Итого
+$$ u(x_0) = \fint \limits_{\partial B_\rho (x_0)} u(z) d\sigma(z).$$
+
+\end{proof}
+
+\begin{note}
+Теорема верна в предположении, что $u \in C^2 (\Omega)$.
+\end{note}
+\begin{proof}[Доказательство второго замечания]
+Дифференцируем соотношение из условия теоремы по $rho$:
+\begin{align*}
+0 &= \frac {d} {d\rho} \left( \frac {1} {n \omega_n \rho^{n-1}} \int \limits_{\partial B_\rho (x_0)} u(x) d\sigma(x) \right) = 
+ \frac {d} {d\rho} \left( \frac {1} {n \omega_n} \int \limits_{\partial B_1(0)} u(x_0 + \rho s) d\sigma(s) \right) = \\
+&= \frac {1} {n \omega_n} \int \limits_{\partial B_1 (0)} \nabla u(x_0 + \rho s) \cdot s d\sigma(s) = 
+ \frac {1} {n \omega_n} \int \limits_{\partial B_1 (0)} \pder[u]{s}(x_0 +\rho_s) d\sigma(s) = \\
+&= \frac {1} {n \omega_n \rho^{n-1}} \int \limits_{\partial B_\rho (x_0)} \pder[u]{n}(z) d\sigma(z) = 
+ \frac {1} {n \omega_n \rho^{n-1}} \int \limits_{B_\rho (x_0)} \Delta u (z) dz = 0, \quad \forall \rho
+\end{align*}
+Таким образом,
+$$\Delta u(x_0) = 0, \quad \forall x_0 \in \Omega$$
+
+\end{proof}
+
+\begin{proof}[Доказательство теоремы]
+TODO
+\end{proof}
 \subsection{Функция Грина}
 TODO

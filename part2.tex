@@ -30,7 +30,7 @@
 \end{equation}
 
 \begin{exercise}
-При каких $\varphi$ и $\phi$ $\eqref{wavehomans}$ - решение $\eqref{waveequation}$? (Ответ: $\varphi \in C^2$, $\psi \in C^1$)
+При каких $\varphi$ и $\psi$ $\eqref{wavehomans}$ - решение $\eqref{waveequation}$? (Ответ: $\varphi \in C^2$, $\psi \in C^1$)
 \end{exercise}
 
 Имем общее решение волнового уравнения. Поставим для него задачу Коши:
@@ -44,7 +44,7 @@
 \label{wavecauchy}
 \end{align}
 
-\begin{theorem} Пусть $\varphi \in C^2(\real)$ и $\phi \in C^1(\real)$. Тогда
+\begin{theorem} Пусть $\varphi \in C^2(\real)$ и $\psi \in C^1(\real)$. Тогда
 $$ u(t, x) = \varphi (x - vt) + \frac {1} {2v} \int \limits_{x - vt}^{x+vt} \psi (y) dy$$
 --- решение задачи Коши для одномерного волнового уравнения $\ref{wavecauchy}$.
 \end{theorem}
@@ -186,27 +186,28 @@ $$ a (\xi_x - \Lambda^+ \xi_y)(\xi_x + \Lambda^- \xi_y) = a \xi^2_x - a(\Lambda^
 $$a \Lambda^2 + 2b \Lambda + c = 0,$$
 откуда можно заключить, что
 $$ \Lambda^{\pm} = - \frac {b} {a} \pm \sqrt{\frac {b^2} {a^2} - \frac {c} {a}} = \frac {1} {a} (-b \pm \sqrt{b^2 - ac}).$$
-Обозначим $$A = \begin{pmatrix} a & b \\ b & c \\\end{pmatrix}.$$
+Обозначим $$M = \begin{pmatrix} a & b \\ b & c \\\end{pmatrix}.$$
 Тогда 
 \begin{enumerate}
-	\item если $\det A =  ac - b^2 < 0$, то уравнение называется эллиптическим и можно вывести два транспортных уравнения:
+	\item если $\det M =  ac - b^2 < 0$, то уравнение называется эллиптическим и можно вывести два транспортных уравнения:
 	\begin{gather*}
-		\xi_x = - \frac {1} {a} (-b + \sqrt{b^2 - ac}) \xi_y = 0, \\
-		\eta_x = - \frac {1} {a} (-b - \sqrt{b^2 - ac}) \eta_y = 0.
+		\xi_x - \frac {1} {a} (-b + \sqrt{b^2 - ac}) \xi_y = 0, \\
+		\eta_x - \frac {1} {a} (-b - \sqrt{b^2 - ac}) \eta_y = 0.
 	\end{gather*}
 	Рассмотрим дифференциальное уравнение:  $$\xi_x = \Lambda^+ \xi_y \quad \Rightarrow \quad y_x = - \Lambda^+ (x,y)\text{ - характеристика},$$
 	Пусть $\xi$ - какое-то решение, рассмотрим его на траекториях
 	$$ \frac {d \xi (x, y(x))} {dx} = \xi_x + \xi_y \frac {dy} {dx} = \xi_x - \Lambda^+ \xi_y = 0,$$
 	тогда решение полученного транспортного уравнения должно быть постоянным на характеристиках этого ОДУ:
-	$$ \frac {d \xi (x, y(x))} {dx} = \const \quad \text{при } \frac {dy} {dx} = - \Lambda^-$$
+	$$ \frac {d \xi (x, y(x))} {dx} = \const \quad \text{при } \frac {dy} {dx} = - \Lambda^-.$$
 	% как делаете: решение определяется по этим формулам, лямбда плюс и минус - по коэффициентам. если определитель больше нуля, то есть два вещественных разных решения - лямбда плюс и лямбда минус. решаем дифференциальное уравнение с лямбда плюс и определяем функцию кси из того условия, что кси постоянна на траекториях этого диффура. если лямбда плюс - гладкая функция, то через каждую точку проходит ровно одна характеристическая линия, значит, явным образом можно определить кси. то же самое с эта: решаем уравнение dy/dx = -лямбда^-, это даёт решение второго транспортного уравнения. эти решения и будут нашей заменой переменных. тем самым гарантируется, что останется только коэффициент при u_{xi eta}. то есть для гиперболического уравнения всегда можно найти замену
 	
-	\item если $\det A = b^2 - ac = 0$, то уравнение называется параболическим и $$\Lambda = - \frac {b} {a} \quad \Rightarrow \quad \frac {dy} {dx} = \frac {b} {a}.$$
+	\item если $\det M = ac - b^2 = 0$, то уравнение называется параболическим и $$\Lambda = - \frac {b} {a} \quad \Rightarrow \quad \frac {dy} {dx} = \frac {b} {a}.$$
 	Отсюда можно найти только $\xi$, в этом случае $\eta$ выбирается такая, чтобы якобиан замены не был равен нулю. 
 	\begin{exercise} Показать, что в этом случае $A = 0$ и $u_{\xi \eta} = 0$.
+	% A =0 ?
 	\end{exercise}
 	
-	\item если $\det A = ac - b^2 > 0$, то уравнение называется эллиптическим и $u_{\xi \eta} =0$, $A = C \neq 0$. Корни будут комплексно сопряжёнными, а замена будет $$\xi = Re ...,\quad \eta = Im ... .$$
+	\item если $\det M = ac - b^2 > 0$, то уравнение называется эллиптическим и $u_{\xi \eta} =0$, $A = C \neq 0$. Корни будут комплексно сопряжёнными, а замена будет $$\xi = Re ...,\quad \eta = Im ... .$$
 \end{enumerate}
 	
 \subsubsection{Классификация в случае двух независимых переменных}
@@ -227,7 +228,7 @@ $$ \frac {\partial^2 u} {\partial \xi^2} + \frac {\partial^2 u} {\partial \eta^2
 
 \subsection{Классификация уравнений второго порядка в случае многих независимых переменных}
 Рассмотрим дифференциальное уравнение в частных производных второго порядка с переменными коэффициентами:
-$$ \underbrace {\sum \limits_{i,j = 1}^2 a_{ij} \frac {\partial^2 u} {\partial x_i \partial x_j}}_{\text{главная часть}}  + F(\pder[u]{x_1}, \pder[u]{x_2}, u, x_1, ..., x_n) = 0,\quad x \in \real^n$$
+$$ \underbrace {\sum \limits_{i=1}^n \sum \limits_{j = 1}^n a_{ij} \frac {\partial^2 u} {\partial x_i \partial x_j}}_{\text{главная часть}}  + F(\pder[u]{x_1}, \pder[u]{x_2}, u, x_1, ..., x_n) = 0,\quad x \in \real^n$$
 
 Обозначим через $A$ симметричную матрицу коэффициентов $a_{ij}$. Уравнение называется 
 \begin{itemize}

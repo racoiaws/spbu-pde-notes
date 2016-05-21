@@ -45,10 +45,10 @@
 
 \end{proof}
 В решении задачи $\eqref{wavehomcauchy}$ нам поможет принцип Дюамеля.
-\begin{theorem}[Дюамель] Пусть поставлена задача Коши
+\begin{theorem}[Дюамель] Пусть $s \geq 0$, и поставлена задача Коши
 \begin{equation}
 	\begin{cases}
-		w_{tt} - v^2 w_{xx} = 0,\quad s \geq 0 \\
+		w_{tt} - v^2 w_{xx} = 0, \\
 		w(s,x) = 0, \\
 		w_t(s,x) = f(s,x),
 	\end{cases}
@@ -100,7 +100,7 @@ $$ \int \limits_t^{t +\Delta t} ds \int \limits_B  c \rho u_t dx = \underbrace {
 Поделим на $\Delta t$ и устремим $\Delta t$ к $0$:
 $$ \int \limits_B c \rho u_t dx = \int \limits_B q dx - \int \limits_{\partial B} F \cdot n d \sigma. $$
 
-Применяем формулу Гаусса-Остроградского\footnote{Формула Гаусса-Остроградского:$
+Применим формулу Гаусса-Остроградского\footnote{Формула Гаусса-Остроградского:$
     \int_{\partial \Omega} F \cdot n d\sigma = \int_{\Omega} \Div F dx$}
 \begin{gather*}
     \int \limits_B c \rho u_t dx = \int \limits_B q dx - \int \limits_B \Div F dx, \\
@@ -147,7 +147,7 @@ $$ u(0, x) = h(x).$$
 Нас будет интересовать поведение решений этой задачи на конечных цилиндрах $$ Q_T = (0, T) \times \Omega $$
 
 \begin{definition}
-Параболической границей цилиндра называется множество
+Параболической границей цилиндра $Q_T$ называется множество
 $$ S_T = (\left\{ 0 \right\} \times \Omega) \cup ((0,T) \times \partial \Omega) = \partial Q_T \setminus (\left\{ T \right\} \times \partial \Omega) .$$
 \end{definition}
 
@@ -288,6 +288,6 @@ $$ \abs{u(t,x)} \leq A e^{-bt} \xrightarrow[t \to \infty]{} 0$$
 & v\Big\rvert_{\partial \Omega} = h - h = 0, \\
 & v\Big\rvert_{t = 0} = g(x) - \overline{u}(x).
 \end{align*}
-Заметим, что $v$ удовлетворяет условию следствия 3. Значит, $ v \xrightarrow[t \to 0]{} 0$, и $ u \to \overline{u}$.
+Заметим, что $v$ удовлетворяет условию следствия. Значит, $ v \xrightarrow[t \to \infty]{} 0$, и $ u \xrightarrow[t \to \infty]{} \overline{u}$ равномерно по $x$, экспоненциально по $t$.
 
 \end{proof}

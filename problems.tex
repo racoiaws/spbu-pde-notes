@@ -1,0 +1,93 @@
+% !TEX encoding = UTF-8 Unicode
+% когда-нибудь тут будут оформлены решения
+% обычно решение задачи опирается на решение или идею из предыдущих
+\chapter{Упражнения}
+Некоторые упражнения с последних лекций, а также сопутствующие леммы и теоремы.
+\section*{21.04.16}
+\begin{lemma}
+Сходящиеся в смысле обобщённых функций ряды можно дифференцировать сколько угодно раз. Получающиеся ряды из производных сходятся к соответствующим обобщенным производным.
+\end{lemma}
+
+\begin{exercise}[Первая собственная функция]
+Если $$\int \limits_{\Omega} \abs{\nabla u}^2 = \lambda_1, \quad \int \limits_{\Omega} u^2 = 1, \quad u \in H_0^1(\Omega),$$
+тогда $$ - \Delta u = \lambda_1 u.$$
+\end{exercise}
+
+\begin{exercise}
+Найти обобщенную производную функции $f$:
+\begin{gather*}
+f(x) =
+	\begin{cases*}
+		x+1, & $x < 0$ \\
+		0, & $x = 0$ \\
+		x-1, & $0 < x < 1$ \\
+		(x-1)^2, & $x \geq 1$
+	\end{cases*}
+\end{gather*}
+\end{exercise}
+
+\section*{30.04.16}
+\begin{exercise}
+Найти обобщенную производную функции $u$:
+$$u(x) = \frac {1} {\abs{x}^{\alpha}}, \quad 0 < \alpha < n -1, \quad x \in \real^n$$
+\end{exercise}
+
+\begin{exercise}
+Проверить формулу Лейбница для произведения обобщённой и пробной функций:
+$$\pder[(u \varphi)]{x_i} = \pder[u]{x_i} \varphi + \pder[\varphi]{x_i} u.$$
+\end{exercise}
+
+% где-то тут 7.05.16
+\begin{exercise}
+Пусть $\Omega \subset \real^n$ - открытое, связное, $u \in L_{loc}^1(\Omega)$, а также $\nabla u = 0$ в обобщенном смысле. Доказать, что $u \equiv \const$.
+\end{exercise}
+
+\begin{exercise} Пусть $\varphi \in C_0^{\infty} (\real)$, а также
+$$ \varphi (0) = 0, \quad \psi (x) = \frac {\varphi (x)} {x} .$$
+Доказать, что $\psi \in C_0^{\infty} (\real)$.
+\end{exercise}
+
+\section*{14.05.16}
+
+\begin{exercise} Доказать, что $H^1 (\real^n) = H_0^1 (\real^n)$.
+\end{exercise}
+
+% нужна теорема Рисса-Торина
+\begin{exercise}[Неравенство Янга для свёртки]
+Пусть $f \in L^p$, $g \in L^q$, и верно
+$$\frac {1} {p} + \frac {1} {q} = 1 - \frac {1} {r}, \quad 1 \leq p,q,r \leq \infty, $$
+тогда
+$$f * g \in L^r, \quad || f*g ||_r \leq || f ||_p || g ||_q. $$
+\end{exercise}
+
+\section*{21.05.16}
+\begin{exercise}
+Пусть $\Omega \subset \real^n$ - выпуклое, $u \in H^1(\Omega)$. Доказать, что
+$$\forall \delta > 0 \quad \exists u_{\delta} \in C^{\infty} (\overline{\Omega}):\quad ||u_{\delta} - u ||_{H^1(\Omega)} \leq \delta. $$
+\end{exercise}
+
+\begin{exercise}
+Посчитать обобщённую производную композиции двух обобщённых функций.
+\end{exercise}
+
+\begin{exercise}
+Пусть $\Omega \subset \real^n$ - ограниченная выпуклая область, $u \in H^1(\Omega)$. Доказать, что существует такая область $D$, в которую компактно вкладывается $\Omega$, что
+$$\exists v \in H_0^1(\Omega): v\Big\rvert_{\Omega} = u\Big\rvert_{\Omega}, \quad || v ||_{H^1(D)} \leq C || u ||_{H^1(\Omega)}.$$
+\end{exercise}
+
+\begin{exercise}
+Пусть $\Omega \subset \real^n$ - ограниченная выпуклая область. Доказать, что вложение $H^1(\Omega)$ в $L^2 (\Omega)$ компактно.
+\end{exercise}
+
+\begin{exercise}[Неравенство Пуанкаре]
+Пусть $\Omega \subset \real^n$ - ограниченная выпуклая область. Докажите, что
+$$ \intO (u - u_{\Omega})^2 dx \leq C \intO \abs{\nabla u}^2 dx, $$
+где
+$$ u_{\Omega} := \fint \limits_{\Omega} u dx, \quad C = C(\Omega,n).$$
+\end{exercise}
+
+\begin{exercise}
+Пусть $\Omega \subset \real^n$ - ограниченная выпуклая область, $u \in H^1(\Omega)$ и $f \in L^2(\Omega)$. Рассмотрим функционал $F$:
+$$ F(u) := \frac {1} {2} \intO \abs{\nabla u}^2 \, dx - \intO fu \, dx.$$
+При каких ограничениях на $f$ функционал $F$ достигает минимума? 
+\end{exercise}
