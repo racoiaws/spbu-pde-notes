@@ -1,7 +1,10 @@
 % !TEX encoding = UTF-8 Unicode
 % лекции 9-10, 12 апреля 2016
 % вопросы 18-20 
-% Основы теории обобщенных функций. линейный функционал. операции на обобщ функциях. фундаментальное решение уравнения лапласа. гармоническая функция.
+% 18. Пространство основных функций и пространство обобщенных функций (распределений). Примеры обобщенных функций. Дифференцирование обобщенных функций. Обобщенные и классические производные.
+% 19. Фундаментальное решение уравнения Лапласа, его физический смысл.
+% 20.  Представление (частного) решения уравнения Пуассона в пространстве при помощи фундаментального решения.
+
 \section{Основы теории обобщенных функций}
 $\Omega \subset \real^n$ --- область.
 
@@ -210,28 +213,3 @@ $$=\int\limits_{\real^n}f(z)dz\int\limits_{\real^n}\Phi(y)(-\Delta\varphi(z+y))d
 $$= \int\limits_{\real^n}f(z)\underbrace{\action{\varphi(z+\cdot), -\Delta\Phi}}_{\varphi(z)}dz = \int\limits_{\real^n}f(z)\varphi(z)dz = \action{\varphi, f},$$
 т.о. $-\Delta u = f,$ т.е. $u$ --- классическое решение (если 2 функции равны в обобщенном смысле и они классические, то они равны в классическом смысле).
 \end{proof}
-
-\section{Гармонические функции}
-\subsection{Свойства гармонических функций}
-\begin{definition}
-$u$ --- гармоническая функция в $\Omega$, если является решением уравнения Лапласа $-\Delta u = 0.$
-\end{definition}
-\begin{note}
-$u\in C^2(\Omega)\cap C(\overline{\Omega}), \Omega$ --- ограничена, тогда 
-$$0 = \int\limits_\Omega \Delta u dx = \int\limits_\Omega 1\cdot \Delta udx = -\int\limits_\Omega\underbrace{\nabla 1}_{0}\nabla udx+\int\limits_{\partial\Omega}1\cdot\dfrac{\partial u}{\partial \nu}d\sigma\,\Rightarrow\, \int\limits_{\partial\Omega}\dfrac{\partial u}{\partial \nu}d\sigma = 0.$$
-\end{note}
-
-\begin{theorem}[Теорема о среднем для гармонических функций]
-Пусть $u\in C^2(\Omega), -\Delta u = 0,$ тогда $$u(x_0)=\fint\limits_{\partial B_\eps(x_0)}u(x)d\sigma(x)=\fint\limits_{B_\eps(x_0)}u(x)dx\quad \forall\eps\,:\,\overline{B}_\eps(x_0)\subset\Omega.$$
-\begin{note}
-Если $u\in C(\overline{\Omega}), \, \eps_0\,:\,B_\eps(x_0)$ касается границы, то утверждение верно $\forall \eps\leq\eps_0.$ 
-\end{note}
-\end{theorem}
-\begin{proof}
-$u(x_0)\stackrel{\text{по } \MakeUppercase{\romannumeral3}\text{ ф. Грина}}= $
-\end{proof}
-
-
-
-
-
