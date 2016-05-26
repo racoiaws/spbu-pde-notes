@@ -1,5 +1,5 @@
 % !TEX encoding = UTF-8 Unicode
-% лекции 11-12, 12 апреля 2016
+% лекции 11-12, 19 марта 2016
 % конец первой части
 % вопросы 21-26
 % 21. Теоремы о среднем для гармонических функций
@@ -56,7 +56,7 @@ $$u(x_0) = \fint \limits_{B_{\eps} (x_0)} u dx.$$
 Пусть $u \in C(\overline{\Omega})$ (непрерывна вплоть до границы). Тогда если есть шар $B_{\eps_0}$, касающийся границы $\Omega$, то утверждение теоремы верно для $\eps \leq \eps_0$. 
 \end{note}
 \begin{proof}
-Пользуясь формулой (*) (?????) и непрерывностью $u$, переходим к пределу.
+Пользуясь непрерывностью $u$, переходим к пределу.
 
 \end{proof}
 
@@ -85,7 +85,7 @@ $$ u(x_0) = \fint \limits_{\partial B_\rho (x_0)} u(z) d\sigma(z).$$
 Теорема верна в предположении, что $u \in C^2 (\Omega)$.
 \end{note}
 \begin{proof}[Доказательство второго замечания]
-Дифференцируем соотношение из условия теоремы по $rho$:
+Дифференцируем соотношение из условия теоремы по $\rho$:
 \begin{align*}
 0 &= \frac {d} {d\rho} \left( \frac {1} {n \omega_n \rho^{n-1}} \int \limits_{\partial B_\rho (x_0)} u(x) d\sigma(x) \right) = 
  \frac {d} {d\rho} \left( \frac {1} {n \omega_n} \int \limits_{\partial B_1(0)} u(x_0 + \rho s) d\sigma(s) \right) = \\
@@ -100,7 +100,143 @@ $$\Delta u(x_0) = 0, \quad \forall x_0 \in \Omega$$
 \end{proof}
 
 \begin{proof}[Доказательство теоремы]
-TODO
+Имеем функцию $u \in C(\Omega)$. Сгладим её. Для начала рассмотрим функцию
+$$ \psi \in C_0^{\infty} (\real), \quad \psi(-x) = \psi(x), \quad \int \limits_{\real} \psi = 1, \quad \supp \psi \subset B_1(0).$$
+Теперь введём аппроксимативную единицу $\varphi_\eps$:
+$$ \eps >0, \quad \varphi_\eps(x) = \frac {1} {\eps^n} \psi (\frac {\abs{x}} {\eps}). $$
+Определим $u_\eps$:
+$$ u_\eps = u * \varphi_\eps$$
+Заметим, что $u_\eps$ определена не на всём $\Omega$, а только на его подмножестве $\Omega_\eps$, расстояние от которого до границы $\Omega$ равно $\eps$. % здесь можно вставить рисунок
+
+Распишем $u_\eps(x)$:
+\begin{align*}
+	u_\eps (x) &= \int \limits_{\real^n} u(y) \varphi_\eps (x-y) \, dy = \int \limits_{B_\eps (x)} u(y) \varphi_\eps (x-y) \, dy = \\
+	&= \int \limits_0^\eps \, dr \int \limits_{\partial B_r (x)} u(y) \varphi_\eps (x-y) \, d\sigma(y) = \int \limits_0^\eps \, dr \int \limits_{\partial B_1 (0)} u(x+rs) \varphi_\eps (rs) r^{n-1} \, d\sigma(s)
+\end{align*}
+Функция $\varphi_\eps$ радиальна, значит, можем вынести её за интеграл по $d\sigma(s)$:
+\begin{align*}
+	u_\eps (x) &= \int \limits_0^\eps r^{n-1} \frac {\psi (\frac {r} {\eps})} {\eps^n} \, dr \int \limits_{\partial B_1 (0)} u(x+rs) \, d\sigma(s) = \int \limits_0^\eps \frac {\psi(\frac {r} {\eps})} {\eps^n} \, dr \int \limits_{\partial B_r(x)} u(z) \, d\sigma(z) =  \\% по первому замечанию 
+	&= \int \limits_0^\eps \frac {\psi (\frac {r} {\eps})} {\eps^n} u(x) \omega_n n r^{n-1} \, dr = u(x) \underbrace {\int \limits_0^\eps \frac {r^{n-1}} {\eps^n} \psi \left( \frac {r} {\eps} \right) \omega_n n \, dr}_{\int_{\real^n} \varphi_\eps}
+\end{align*}
+Получили
+\begin{align*}
+u_\eps (x) &= u(x) \int \limits_{\real^n} \varphi_\eps = u(x) \quad \text{на } \Omega_\eps \, \forall \eps 
+\end{align*}
+% дорасписать про \Omega_\eps
 \end{proof}
+
+\begin{corollary}
+Если $u$ - гармоническая в $\Omega$, то $u \in C^{\infty} (\Omega)$.
+\end{corollary}
+
+\begin{corollary}
+Любая производная гармонической функции - тоже гармоническая функция.
+\end{corollary}
+
+\begin{corollary} Пусть $u$ - гармоническая, тогда
+$$\abs{D^{\alpha} u(x)} \leq \frac {C_n^{\abs{\alpha}}} {r^{\abs{\alpha}}} \max_{B_r (x)} u(x).$$
+\end{corollary}
+\begin{proof}
+По теореме о среднем:
+$$ u_{x_i} (x) = \frac {1} {\omega_n r^n} \int \limits_{B_r (x)} u_{x_i} (x) = \frac {1} {\omega_n r^n} \int \limits_{\partial B_r (x)} u n_i \, d\sigma.$$
+Тогда
+$$ \abs{u_{x_i} (x)} \leq \frac {1} {\omega_n r^n} n \omega_n r^{n-1} \max_{B_r (x)} u(x) = \frac {n} {r} \max_{B_r (x)} u(x).$$
+Для произвольного мультииндекса $\alpha$ оценивание можно проделать соответствующее количество раз, тогда:
+$$ \abs{D^{\alpha} u(x)} \leq \frac {C_n^{\abs{\alpha}}} {r^{\abs{\alpha}}} \max_{B_r (x)} u(x).$$
+
+\end{proof}
+
+\begin{note}
+В частности, если $u$ ограничена в $\overline \Omega$, то
+$$ \abs{D^{\alpha} u(x)} \leq \frac {C_n^{\abs{\alpha}}} {d(x, \partial \Omega)^{\abs{\alpha}}} \max_{\overline{\Omega}} u.$$
+\end{note}
+
+\begin{definition}
+Функция называется вещественно аналитической, когда она представима в виде своего ряда Тейлора в окрестности всякой точки. При этом в каждой точке ряд равномерно сходится.
+\end{definition}
+\begin{corollary}
+Если $u$ - гармоническая, то она вещественно аналитическая.
+\end{corollary}
+\begin{proof}
+Запишем ряд Тейлора:
+$$ \sum \limits_\alpha \frac {D^{\alpha} u(x_0)} {\abs{\alpha}!} (x - x_0)^{\alpha}, \quad (x-x_0)^{\alpha} = \prod \limits_{i \in 1:n} (x^{(i)} - x_0^{(i)})^{\alpha_i}.$$
+Будет ли этот ряд сходиться? Возьмём $x$:
+$$ x \in B_r (x_0), \quad \abs{(x-x_0)^{\alpha}} \leq r^{\abs{\alpha}},$$
+тогда каждая производная оценивается как
+$$ \frac {\abs{D^\alpha u(x_0) \cdot (x-x_0)^\alpha}} {\abs{\alpha}!} \leq \frac {C_n^{\abs{\alpha}}} {\abs{\alpha}!} \max_{\overline{B}_r (x_0)} u(x),$$
+а весь ряд можно оценить таким образом:
+$$ \sum \limits_\alpha \frac {D^{\alpha} u(x_0)} {\abs{\alpha}!} (x - x_0)^{\alpha} \leq \max_{\overline{B}_r (x_0)} u(x) \cdot \underbrace {\sum_\alpha \frac {C_n^{\abs{\alpha}}} {\abs{\alpha}!}}_{\text{сходится}}.$$
+
+\end{proof}
+
+\begin{note}
+Класс вещественно аналитических функций меньше класса бесконечно дифференцируемых функций.
+\end{note}
+
+\begin{note}
+Если вещественно аналитическая функция равна 0 на каком-то интервале, то она равна нулю всюду.
+\end{note}
+
+\begin{corollary}[Теорема Лиувилля]
+Пусть $\Omega = \real^n$, а функция $u$ - гармоническая и ограниченная. Тогда $u \equiv \const$.
+\end{corollary}
+\begin{proof}
+Воспользуемся предыдущим следствием:
+$$ \abs{u_{x_i} (x_0)} \leq \frac {C_n} {r} \sup_{\real^n} u(x) \quad \forall r$$
+Устремив $r$ к бесконечности, получаем
+$$ \abs{u_{x_i} (x_0)} = 0 \quad \forall x_0 \, \forall i$$
+Значит, $\nabla u = 0$, и, как следствие, $u \equiv \const$.
+
+\end{proof}
+
+\begin{theorem}[Принцип максимума]
+Пусть $\Omega$ - связная область, а $u$ - гармоническая в ней. Если
+$$ \exists x_0 \in \Omega: \, u(x_0) = \sup_\Omega u(x),$$
+ то $$u \equiv u(x_0).$$
+\end{theorem}
+\begin{proof}
+Пусть такая точка $x_0$ существует. Представим $\Omega$ в виде дизъюнктного объединения $A_1$ и $A_2$:
+\begin{align*}
+	A_1 &:= \left\{ x \in \Omega: \, u(x) = u(x_0) \right\} \neq \varnothing, \\
+	A_2 &:= \left\{ x \in \Omega: \, u(x) < u(x_0) \right\} = \Omega \setminus A_1.
+\end{align*}
+Пусть $A_2$ тоже непусто (иначе утверждение теоремы тривиально). Вспомним, что прообраз замкнутого множества замкнут. Заметим, что $A_1$ относительно замкнуто\footnote{ непрерывный образ замкнутого множества замкнут} в $\Omega$, откуда следует, что $A_2$ открыто.
+
+Теперь покажем, что $A_1$ открыто. Возьмём некоторую точку $z \in A_1$ и шар $B_r (z)$ такой, что он не касается границы $\Omega$. Тогда весь шар находится внутри $A_1$. Допустим, это не так. Тогда в какой-то точке $y \in B_r (z) $ значение $u(y) < u(x_0)$ и среднее по этому шару будет меньше, чем $u(x_0)$. Но по теореме о среднем оно должно быть равно $u(z)$. Значит, любой шар $B_r (z)$ лежит в $A_1$. Следовательно, $A_1$ - открытое.
+% TODO: написать получше, сейчас рассуждения просто сливаются
+
+Мы пришли к тому, что $\Omega$ разбивается на два непересекающихся открытых множества, что противоречит связности. Значит, $A_2$ - пусто, и $A_1 = \Omega$.
+
+\end{proof}
+
+\begin{note} Заменой $u$ на $-u$ и супремума на инфимум получается принцип минимума.
+\end{note}
+
+\begin{corollary} Пусть $\Omega$ - ограниченная область в $\real^n$ и поставлена задача Дирихле для уравнения Пуассона:
+\begin{align*}
+	\begin{cases*}
+		- \Delta u = f,\\
+		u\Big\rvert_{\partial \Omega} = u_0.
+	\end{cases*}
+\end{align*}
+Тогда если классическое решение
+$$ u \in C^2(\Omega) \cap C(\overline{\Omega})$$
+существует, то оно единственно.
+\end{corollary}
+\begin{proof}
+Следует из принципа максимума. Пусть есть два решения $u_1$ и $u_2$, тогда $u = u_1 - u_2$ - решение задачи
+\begin{align*}
+	\begin{cases*}
+		- \Delta u = 0,\\
+		u\Big\rvert_{\partial \Omega} = 0.
+	\end{cases*}
+\end{align*}
+Получается, что $u$ - непрерывная вплоть до границы гармоническая функция. Значит, она имеет и максимум, и минимум. Далее возможны два случая:
+\begin{enumerate}
+\item Максимум достигается внутри области. Тогда внутри каждой компоненты связности $u \equiv 0$, но при этом имеем $0$ на границе. Значит, $u \equiv 0$.
+\item Максимум и минимум достигаются на границе. Там она $0$. Значит, $u \equiv 0$.
+\end{enumerate}
+\end{proof}
+
 \subsection{Функция Грина}
 TODO

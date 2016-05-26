@@ -375,7 +375,7 @@ $$\lim_{r\to 0} \fint \limits_{B_r(x_0)} \abs{u(x) - u(x_0)} dx = 0 \quad \text{
 
 Система в каждый момент времени имеет потенциальную ($U$) и кинетическую ($T$) энергии. Запишем интеграл действия:
 
-$$ A = \int \limits_{t_1}^{t_2} (T- U) d\tau $$
+$$ A = \int \limits_{0}^{\tau} (T- U) dt $$
 
 Выведем формулу кинетической энергии. Смещение струны равно $u(t,x)$. Посмотрим на небольшой кусочек этой струны, он имеет  небольшую массу. Грубо говоря, это плотность струны умножить на длину этого элемента. Этот кусочек движется со скоростью $u_t$. Тогда кинетическая энергия всей струны в момент $t$ равна
 $$ T(t) = \frac {1} {2} \int \limits_0^l \rho u_t^2 dx$$
@@ -392,7 +392,7 @@ $$ A(u) = \frac {1} {2} \int \limits_0^{\tau}  \int \limits_0^l (\rho u_t^2 - \t
 
 Обозначим $\Omega = (0, \tau) \times (0, l)$.
 Пусть $u \in C^{\infty}_0(\overline{\Omega})$, и на $u$ достигается минимум функционала $A$. Тогда 
-$$A(u + \eps v) - A(u) \geq 0\quad \forall v \in C^{infty}_0(\Omega).$$
+$$A(u + \eps v) - A(u) \geq 0\quad \forall v \in C^{\infty}_0(\Omega).$$
 Посчитаем:
 \begin{align*}
 A(u + \eps v) - A(u) & =  \int \limits_{\Omega} (\rho(u_t + \eps v_t)^2 - \tau(u_x + \eps v_x)^2 - \rho u_t^2 + \tau u_x^2 ) dxdt \\
