@@ -122,7 +122,8 @@ $$ u_\eps = u * \varphi_\eps$$
 \begin{align*}
 u_\eps (x) &= u(x) \int \limits_{\real^n} \varphi_\eps = u(x) \quad \text{на } \Omega_\eps \, \forall \eps 
 \end{align*}
-% дорасписать про \Omega_\eps
+% уточнить
+% u_\eps \in C_0^\infty
 \end{proof}
 
 \begin{corollary}
@@ -238,5 +239,248 @@ $$ u \in C^2(\Omega) \cap C(\overline{\Omega})$$
 \end{enumerate}
 \end{proof}
 
-\subsection{Функция Грина}
-TODO
+\section{Функция Грина внутренней задачи Дирихле для уравнения Пуассона}
+\subsection{Формулы Грина}
+Пусть $\Omega \subset \real^n$ - ограниченная область с гладкой границей. Тогда верны формулы Грина:
+\begin{enumerate}
+\item $\displaystyle \int \limits_\Omega v \Delta u = - \int \limits_\Omega \nabla v \cdot \nabla u \, dx + \int \limits_{\partial \Omega} v \pder[u]{n} \, d\sigma,$
+\item $\displaystyle \int \limits_\Omega u \Delta v - v \Delta u = \int \limits_{\partial \Omega} u \pder[v]{n} - v \pder[u]{n} \, d\sigma,$
+\item $\displaystyle u(x_0) = \int \limits_{\partial \Omega} \Phi (x-x_0) \pder[u]{n} \, d\sigma - \int \limits_{\partial \Omega} u \pder[\Phi]{n} (x-x_0) \, d\sigma - \int \limits_\Omega \Delta u \Phi (x - x_0) \, dx,$
+\end{enumerate}
+где 
+$$ \Phi(x) = \frac {1} {n (n-2) \omega_n} \cdot \frac {1} {\abs{x}^{n-2}}$$
+--- фундаментальное решение уравнения $$-\Delta \Phi = \delta.$$
+
+\subsection{Определение}
+Пусть $\Omega \subset \real^n$ - ограниченная область с гладкой границей, $u \in C^2(\Omega) \cap C(\overline{\Omega})$. Рассмотрим уравнение Пуассона в $\Omega$:
+\begin{align*}
+	\begin{cases*}
+		- \Delta u = f, \\
+		u\Big\rvert_{\partial \Omega} = u_0.
+	\end{cases*}
+\end{align*}
+Будем искать функцию
+$$G: \, \Omega \times \Omega \rightarrow \real$$ вида
+$$G(x,y) = \Phi (x-y) + v^y (x),$$
+где
+\begin{gather*}
+	- \Delta v^y = 0 \quad \text{в $\Omega$} \\
+	\begin{cases*}
+		- \Delta_x G(x,y) = \delta_y \\
+		G(x,y)\Big\rvert_{x \in \partial \Omega} = u_0.
+	\end{cases*}
+\end{gather*}
+\begin{definition}
+Функция $G(x,y)$ называется функцией Грина задачи Дирихле и зависит только от области $\Omega$.
+\end{definition}
+
+Физический смысл таков: пусть $y$ фиксирована, тогда $G(x,y)$ - потенциал электростатического поля единичного заряда в точке $y$ при заземлённой границе $\Omega$.
+
+Условия на $v^y$ таковы:
+
+\begin{align*}
+	\begin{cases*}
+		- \Delta v^y = 0 \\
+		v^y\Big\rvert_{\partial \Omega} = - \Phi(x-y)\Big\rvert_{x \in \partial \Omega}.
+	\end{cases*}
+\end{align*}
+
+Функция $\Phi(x-y)$ - потенциал поля заряда в точке $y$ в открытом пространстве. А если поставить сюда железную границу (заземлить), то потенциал изменится. Создастся некий дополнительный заряд, компенсирующий потенциал, создаваемый зарядом $y$ в открытом пространстве.
+
+Значит, $v^y$ - потенциал собственной системы, компенсирующей заряд. На поверхности $\Omega$ он будет равен минус потенциалу, созданному электростатическим полем от заряда в точке $y$ в свободном пространстве.
+
+Предположим, что $v^y$ удалось найти. Запишем третью формулу Грина:
+$$ u(y) = \int \limits_{\partial \Omega} \pder[u]{n} \Phi (x-y) - u \pder[\Phi(x-y)]{n_x} \, d\sigma(x) - \int \limits_\Omega \Phi (x -y) \Delta u(x) \, dx.$$
+Запишем вторую формулу Грина для $v^y$:
+$$ \int \limits_{\partial \Omega} v^y \pder[u]{n} - u \pder[v^y]{n} \, d\sigma - \int \limits_\Omega v^y \Delta u \, dx = \int \limits_{\Omega} u \underbrace{\Delta v^y}_{ = 0} \, dx = 0.$$
+Сложим:
+\begin{align*}
+	u(y) & = \int \limits_{\partial \Omega} \pder[u]{n} \underbrace{(v^y + \Phi (x-y))}_{=G(x,y)} - u \pder{n_x} (\Phi (x-y) + v^y) \, d\sigma - \int \limits_\Omega (\Phi (x-y) + v^y) \Delta u \, dx = \\
+	& = \int \limits_{\partial \Omega} \pder[u]{n} \underbrace{G(x,y)}_{=0} - u \pder{n_x} G(x,y) \, d\sigma - \int \limits_\Omega G(x,y) \Delta u \, dx = \\
+	& = - \int \limits_{\partial \Omega} u \pder{n_x} G(x,y) \, d\sigma(x) - \int \limits_\Omega G(x,y) \Delta u \, dx.
+\end{align*}
+Таким образом, решение задачи Дирихле выражается интегральной формулой:
+$$ u(y) = - \int \limits_{\partial \Omega} u_0(x) \pder{n_x} G(x,y) \, d\sigma(x) + \int \limits_\Omega G(x,y) f(x) \, dx.$$
+Это верно, если мы смогли найти такую $G(x,y)$.
+
+\begin{note} На самом деле, можно доказать существование функций Грина для довольно широкого класса областей, но мы не будем этим заниматься.
+\end{note}
+
+\subsection{Общие свойства}
+Пусть $\Omega \subset \real^n$ - ограниченная область, и функция $G(x,y)$ для $\Omega$ существует. Тогда:
+
+\begin{enumerate}
+\item $G(x,y) \geq 0$ всюду. 
+\begin{proof} Вырежем из $\Omega$ небольшой шар $B_\eps (y)$.
+
+\begin{center}
+\includegraphics[scale=0.3]{part6.1.png}
+\end{center}
+
+В множестве $\Omega \setminus B_\eps (y)$ функция Грина будет гармонической. Для достаточно маленького $\eps$ будет верно
+
+\begin{align*}
+	\begin{cases*}
+		- \Delta_x G(x,y) = \delta_y, \\
+		G(x,y)\Big\rvert_{x \in \partial \Omega} = 0.
+	\end{cases*}
+\end{align*}
+При достаточно маленьком $\eps$ имеем
+$$ G(x, y) = \underbrace{\Phi(x-y)}_{\substack{\text{сколь угодно} \\ \text{большая}}} + \underbrace{v^y(x)}_{\substack{\text{гармоническая,} \\ \text{ограниченная}}} \quad \Rightarrow \quad G(x,y)\Big\rvert_{\partial B_\eps (y)} > 0.$$
+Функция $G(x,y)$ достигает максимума и минимума на границах, а на границах она неотрицательна. Значит, она неотрицательна всюду.
+% как-то хлипко вышло
+
+\end{proof}
+\item $ \displaystyle \lim_{x \to y} G(x,y) = + \infty$.
+\begin{proof}Видно из доказательства предыдущего свойства.
+
+\end{proof}
+\item $G(x, y) = G(y, x)$ - функция Грина симметрична.
+\begin{proof}
+Пусть
+$$ u(x) = G(x,y), \quad v(x) = G(x,z).$$
+Рассмотрим два непересекающихся шара $U(y) \subset \Omega$ и $V(z) \subset \Omega$.
+
+\begin{center}
+\includegraphics[scale=0.2]{part6.2.png}
+\end{center}
+
+Заметим, что верно
+\begin{align*}
+	- \Delta u = 0\quad \text{в $V$}, \\
+	- \Delta v = 0 \quad \text{в $U$}. 
+\end{align*}
+По второй формуле Грина для $\Omega \setminus (U \cup V)$:
+$$ \int \limits_\Omega \underbrace{u \Delta v - v \Delta u}_{=0} \, dx = \int \limits_{\partial U} u \pder[v]{n} - v \pder[u]{n} \, d\sigma + \int \limits_{\partial V} u \pder[v]{n} - v \pder[u]{n} \, d\sigma = 0.$$
+
+Тогда по третьей формуле Грина
+\begin{align*}
+	v(y) = - \int \limits_{\partial U} u \pder[v]{n} - v \pder[u]{n} \, d\sigma \quad \text{в $U$}, \\
+	u(z) = - \int \limits_{\partial V} v \pder[u]{n} - u \pder[v]{n} \, d\sigma \quad \text{в $V$}.
+\end{align*}
+Подставим последние две формулы в формулу до них:
+$$ -v(y) + u(z) = 0 \quad \Rightarrow \quad G(y,z) = G(z,y).$$
+
+\end{proof}
+
+\end{enumerate}
+
+\subsection{Нахождение функции Грина для полупространства}
+Для начала рассмотрим $\Omega = \left\{ x_n > 0 \right\} \subset \real^n$ - полупространство.
+\begin{note}
+Представим, что мы находимся в 18 веке: не будем обращать внимания на формальности, говорящие, что область $\Omega$ должна быть ограниченной.
+\end{note}
+В нижнем полупространстве находится "земля" (потенциал равен нулю). Поместим заряд в $1$ Кл в точку $y$. Требуется посчитать его потенциал.
+
+Такую задачу можно свести к задаче без заземления: представим, что заземления нет. Далее поставим заряд в $-1$ Кл в точку $y'$, симметричную относительно границы нашего полупространства, и будем рассматривать эту систему.
+
+\begin{center}
+\includegraphics[scale=0.25]{part6.3.png}
+\end{center}
+
+Тогда
+$$ G(x,y) = \Phi (x-y) - \Phi (x - y'),$$
+где
+$$ \Phi (x - y) = \frac {1} {n (n-2) \omega_n} \frac {1} {\abs{x-y}^{n-2}}.$$
+По геометрическим соображениям потенциал этой системы зарядов на границе полупространства будет равен нулю. В некотором определённом смысле с помощью полученной $G(x,y)$ можно решить задачу Дирихле в полупространстве.
+
+\subsection{Нахождение функции Грина для шара}
+Перейдём к шару. Пусть наша область это $B_1 (0) \subset \real^n$. Допустим, у нас есть заземлённая граница шара и заряд в $1$ Кл в точке $y$. Создадим систему зарядов, в которой при отсутствии заземлённой границы "фиктивные" заряды компенсируют потенциал имеющегося заряда. Делаем инверсию:
+$$ y' = \frac {y} {\abs{y}^2}. $$
+
+Воспользуемся свойством инверсии:
+$$ (\abs{y} \cdot \abs{x-y'})^2 = \abs{y}^2 (\abs{x}^2 + \abs{y'}^2 - 2 xy') \stackrel{\abs{x}=1}=(\abs{y}^2 + 1 - 2 x y') = \abs{x-y}^2.$$
+То есть,
+$$ \abs{y} \cdot \abs{x-y'} \quad \text{при } \abs{x} = \abs{x-y} = 1.$$.
+
+\begin{center}
+\includegraphics[scale=0.2]{part6.4.png}
+\end{center}
+
+Тогда в качестве $G$ возьмём сумму двух кулоновских потенциалов:
+$$ G(x,y) = \frac {1} {n (n-2) \omega_n} \left( \frac {1} {\abs{x-y}^{n-2}} - \frac {1} {\abs{y} \cdot \abs{x-y'}^{n-2}} \right).$$
+Непосредственно проверяются условия из определения функции Грина:
+\begin{align*}
+	\begin{cases*}
+		- \Delta_x G(x, y) = \delta_y, \\
+		G(x, y)\Big\rvert_{\abs{x} = 1} = 0.
+	\end{cases*}
+\end{align*}
+Значит, в результате инверсии мы получили нужный "фиктивный" заряд и нашли функцию Грина для шара. Решим задачу Дирихле для уравнения Лапласа в единичном шаре:
+
+\begin{align*}
+	\begin{cases*}
+		- \Delta u = 0, \\
+		u\Big\rvert_{\partial \Omega} = u_0.
+	\end{cases*}
+\end{align*}
+Считаем:
+$$u(y) = - \int \limits_{\partial \Omega} u_0 \pder{n_x} G(x,y) \, d\sigma(x) + \int \limits_\Omega \underbrace{f(x)}_{=0} G(x,y) \, dx = - \int \limits_{\partial B_1 (0)} u_0 k(x, y) \, d\sigma(x),$$
+где
+$$ k (x,y) = - \pder{n_x} G(x,y) = \frac {1 - \abs{y}^2} {n \omega_n} \frac {1} {\abs{x-y}^n} = - \nabla_x G(x,y) \cdot \underbrace{x}_{\substack{\text{направление} \\ \text{нормали}} } \quad \text{--- ядро Пуассона}.$$
+
+\begin{exercise} Показать, что полученное $u$ - действительно решение.
+\end{exercise}
+\begin{note}Так как
+$$- \Delta u(y) = \int \limits_{\partial B_1 (0)} u_0 \Delta_y k(x, y) \, d\sigma,$$
+то достаточно доказать, что при фиксированном $x$ функция $k$ - гармоническая по второй переменной:
+$$ - \Delta_y k(x,y) = 0, \quad \abs{x} = 1.$$
+\end{note}
+
+\begin{exercise} Показать, что
+$$ \lim_{\substack{y \to x_0 \\ \abs{x_o} = 1}} k(x, y) = 0 \quad x_0 \neq x$$
+и
+$$ k( x, \cdot) \notin C(\overline{\Omega}) \quad \forall x.$$
+\end{exercise}
+
+\begin{note}Пусть $Q$ - матрица поворота. Тогда
+$$ u(Qy) = u(y),$$
+то есть, $u$ радиально симметрична.
+\end{note}
+\begin{proof}
+Посчитаем:
+\begin{align*}
+	u(Qy) &= \int \limits_{\partial \Omega} \frac {1 - \abs{Qy}^2} {n \omega_n \abs{x-Qy}^n} \, d\sigma(x) = \int \limits_{\partial \Omega} \frac {1 - \abs{y}^2} {n \omega_n \abs{Qx-y}^n} \, d\sigma(x) \stackrel{z = Qx} = \\
+	&= \int \limits_{\partial \Omega} \frac {1 - \abs{y}^2} {n \omega_n \abs{z - y}^n} \underbrace {\abs{Q}}_{=1} \, d\sigma(z) = u(y). 
+\end{align*}
+
+Мы воспользовались тем, что
+\begin{align*}
+	\abs{x-Qy}^n = \left( \abs{x-Qy}^2 \right)^{\frac {n} {2}} = (1 + \abs{y}^2 - 2 x Q y)^{\frac {n} {2}} = (1 + \abs{y}^2 - 2Qxy)^{\frac {n} {2}} = \abs{Qx - y}^n
+\end{align*}
+
+\end{proof}
+
+\begin{note} $u(y) = 1$.
+\end{note}
+\begin{proof}
+Функция $u$ гармоническая и радиально симметрична. Рассмотрим сферы с центром в нуле и с $y$ на границе:
+\begin{center}
+\includegraphics[scale=0.2]{part6.5.png}
+\end{center}
+На каждой такой сфере функция $u$ константна. По теореме о среднем в нуле она равна среднему по любой такой сфере. Значит, функция $u$ константна везде и равна значению в центре:
+$$ u(y) = u(0) = \frac {1} {n \omega_n} \int \limits_{\partial B_1 (0)} \frac {1} {\abs{x}^n} \, d\sigma = 1.$$
+
+\end{proof}
+
+\begin{note}
+$$\lim_{y \to x_0} u(y) = u_0 (x_0).$$
+\end{note}
+\begin{proof}
+Посчитаем:
+\begin{align*}
+	|u(y) - u_0(x_0)| &= \left| \, \int \limits_{\partial \Omega} k(x, y) u_0(x) \, d\sigma(x) - u_0(x_0) \int \limits_{\partial \Omega} k(x,y) \, d\sigma(x) \right| = \\
+	& = \left| \, \int \limits_{\partial \Omega} k(x,y) (u_0(x) - u_0(x_0)) \, d\sigma(x)\right| \leq \\
+	& \leq \int \limits_{\partial \Omega} k(x, y) | u_0(x) - u_0(x_0) | \, d\sigma(x) \leq \\
+	& \leq \int \limits_{\partial \Omega \cap B_\eps (x_0)} k(x, y) \delta \, d\sigma(x) + 2 || u_0 ||_\infty \int \limits_{\partial \Omega \setminus B_\eps (x_0)} k(x, y) \, d\sigma(x),
+\end{align*}
+где 
+$$ \eps: \, |x - x_0| \leq \eps \Rightarrow |u_0(x) - u_0(x_0)| \leq \delta $$
+и
+$$ |u_0 (x) - u_0(x_0)| \leq 2 || u_0 ||_\infty.$$
+Знаем, что 
+$$ \lim_{y \to x_0} k(x, y) = 0 \quad \text{и} \quad \int \limits_{\partial \Omega \cap B_\eps (x_0)} \leq 1,$$
+значит,
+$$ \lim_{y \to x_0} |u(y) - u_0(x_0)| \leq \delta \cdot 1 + 0 \quad \forall \eps$$
+
+\end{proof}
