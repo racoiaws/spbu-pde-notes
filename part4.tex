@@ -40,7 +40,7 @@ $$ M_+ = \sup_{\stackrel{x \in \real^n,} {t \in [0, T]}}u(t,x), \quad N_+ = \sup
 
 \begin{proof}
 Вспомним обозначения для оператора теплопроводности:
-$$ Lu = u_t - a^2 \Delta v.$$
+$$ Lu = u_t - a^2 \Delta u.$$
 Пусть $\eps >0 $ и $u$ - решение уравнения теплопроводности во все пространстве. Рассмотрим
 $$v_\eps(t, x) = u(t, x) - \eps(2na^2t + \abs{x}^2).$$
 Тогда
@@ -112,165 +112,241 @@ $$M_- = \inf_{\stackrel{x \in \real^n, \,} {t \in [0, T]}}u(t,x); \qquad N_- = \
 
 
 \subsection{Фундаментальное решение уравнения теплопроводности}
+Пусть стоит задача Коши для однородного уравнения теплопроводности в $\real^n$:
+\begin{align*}
+	\begin{cases*}
+		u_t - a^2 \Delta u = 0, \\
+		u(0,x) = \varphi(x).
+	\end{cases*}
+\end{align*}
 
-Хотим получить решение для системы \eqref{heathomcauchy}. Получим --- фундаментальное решение уравнения теплопроводности (в ходе решения будем накладывать некоторые специфические условия на решение).
+Пока что забудем про начальное условие.
 
-Рассмотрим $a = 1$ иначе можно сделать замену $x \rightarrow \dfrac{x}{a}$ (делаем это для упрощения вычислений).
+\begin{definition} Общее решение уравнения
+$$ u_t - a^2 \Delta u = 0$$
+называется фундаментательным решением уравнения теплопроводности.
+\end{definition}
+
+Заметим, что производная по $t$ первого порядка, а по $x$ - второго. Значит, решение такого уравнения "хорошо" себя ведёт при растяжении времени и координат: например, если растянуть время в $\lambda^2$ раз, а пространство в $\lambda$ раз, то решение не изменится.
+
+Не умаляя общности, можно считать, что $a = 1$.
 
 \begin{enumerate}
-\item $u(t,x) = \lambda^\alpha u(\lambda t, \lambda^\beta x) \quad \forall \lambda$ (т.~е. хотим частичную линейность решения)
+\item Ищем решение, инвариантное относительно растяжений:
+$$u(t,x) = \lambda^\alpha u(\lambda t, \lambda^\beta x) \quad \forall \lambda$$
 
-Рассмотрим $\lambda = \dfrac{1} {t}. \, \alpha, \, \beta$ --- неизвестны.
-$$u(t,x) = \dfrac{1}{t^\alpha}(1, \dfrac{x}{t^\beta}) \text{. Обозначим } \, u(1,z) = v(z) \Rightarrow u(t,x) = \dfrac{1}{t^\alpha} v(\dfrac{x}{t^\beta}).$$
-Посчитаем $Lu = 0$:
-$$-\dfrac{\alpha}{t^{\alpha + 1}} v\left( \dfrac{x}{t^\beta}\right) - \dfrac{\beta}{t^{\alpha + \beta + 1}}\nabla v\left( \dfrac{x}{t^\beta}\right)\cdot x - \dfrac{1}{t^\alpha t^{2\beta}}\Delta v\left( \dfrac{x}{t^\beta}\right) = 0.$$
-$$\left(\text{т.к.} \, \dfrac{\partial}{\partial t} \left(v\left( \dfrac{x}{t^\beta}\right)\right) = \sum \dfrac{ \partial v}{\partial x_i}\left(\dfrac{x}{t^\beta}\right) \cdot \dfrac{-\beta x_i}{t^{\beta + 1}} = -\dfrac{\beta}{t^{\beta + 1}}\nabla v\left( \dfrac{x}{t^\beta}\right) \cdot x \right)$$
+Пусть $\lambda = \dfrac{1} {t}$ и $u(1, z) = v(z)$.Тогда
+$$u(t,x) = \frac{1}{t^\alpha} \left( 1, \frac{x}{t^\beta} \right) = \frac {1} {t^\alpha} v \left( \frac{x}{t^\beta} \right).$$
+Посчитаем $Lu$. Так как
+$$\frac{\partial}{\partial t} \left(v\left( \frac{x}{t^\beta}\right)\right) = \sum \limits_{i=1}^n \frac{ \partial v}{\partial x_i}\left(\frac{x}{t^\beta}\right) \cdot \frac{-\beta x_i}{t^{\beta + 1}} = -\frac{\beta}{t^{\beta + 1}}\nabla v\left( \frac{x}{t^\beta}\right) \cdot x,$$
+то
+$$Lu = -\frac{\alpha}{t^{\alpha + 1}} v\left( \dfrac{x}{t^\beta}\right) - \dfrac{\beta}{t^{\alpha + \beta + 1}}\nabla v\left( \dfrac{x}{t^\beta}\right)\cdot x - \dfrac{1}{t^\alpha t^{2\beta}}\Delta v\left( \dfrac{x}{t^\beta}\right) = 0.$$
 
-Сделаем замену $ y = \dfrac{x} {t^\beta}.$
-$$ \dfrac{\alpha}{t^{\alpha + 1}} v(y) + \dfrac{\beta}{t^{\alpha + 1}} \nabla v(y) \cdot y + \dfrac{1}{t^\alpha  t^{2\beta}}\Delta v(y)=0.$$
+Сделаем замену $ y = \dfrac{x} {t^\beta}$:
+$$Lu =  \dfrac{\alpha}{t^{\alpha + 1}} v(y) + \dfrac{\beta}{t^{\alpha + 1}} \nabla v(y) \cdot y + \dfrac{1}{t^\alpha  t^{2\beta}}\Delta v(y)=0.$$
 
-Пусть $\beta = \dfrac{1}{2}$ и умножаем полученное выражение на $t^{\alpha + 1}:$
+Положим $\beta = \dfrac{1}{2}$ и умножим полученное выражение на $t^{\alpha + 1}:$
 $$\alpha v(y) + \dfrac{1}{2} \nabla v(y) \cdot y + \Delta v(y) = 0.$$
 
-\item $u(t,x) = \tilde{u}(t,|x|)$ --- хотим симметрии относительно 0, т.~о. $v(y) = w(|y|), |y| = r.$ Тогда получим:
-$$ \alpha w(r) + \dfrac{1}{2} w'(r) \cdot r + w''(r) + \dfrac{n}{r}w'(r) = 0;$$
-$$\text{т.~к.} \quad \Delta v(y) = \dfrac{\partial^2v}{\partial y_1^2} + \dots + \dfrac{\partial^2v}{\partial y_n^2};$$
-$$\dfrac{\partial w}{\partial y_i} = w' \dfrac{\partial |y|}{\partial y_i} = w' \dfrac{y_i}{r} \Rightarrow 
-\dfrac{\partial^2 w}{\partial y_i^2} = w''\dfrac{y_i^2}{r^2} + w'\left(\dfrac{1}{r} - \dfrac{y_i^2}{r^2}\right) \Rightarrow$$
-$$\Delta w(r) = \dfrac{w''}{r^2}\sum y_i^2 + \dfrac{w'}{r}\sum (1 - \dfrac{y_i^2}{r^2}) = w'' + \dfrac{w'n}{r}.$$
+\item Ищем радиальное решение:
+$$u(t,x) = \tilde{u}(t,|x|), \quad v(y) = w(|y|).$$
+Пусть $r = |y|$. Пересчитаем лапласиан:
+\begin{gather*}
+	\quad \Delta v(y) = \dfrac{\partial^2v}{\partial y_1^2} + \dots + \dfrac{\partial^2v}{\partial y_n^2}, \\
+	\begin{cases*}
+		\dfrac{\partial w}{\partial y_i} = w' \dfrac{\partial |y|}{\partial y_i} = w' \dfrac{y_i}{r}, \\
+		\dfrac{\partial^2 w}{\partial y_i^2} = w''\dfrac{y_i^2}{r^2} + w'\left(\dfrac{1}{r} - \dfrac{y_i^2}{r^2}\right),
+	\end{cases*}
+	\quad \Rightarrow \quad
+	\Delta w(r) = \dfrac{w''}{r^2}\sum \limits_{i=1}^n y_i^2 + \dfrac{w'}{r}\sum \limits_{i=1}^n (1 - \dfrac{y_i^2}{r^2}) = w'' + \dfrac{w'n}{r},
+\end{gather*}
+Перепишем результат предыдущего пункта:
+$$ \alpha w(r) + \dfrac{1}{2} w'(r) \cdot r + w''(r) + \dfrac{n-1}{r}w'(r) = 0.$$
+Положим $\alpha = \dfrac{n}{2}$. Заметим, что здесь стоит сумма двух производных:
+$$ \dfrac{n}{2}w(r) + \dfrac{1}{2}w'(r) \cdot r + w''(r) + \dfrac{n-1}{r}w'(r) = \dfrac{1}{2}\left(r^nw\right)' + \left(r^{n-1}w'\right)' = 0.$$
+Значит,
+$$ \dfrac{1}{2} r^n w+ r^{n-1} w' = \gamma. $$
 
-Пусть $\alpha = \dfrac{n}{2}.$
-$$\dfrac{n}{2}w(r) + \dfrac{1}{2}w'(r) \cdot r + w''(r) + \dfrac{n-1}{r}w'(r) = 0 \Rightarrow$$$$ \dfrac{1}{2}\left(r^nw\right)' + \left(r^{n-1}w'\right)' = 0 \Rightarrow \dfrac{1}{2}\left(r^nw\right)+ \left(r^{n-1}w'\right) = \gamma.$$
+\item По физическим соображениям наше решение должно быстро убывать на бесконечности:
+$$ \lim_{r \to \infty} r^a w' + r^b w = 0 \quad \forall a ,b \in \real$$
+Это возможно только тогда, когда $\gamma = 0$. Осталось решить уравнение
+$$w' + \frac {r} {2} w = 0.$$
+Считаем:
+$$ \frac {dw} {w} = - \frac {r} {2} \, dr \quad \Rightarrow \quad w(r) = b e^ {- \frac {r^2} {4}}.$$
+Нашли решение, инвариантное относительно растяжений, радиальное и убывающее на бесконечности быстрее любого полинома.
 
-\item $r^aw_n' + r^bw \rightarrow 0 \, \text{при} \, n \rightarrow \infty$ --- хотим, чтобы это выполнялось, такое возможно только при $\gamma = 0,$ т.~о.
-$$r^{n-1}w_r' + \dfrac{1}{2}r^nw = 0 \Rightarrow w_r' + \dfrac{r}{2}w = 0 \Rightarrow$$
-$$\dfrac{dw}{w} = -\dfrac{r}{2}dr \Rightarrow w = be^{-\dfrac{r^2}{4}},$$
-$$\text{т.~о.} \, u(t,x) = \dfrac{1}{\sqrt{t^n}}u\left(1, \dfrac{x}{\sqrt{t}}\right) = \dfrac{1}{\sqrt{t^n}}w\left(\dfrac{x}{\sqrt{t}}\right) = \dfrac{b}{\sqrt{t^n}}e^{-\dfrac{|x|^2}{4t}}.$$
+Подставив, получаем однопараметрическое семейство решений:
+$$ u(t,x) = \frac {1} {\sqrt{t^n}} w \left( \frac {|x|} {\sqrt{t}} \right) = \frac {b} {\sqrt{t^n}} e^{-\frac {|x|^2} {4t} }, \quad b > 0 $$
 
-Получили однопараметрическое семейство решений.
-\begin{note}
-Если зафиксируем $t$, то полученное выражение --- гауссова функция(нормальное распределение)
-%TODO: вставитьрисунок
-[рисунок]
-
-,чем $t$ меньше, тем выше "пика" на графике, соответственно, чем больше, тем более сглаженным будет график.
-\end{note}
-Теперь определенным образом выберем константу, пусть $b\,:\,b>0; \, \int\limits_{\real^n} u(t,x)dx = 1.$
-
-\begin{exercise}
-Нужно уметь вычислять $b$.
+\item Осталось выбрать константу $b$. Отнормируем:
+$$ \int \limits_{\real^n} u(t,x) \, dx = 1.$$
+\begin{exercise} Вычислить $b$.
 \end{exercise}
-
-$$b = \dfrac{1}{(4\pi)^{n/2}} \Rightarrow$$$$ u(t,x) = \dfrac{1}{(4\pi t)^{n/2}} \exp\left(-\dfrac{|x|^2}{4t}\right) = \Phi(t,x) \,\text{--- фундаментальное решение уравнения теплопроводности.}$$
-\begin{exercise}
-Что, если $a \not= 1$?
-\end{exercise}
+Правильный ответ: $b = \dfrac {1} {\sqrt{(4\pi)^n}}$
 \end{enumerate}
+
+\begin{definition}
+Фундаментальным решением уравнения теплопроводности называется функция
+$$ \Phi(t, x) = \frac {1} {\sqrt{(4 \pi t)^n}} e ^ {- \frac {|x|^2} {4t}}.$$
+\end{definition}
+
+\begin{exercise}
+Что получится, если $a \not= 1$?
+\end{exercise}
+
+\begin{note}
+При фиксированном $t$ полученное выражение --- гауссова функция (плотность нормального распределения):
+
+\begin{center}
+\includegraphics[scale=0.3]{part4.3.png}
+\end{center}
+
+Чем меньше $t$, тем выше пик на графике. При $t \to 0$ гауссиана стремится равномерно к нулю везде кроме точки $0$. В точке $0$ она уходит в бесконечность.
+\end{note}
 
 \begin{theorem}[Интегральная формула для решения задачи Коши]
-$ \varphi\in C_b(\real^n)$ --- ограниченная и непрерывная(начальное распределение). Тогда
-$$u(t,x) = \int\limits_{\real^n}\Phi(t, x-y)\varphi(y)dy (= \left(\Phi(t,\cdot)*\varphi\right)(x) \text{ --- свертка.})$$
-
+Пусть $\varphi\in C_b(\real^n)$ --- ограниченная и непрерывная (начальное распределение), а $u$ задаётся формулой
+$$u(t,x) = (\Phi(t) * \varphi) (x) =  \int\limits_{\real^n}\Phi(t, x-y)\varphi(y)dy.$$
+Тогда $u$
 \begin{enumerate}
-\item $u \in C^\infty\left(\left(0, +\infty\right)\times \real^n\right);$
-\item $ u_t - \Delta u = 0$ --- т.~е. решение уравнения теплороводности;
-\item $\lim\limits_{(t,\,y) \rightarrow (0,\,x)}u(t,x) = \varphi (x).$
+\item бесконечно гладкая: $$u \in C^\infty\left(\left(0, +\infty\right)\times \real^n\right)$$
+\item удовлетворяет уравнению теплопроводности: $$ u_t - \Delta u = 0$$
+\item удовлетворяет начальному условию: $$\lim\limits_{(t,\,y) \rightarrow (0,\,x)}u(t,x) = \varphi (x).$$
 \end{enumerate}
 
+Иначе говоря, для получения решения задачи Коши для уравнения теплопроводности с ограниченным начальным условием достаточно свернуть начальное условие с фундаментальным решением.
 \end{theorem}
 
-\begin{note}[Физический смысл фундаментального решения] %%%слишком много сказано, нужно ли писать, вроде смысла нет.
-$\Phi$ - распределение температуры от единичного источника (источник с температурой единица), сосредоточенного в одной точке.
-\end{note}
 \begin{proof}
-\begin{enumerate}
-\item $\Phi \in  C^\infty\left(\left(0, +\infty\right)\times \real^n\right)$ --- очевидно.
-$$u_t = \int\limits_{\real^n} \Phi_t(t,x-y)\varphi(y)dy, \qquad u_{x_i} = \int\limits_{\real^n} \Phi_{x_i}(t, x-y)\varphi(y)dy$$
+\begin{enumerate} 
+\item Очевидно, $\Phi \in  C^\infty\left(\left(0, +\infty\right)\times \real^n\right)$. Производные проносятся под интеграл:
+$$u_t = \int\limits_{\real^n} \Phi_t(t,x-y)\varphi(y) \, dy, \quad u_{x_i} = \int\limits_{\real^n} \Phi_{x_i}(t, x-y)\varphi(y) \, dy$$
+Значит, $u \in C^\infty.$
+\item Применим оператор теплопроводности: $$Lu = u_t - \Delta u = \int\limits_{\real^n} \underbrace{(\Phi_t - \Delta \Phi)(t, x-y)}_{0}\varphi(y) dy = 0.$$
+\item Пусть $x_0 \in \real^n$. Посчитаем предел по определению. Для начала,
+\begin{align*}
+|u(t,x) - \varphi(x_0)| &= \Bigl| \int \limits_{\real^n} \Phi(t, x-y) \varphi(y) \, dy - \varphi(x_0) \Bigl| = \\
+	&= \Bigl| \int \limits_{\real^n} \Phi(t, x-y) \varphi(y) \, dy - \varphi(x_0) \int \limits_{\real^n} \Phi(t, x-y) \, dy\Bigl|= \\
+	&= \Bigl| \int \limits_{\real^n} \Phi(t, x-y) (\varphi(y) - \varphi(x_0)) \, dy \Bigl| \leq \int \limits_{\real^n} \Phi(t, x-y) \, \bigl| \varphi(y) - \varphi(x_0) \bigl| \, dy = \\
+	&= \underbrace {\int \limits_{B_\delta (x_0)} \Phi(t, x-y) \, \bigl| \varphi(y) - \varphi(x_0) \bigl| \, dy}_{I_\delta} + \underbrace {\int \limits_{B^c_\delta (x_0)} \Phi(t, x-y) \, \bigl| \varphi(y) - \varphi(x_0) \bigl| \, dy}_{J_\delta}.
+\end{align*}
+Мы внесли $\varphi(x_0)$ под знак интеграла, оценили его сверху и разбили оценку на два интеграла: по $\delta$-окрестности $x_0$ и по её дополнению.
 
-Очевидно, $u \in C^\infty.$
-\item $Lu = u_t - \Delta u = \int\limits_{\real^n} \underbrace{(\Phi_t - \Delta \Phi)(t, x-y)}_{0}\varphi(y) dy = 0.$
-\item Пусть $x_0 \in \real^n.$
-$$|u(t,x) - \varphi(x_0)| = \Bigl|\int\limits_{\real^n}{\Phi(t,x-y)\varphi(y)dy} - \varphi(x_0)\Bigl| = \Bigl|\int\limits_{\real^n}\Phi(t,x-y)\varphi(y)dy - \varphi(x_0)\int\limits_{\real^n}\Phi(t,x-y)dy\Bigl|=$$
-$$=\Bigl|\int\limits_{\real^n}\Phi(t,x-y)(\varphi(y) - \varphi(x_0))dy\Bigl| \leq \int\limits_{\real^n}\Phi(t,x-y)\bigl|\varphi(y) - \varphi(x_0)\bigl|dy = $$
-$$= \underbrace{\int\limits_{B_\delta(x_0)}\Phi(t,x-y)\bigl|\varphi(y) - \varphi(x_0)\bigl|dy}_{I_\delta} + \underbrace{\int\limits_{\real^n \setminus B_\delta(x_0)}\Phi(t,x-y)\bigl|\varphi(y) - \varphi(x_0)\bigl|dy}_{J_\delta}.$$
+Пусть $\eps > 0$. Функция $\varphi$ непрерывна. Значит, можно выбрать такое $\delta$, что 
+$$ | \varphi(y) - \varphi(x_0)| < \dfrac {\eps} {2} \quad \forall y \in B_\delta (x_0)$$
 
-Пусть $\eps > 0.$ Выберем такое $\delta,$ что $\bigl|\varphi(y) - \varphi(x_0)\bigl|<\dfrac{\eps}{2}$ при $y \in B_\delta(x_0)$ (Такое $\delta \, \exists,$ т.~к. $\varphi$ --- непрерывна).
+Тогда
+$$ I_\delta \leq \int \limits_{\real^n} \Phi(t, x-y) \, \frac {\eps} {2} \, dy = \frac {\eps} {2}. $$
 
-Тогда $I_\delta \leq \dfrac{\eps}{2}, \, \text{т.к.} \int\limits_{\real^n}\Phi = 1.$
+Пусть $|x - x_0| < \dfrac{\delta}{2}$, тогда при $y \notin B_\delta(x_0)$ верно $|x - y| \geq \dfrac{1}{2}|x_0 - y|.$
+Оцениваем $J_\delta$:
+\begin{align*}
+J_\delta & \leq 2 || \varphi ||_\infty \int \limits_{B^c_\delta (x_0)} \Phi(t, x-y) \, dy = 2 || \varphi ||_\infty \frac {1} {\sqrt{(4 \pi t)^n}} \int \limits_{B^c_\delta (x_0)} e^{- \frac {|x - y|^2} {4t}} \, dy \leq \\
+ & \leq 2 || \varphi ||_\infty \frac {1} {\sqrt{(4 \pi t)^n}} \int \limits_{B^c_\delta (x_0)} e^{- \frac {|x_0 - y|^2} {16t}} \, dy \leq \frac {C} {\sqrt{(4 \pi t)^n}} \int \limits_\delta^{+\infty} e^{- \frac {\rho^2} {16t}} \rho^{n-1} \, d\rho = \\
+ &= С \int \limits_{\delta / \sqrt{t}}^{+\infty} e^{- \frac {r^2} {16t}} r^{n-1} \, dr \stackrel{t \to 0} {\longrightarrow} 0
+\end{align*}
+Мы оценили модуль под знаком суммой модулей, а сумму оценили удвоенной равномерной нормой. Далее мы воспользовались неравенством, перешли к сферическим координатам и сделали замену $r = \dfrac {\rho} {\sqrt{t}}$. 
 
-Пусть $|x - x_0| < \dfrac{\delta}{2}, \, y \notin B_\delta(x_0) \Rightarrow |x - y| \geq \dfrac{1}{2}|x_0 - y|.$
-$$J_\delta \leq 2||\varphi||_\infty \cdot \int\limits_{\real^n \setminus B_\delta(x_0)} \Phi(t,x-y)dy = 2||\varphi||_\infty \dfrac{1}{(4\pi t)^{n / 2}} \int\limits_{B_{\delta}^c} e^{-\dfrac{|x-y|^2}{4t}}dy \leq $$$$\leq 2||\varphi||_\infty \dfrac{1}{(4\pi t)^{n / 2}} \int\limits_{B_{\delta}^c} e^{-\dfrac{|x_0-y|^2}{16t}}dy \leq \dfrac{C}{(4\pi t)^{n / 2}} \int\limits_\delta^{+\infty} e^{-\dfrac{\rho^2}{16t}}\rho^{n-1}d\rho =  $$$$ = C\int\limits_{\delta / \sqrt{t}}^{+\infty} e^{-\dfrac{\rho^2}{16t}}\rho^{n-1}d\rho \stackrel{t\rightarrow 0}{\longrightarrow} 0$$
-$$\delta: \, t < \dfrac{\delta}{2}, \, J_\delta \leq \dfrac{\eps}{2}, \Rightarrow I = I_\delta + J_\delta \leq \eps, \, |x-x_0| < \dfrac{\delta}{2}, \, 0<t<\dfrac{\delta}{2} \Rightarrow $$$$ |u(t,x) - \varphi(x_0)|<\eps$$
+Можем выбрать такое $t$, что $$ t \leq \frac {\delta} {2}, \quad J_\delta \leq \dfrac {\eps} {2}.$$
+Суммируем $I_\delta$ и $J_\delta$. Тогда
+$$ \forall \eps >0 \quad \exists t, \delta: \quad | x- x_0| < \frac {\delta} {2}, \quad |t| < \frac {\delta} {2} \quad \Rightarrow \quad |u(t,x) - \varphi(x_0)| < \eps,$$
+что и требовалось доказать.
 \end{enumerate}
+
 \end{proof}
 
+
 \subsection{Решение задачи Коши для неоднородного уравнения теплопроводности в пространстве. Метод Дюамеля}
+Поставим начальную задачу для неоднородного уравнения теплопроводности в $\real^n$:
 \begin{align}
     \begin{cases} 
-        u_t - \Delta u = f, \\
+        u_t - \Delta u = f(t,x), \\
         u (0, x) = \varphi (x).
     \end{cases}
 \label{heatnonhomcauchy2}
 \end{align}
-$t \in \real^+,\, x \in \real^n, f=f(t,x)$
 
-\begin{note}
 
-Достаточно решать для случая $\varphi = 0, \, f \not= 0 \, \text{и} \, \varphi \not=, \, f = 0,$ т. е. пусть $u_1, \, u_2 :$
+\begin{note}[Принцип суперпозиции]
+Пусть $u_1$, $u_2$ --- решения задач
 \begin{equation*}
 \begin{cases} 
         Lu_1 = f, \\
-        u_1\Bigl|_{t=0} = 0.
+        u_1\Bigl|_{t=0} = 0,
     \end{cases}
-    \qquad
+    \quad \text{и} \quad
     \begin{cases} 
         Lu_2 = 0, \\
-        u_2\Bigl|_{t=0} = \varphi (x).
+        u_2\Bigl|_{t=0} = \varphi (x),
     \end{cases}
 \end{equation*}
-Тогда $u = u_1+u_2:$
-\begin{align}
-\begin{cases} 
-        Lu = f, \\
-        u\Bigl|_{t=0} = \varphi (x).
-    \end{cases}
-    \end{align}
+соответственно. Тогда $u = u_1+u_2$ - решение задачи \eqref{heatnonhomcauchy2}
 \end{note}
 
-{\itshape Принцип Дюамеля.} Пусть $\varphi = 0$
+Не умаляя общности, считаем, что $\varphi = 0$.
+
+\subsubsection*{Принцип Дюамеля}
+
+Пусть $v(t,x,s)$ - решение семейства задач
 \begin{equation*}
-v(t,x,s) : \quad
     \begin{cases} 
         v_t - \Delta v = 0, \\
-        v\Bigl|_{t=s} = f(s, \,).
+        v\Bigl|_{t=s} = f(s, .).
     \end{cases}
 \end{equation*}
+
 $$u(t,x) = \int\limits_0^tv(t,x,s)ds = \int\limits_0^t ds \int\limits_{\real^n}\Phi(t-s, x-y)f(s,y)dy.$$
 
+В некоторых случаях эта формула даёт классическое решение, рассмотрим один из них:
+
 \begin{theorem}
-Пусть $ u(t,x) = \int\limits_0^t ds \int\limits_{\real^n}\Phi(t-s, x-y)f(s,y)dy,$ тогда при $f\in C_x^2, \, C_t^1, f $ --- финитная $\in C_0^\infty( (0,+\infty) \times \real^n),$
+Пусть $$u(t,x) = \int\limits_0^t ds \int \limits_{\real^n} \Phi (t-s, x-y) f(s,y) \, dy ,$$ и функция $f\in C_x^2 \cap C_t^1$, а также финитная в $(0, \infty) \times \real^n$. Тогда $u$
 \begin{enumerate}
-\item $u \in C_t^1, \, u \in C_x^2;$
-\item $u_t(t,x) - \Delta u(t,x) = f, \, u(0,x) = 0;$
-\item $\lim u(t,x) = 0$ при $(t,x) \rightarrow (0,x_0) \forall x_0 \in \real^n.$
+\item Непрерывно дифференцируема один раз по $t$ и два раза по $x$: $$u \in C_t^1 \cap C_x^2,$$
+\item Является решением задачи Коши для неоднородного уравнения теплопроводности: $$u_t - \Delta u = f, \quad u(0,x) = 0,$$
+\item Удовлетворяет начальному условию: $$\lim_{(t,x) \to (0,x_0)} u(t,x) = 0 \quad  \forall x_0 \in \real^n.$$
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
 
-$$u(t,x) = \int\limits_0^t ds \int\limits_{\real^n} \Phi(s,y)f(t-s, x-y)dy \, \text{--- свертка},$$ т.к. $f\in C_x^2, \, C_t^1, f $ --- финитная и $\Phi(s,y)$ гладкая в окрестности $s = t >0:$
-$$\dfrac{\partial^2u}{\partial x_i^2} = \int\limits_0^t ds \int\limits_{\real^n} \Phi(s,y)f_{x_i x_i}(t-s, x-y)dy;$$
-$$u_t = \int\limits_{\real^n} \Phi(t,y)f(0,x-y)dy + \int\limits_0^t ds\int\limits_{\real^n} \Phi(s,y)f_t(t-s, x-y)dy,$$ т.е. $u \in C_t^1, \, u \in C_x^2.$
+\begin{enumerate}
+\item Взять и пронести производную под знак интеграла не можем, так как в точке $t = s$ у $\Phi$ имеется сингулярность. Поменяем переменные в свёртке:
+$$ u(t, x) = \int \limits_0^t ds \int \limits_{\real^n} \Phi(s,y) f(t-s, x-y) \,dy.$$
+Теперь можем проносить производные по $x$:
+$$ \Delta u = \int \limits_0^t ds \int \limits_{\real^n} \Phi(s,y) \Delta f (t-s, x-y) \, dy.$$
+Со временем чуточку сложнее из-за переменного верхнего предела:
+$$  u_t = \int \limits_{\real^n} \Phi(t,y) f(0, x-y) \, dy + \int \limits_0^t ds \int \limits_{\real^n} \Phi(s,y) f_t(t-s,x-y) \, dy.$$
+\item Подставляем в уравнение:
+$$ u_t - \Delta u = \int \limits_{\real^n} \Phi(t,y) f(0, x-y) \, dy +  \int \limits_0^t ds \int \limits_{\real^n} \Phi(s,y) \left( \pder{t} - \Delta_x \right) f(t-s, x-y) \, dy.$$
+% цитирую: "Было бы неплохо "перекинуть" дифференциальный оператор с $f$ на $\Phi$."
+Заметим, что
+$$ \pder{t} f(t-s,x-y) = - \pder{s} f(t-s, x-y), \quad \Delta_x f(t-s, x-y) = \Delta_y f(t-s, x-y)$$
+Тогда
+$$ u_t - \Delta u = \int \limits_{\real^n} \Phi(t,y) f(0, x-y) \, dy +  \int \limits_0^t ds \int \limits_{\real^n} \Phi(s,y) \left( -\pder{s} - \Delta_y \right) f(t-s, x-y) \, dy.$$
+Пусть $\eps > 0$. Разобъём второй интеграл на два:
+\begin{gather*}
+\int \limits_0^t ds \int \limits_{\real^n} \Phi(s,y) (-\pder{s} - \Delta_y) f(t-s, x-y) \, dy = I_1 + I_2 = \\ 
+= \int \limits_0^\eps ds \int \limits_{\real^n} \Phi(s,y) \left(-\pder{s} - \Delta_y \right) f(t-s, x-y) \, dy \\
++ \int \limits_\eps^t ds \int \limits_{\real^n} \Phi(s,y) \left( -\pder{s} - \Delta_y \right) f(t-s, x-y) \, dy.
+\end{gather*}
+В $I_1$ производные $f$ финитны, можно оценить их равномерными нормами и вынести за знак интеграла:
+$$I_1 \leq (|| f_t ||_\infty + || \Delta f ||_\infty) \int \limits_0^\eps ds \underbrace {\int \limits_{\real^n} \Phi(s,y) \, dy }_{=1} = C \eps \stackrel {\eps \to 0} {\longrightarrow} 0. $$
+В $I_2$ интегрированием по частям можно перенести дифференциальный оператор на $\Phi$, в этом нам поможет финитность $f$:
+\begin{align*}
+	I_2 &= \int \limits_\eps^t ds \int \limits_{\real^n} \Phi(s,y) \left( - \pder{s} - \Delta_y \right) f(t-s, x-y) \, dy = \\
+	&= \int \limits_\eps^t ds \int \limits_{\real^n} (\underbrace {\Phi_s - \Delta_y\Phi}_{=0})(s,y) f(t-s, x-y) \, dy \\
+	& +  \int \limits_{\real^n} \Phi(\eps, y) f(t - \eps, x-y) \, dy - \int \limits_{\real^n} \Phi(t, y) f(0, x-y) \, dy.
+\end{align*} 
+Интегрировали мы по $(\eps, t) \times K$, где $K$ - некоторый компакт. На боковых границах функция $f$ равна нулю, так что граничные члены остались только с верхней и нижней "крышек".
 
-$$u_t - \Delta u = \int\limits_{\real^n} \Phi(t,y)f(0,x-y)dy + \int\limits_0^t ds\int\limits_{\real^n} \Phi(s,y)f_t(t-s, x-y)dy-$$$$ - \int\limits_0^t ds \int\limits_{\real^n}dy\underbrace{\sum \Phi(s,y)f_{x_i x_i}(t-s, x-y)}_{\Phi(s,y)\Delta f(t-s, x-y)} = $$
-$$= \int\limits_{\real^n} \Phi(t,y)f(0,x-y)dy + \int\limits_0^t ds \int\limits_{\real^n}dy \Phi(s,y)(-\dfrac{\partial}{\partial s} - \Delta y) = $$ $$= \underbrace{ \int\limits_0^\eps ds \int\limits_{\real^n}\Phi(s,y)\left(\left(-\dfrac{\partial}{\partial s} - \Delta y\right)f(t-s, x-y)\right)dy}_{I_\eps} + \underbrace{\int\limits_{\real^n} \Phi(t,y)f(0,x-y)dy}_{k} + $$
-$$+ \underbrace{\int\limits_\eps^t ds \int\limits_{\real^n} \Phi(s,y)\left(\left(-\dfrac{\partial}{\partial s} - \Delta y\right)f(t-s, x-y)\right)dy}_{J_\eps}.$$
-$$\abs{I_\eps} \leq \left(||f_t||_\infty + ||\Delta_x f||_\infty\right)\int\limits_0^\eps ds \int\limits_{\real^n}\Phi(s,y)dy = C\eps.$$
-$$J_\eps = \int\limits_\eps^t ds \underbrace{\int\limits_{\real^n}\left(\left(\dfrac{\partial}{\partial s} - \Delta y\right)\Phi(s,y)\right)f(t-s, x-y)dy}_{0, \, \text{т.к.} \, \Phi \, \text{--- решение однородного уравнения}} + \int\limits_{\real^n} \Phi(\eps, y)f(t-\eps, x-y)dy - $$ $$-\underbrace{\int\limits_{\real^n} \Phi(t,y)f(0,x-y)dy}_{\text{это} \, k}.$$
-При $\eps \rightarrow 0:$
-$$u_t - \Delta u = \lim_{\eps \rightarrow 0} \int\limits_{\real^n}\Phi(\eps, y)f(t-\eps, x-y)dy = \lim_{\eps \rightarrow 0} \int\limits_{\real^n}\Phi(\eps, x-y)f(t-\eps, y)dy = f(t,x) \Rightarrow$$ $\Rightarrow u$ --- решение.
+Таким образом, для всех $(t,x)$ верно
+$$ u_t - \Delta u = \lim_{\eps \to 0} \int \limits_{\real^n} \Phi(\eps, y) f(t-\eps, x-y) \, dy = f(t,x).$$
 
-$$\abs{u(t,x)} \leq \int\limits_0^t ds \int\limits_{\real^n}\Phi(s,y)\underbrace{\abs{f(t-s, x-y)}}_{\leq C, \, \text{т.к. финитная}}dy \leq C\int\limits_0^t ds \int\limits_{\real^n}\Phi(s,y)dy = Ct \stackrel{t \rightarrow 0} \longrightarrow 0. $$
+\item Оценим по модулю, попутно воспользовавшись финитностью:
+$$\abs{u(t,x)} \leq \int \limits_0^t ds \int \limits_{\real^n} \Phi(s,y) |f(t-s, x-y)| \,dy \leq C \int \limits_0^t ds \int \limits_{\real^n} \Phi(s,y) \, dy = Ct \stackrel{t \to 0} \longrightarrow 0. $$
+\end{enumerate}
+
 \end{proof}
 
 \subsection{Уравнения Лапласа и Пуассона}
