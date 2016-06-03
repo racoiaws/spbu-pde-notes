@@ -3,102 +3,111 @@
 % вопросы 18-20 
 % 18. Пространство основных функций и пространство обобщенных функций (распределений). Примеры обобщенных функций. Дифференцирование обобщенных функций. Обобщенные и классические производные.
 % 19. Фундаментальное решение уравнения Лапласа, его физический смысл.
-% 20.  Представление (частного) решения уравнения Пуассона в пространстве при помощи фундаментального решения.
+% 20. Представление (частного) решения уравнения Пуассона в пространстве при помощи фундаментального решения.
 
-\section{Основы теории обобщенных функций}
-$\Omega \subset \real^n$ --- область.
-
+\subsection{Основы теории обобщенных функций}
+Как и раньше, $\Omega \subset \real^n$ --- область.
 \begin{definition}
-$ \beauD(\Omega) = C_0^\infty(\Omega)$ называется пространством основных функций (пробных функций).
+Множество $ \beauD(\Omega) = C_0^\infty(\Omega)$ называется пространством основных функций (пробных функций).
 \end{definition}
-
 \begin{definition}
 Последовательность функций $\{u_k\} \subset C_0^\infty(\Omega)$ сходится к основной функции $u \in C_0^\infty(\Omega)$, если 
 \begin{enumerate}
-\item $\exists K \ssubset \Omega \, : \, \supp u_k \subset K;$
-\item $u_k \unicom u$ и $D^\alpha u_k \unicom D^\alpha u \quad \forall \alpha,$ где $\alpha$ --- мультииндекс: $$\alpha = (\alpha_1, \ldots, \alpha_n), \, \alpha_i \in \mathds{N},$$ $$\abs{\alpha} = \sum\limits_{i=1}^{n}\alpha_i,$$
+\item все функции последовательности имеют носитель в одном компакте: $$\exists K \ssubset \Omega: \quad \supp u_k \subset K,$$
+\item все функции последовательности и все их производные сходятся к $u$ и её производным равномерно $$u_k \rightrightarrows u, \quad D^\alpha u_k \rightrightarrows D^\alpha u \quad \forall \alpha,$$ где $\alpha$ --- мультииндекс: $$\alpha = (\alpha_1, \ldots, \alpha_n), \, \alpha_i \in \mathds{N},$$ $$\abs{\alpha} = \sum\limits_{i=1}^{n}\alpha_i,$$
 $$D^\alpha u = \dfrac{\partial^{\abs{\alpha}}u}{\partial x_1^{\alpha_1}\ldots\partial x_n^{\alpha_n}}.$$
 \end{enumerate}
 \end{definition}
 
-\begin{examples}
-\begin{enumerate}
-\item $u_0 \in C_0^\infty(\real), \, \Omega = \real, \, u_k = \dfrac{1}{k}u_0 \stackrel{\beauD(\real)}\longrightarrow 0.$
-\item $u_0 \in C_0^\infty(\real), \, \Omega = \real, \, u_k(x) = \dfrac{1}{k}u_0(x - k)$ --- поточечно и равномерно сходится к 0, все производные сходятся к 0, но сходимости в смысле основных функций нет, т.к. не живут на одном компакте. Т.о. сходимость основных функций сильнее, чем равномерная или поточечная. Интересный факт: нет метрики с такой сходимостью, но можно постоить топологию.
-\end{enumerate}
-\end{examples}
+\begin{example}Пусть $u_0 \in C_0^\infty(\real)$ и $u_k = \dfrac{1}{k}u_0$, тогда $u_k \conv*{\beauD(\real)}{} 0$.
+\end{example}
 
-\begin{definition}
-Пространством обобщенных функций называется пространство линейных непрерывных функционалов на пространстве $\beauD(\Omega).$ Обозначается $\beauD'(\Omega).$
-\begin{note}
-$u \in \beauD(\Omega), \, \action{u,f}$ --- действие обобщенной функции $f$ на основную функцию $u$.
+\begin{example}Пусть $u_0 \in C_0^\infty(\real)$ и $u_k(x) = \dfrac{1}{k}u_0(x - k)$. Тогда
+\begin{gather*}
+	u_k \to 0, \\
+	u_k \rightrightarrows 0, \\
+	D^\alpha u_k \rightrightarrows 0 \quad \forall \alpha
+\end{gather*}
+но $u_k$ не живут на одном компакте, так что $$ u_k \centernot {\conv*{\beauD(\real)}{}} 0.$$
+
+Таким образом, сходимость основных функций сильнее, чем равномерная или поточечная.
+\end{example}
+
+\begin{note} Заданная нами на $\beauD$ топология не порождается никакой метрикой. 
 \end{note}
-\end{definition}
 
 \begin{definition}
-Обобщенная функция $f$ непрерывна, если $u_k \in \beauD(\Omega), \, u_k \stackrel{\beauD(\real)}\longrightarrow u \, \Rightarrow \, \action{u_k, f} \rightarrow \action{u, f}.$
+Пространством обобщенных функций $\beauD'(\Omega)$ называется пространство линейных непрерывных функционалов на пространстве $\beauD(\Omega)$. Через $\action{u,f}$ обозначается действие обобщенной функции $f$ на основную функцию $u$. Обобщенные функции также называют распределениями.
 \end{definition}
 
-\begin{examples}
+\begin{note} Таким образом, обобщённая функция это не функция, а функционал.
+\end{note}
+
+\begin{note} Пусть $\left\{ u_k \right\} \subset \beauD(\Omega)$. Непрерывность обобщённой функции $f$ означает, что
+$$ u_k \conv* {\beauD(\Omega)} {} u \quad \Rightarrow \quad \action{u_k, f} \longrightarrow \action{u, f}.$$
+\end{note}
+
+\begin{example} Любая функция $v \in L_{loc}^1 (\Omega)$ канонически порождает обобщённую функцию $\widehat{v}$:
+$$ \action{u, \widehat{v}} = \int \limits_\Omega u(x) v(x) \, dx.$$
+Интеграл имеет смысл, так как на самом деле мы интегрируем по $\supp u$. Линейность $\widehat{v}$ очевидна, покажем непрерыность. Пусть $\left\{ u_k \right\} \subset \beauD(\Omega)$ и $ u_k \conv*{\beauD(\Omega)}{} u$, тогда
+$$ \action{u_k, \widehat{v}} = \int \limits_\Omega u_k v = \int \limits_K u_k v \longrightarrow \int \limits_K uv = \int \limits_\Omega uv = \action{u, \widehat{v}}.$$
+Таким образом, можно отождествлять $v = \widehat{v}$ и говорить, что $L_{loc}^1(\Omega) \subset \beauD' (\Omega)$, хоть эти пространства и имеют разную природу.
+\end{example}
+
+\begin{example}Конечная положительная борелевская мера $\mu$ порождает обобщённую функцию $\widehat{\mu}$:
+$$\action{u, \widehat{\mu}} = \int \limits_\Omega u \, d\mu.$$
+Линейность очевидна, непрерывность вытекает из непрерывности интеграла. Таким образом, конечные положительные борелевские меры --- тоже обобщённые функции.
+\end{example}
+
+\begin{example}Рассмотрим так называемую дельта-фунцию Дирака $\delta = \delta_0 = \delta(x)$:
+$$ \action{u, \delta} = u(0).$$
+Также для $x \in \Omega$ можно определить $\delta_{x_0} = \delta (x - x_0)$:
+$$\action{u, \delta_{x_0}} = u(x_0).$$
+Линейность и непрерывность очевидны. Значит, дельта-функция является обобщённой функцией.
+\end{example}
+
+\begin{note}Дельта-функция не порождается никакой функцией из $L_{loc}^1(\Omega)$.
+\end{note}
+\begin{proof}
+Пусть $f \in L_{loc}^1(\Omega)$ такая, что
+$$ \action{u, \delta} = \action{u, f} = \int \limits_\Omega fu  = u(0) \quad \forall u \in C_0^{\infty}(\Omega)$$
+Рассмотрим такие $u$, у которых $0$ не лежит в носителе. Для них верно
+$$\action{u, f} = \int \limits_\Omega fu = 0.$$
+По основной лемме вариационного исчисления $f = 0$ почти всюду на $\Omega \setminus \{0\}$. Множество $\{0\}$ имеет меру нуль, значит, $f = 0$ почти всюду на $\Omega$. Подставив в интеграл, получим
+$$ u(0) = 0 \quad \forall u \in C_0^{\infty},$$
+что невозможно.
+
+\end{proof}
+
+На обобщённых функциях можно определить операции:
+
 \begin{enumerate}
-\item $v \in L_{loc}^1(\Omega), \, \text{т.е. } \forall K \ssubset \Omega \quad v \in L^1(K).$
-
-$\widehat{v} \in \beauD'(\Omega), \, \action{u, \widehat{v}} = \int\limits_\Omega u(x)v(x)dx.$ (Почему это корректно? Потому что на самом деле интегрируем по $\supp u$, а это компакт, где $v \in L^1.$)
-Линейность $\widehat{v}$ очевидна.
-Непрерывность: пусть $u_k \stackrel{\beauD(\real)}\longrightarrow u \, \Rightarrow$
-$$\action{u_k, \widehat{v}} = \int\limits_\Omega u_k(x)v(x)dx = \int\limits_K u_kv \rightarrow \int\limits_K uv = \int\limits_\Omega uv = \action{u, \widehat{v}},$$
-т.о. $\widehat{v}$ --- непрерывна, поэтому говорят, что $L_{loc}^1(\Omega) \subset \beauD'(\Omega),$ хотя это пространства разной природы, но они отождествляются и будем считать, что $\widehat{v} = v.$
-\item Пусть $\mu$ --- конечная положительная борелевская мера. 
-$$\widehat{\mu}\, :\, \action{u, \widehat{\mu}} = \int\limits_\Omega ud\mu, \, \widehat \mu \in \beauD'(\Omega).$$
-Линейность очевидна. Непрерывность:
-$$\action{u_k, \widehat \mu} = \int\limits_\Omega u_kd\mu \rightarrow \int\limits_\Omega ud\mu = \action{u, \widehat \mu},$$
-т.о. $\widehat\mu$ --- непрерывна. $\widehat\mu$ --- обобщенная функция, порожденная $\mu$, поэтому можно считать, что конечные положительные борелевские меры совпадают с обобщенными функциями.
-\item $\Omega = \real^n.$ Рассмотрим $\delta \, : \, \action{u, \delta} = u(0).$ Введем обозначения $\delta_0, \, \delta(x).$ Линейность и непрерывность выполняются (из $u_k \stackrel{\beauD(\real)}\longrightarrow u$ следует поточечная сходимость). Рассмотрим
-$$ \delta_{x_0} \, :\, x_0 \in\Omega, \, \action{u, \delta_{x_0}} = u(x_0).$$  Обозначают  $\delta(x - x_0).$
-Порождается ли $\delta$ функцией из $L_{loc}^1$? Т.е. $\exists? f \in L_{loc}^1(\Omega)\,:\, \action{u,\delta} = \action{u, f} = \int\limits_\Omega uf = u(0) \, \forall u\in C_0^\infty(\Omega).$ 
-
-Рассмотрим $u \, :\, 0\not\in \supp u\, \text{ и } \, \int\limits_\Omega uf =0, \, u\in C_0^\infty (\Omega \setminus \{0\}).$
-
-По основной лемме вариационного исчисления (сильный вариант) $f = 0$ п.в. на $\Omega \setminus \{0\} \, \Rightarrow \, f =0 $ п.в. на $\Omega$, т.е. $u(0) = 0 \, \forall u \in C_0^\infty(\Omega),$ а это не верно $\Rightarrow$ никакой функцией из $L_{loc}^1$ не порождается $\delta.$
-\end{enumerate}
-\end{examples}
-
-\subsection{Операции на обобщенных функциях}
-\begin{enumerate}
-\item Сложение, умножение на скаляр.$$v_1, \, v_2 \in \beauD'(\Omega)\quad \lambda_1,\,\lambda_2 \in \real:$$
+\item Сложение, умножение на скаляр. Пусть $v_1, \, v_2 \in \beauD'(\Omega)$, $\lambda_1,\,\lambda_2 \in \real$, тогда
 $$\action{u, \lambda_1v_1 + \lambda_2v_2} = \lambda_1\action{u, v_1} + \lambda_2\action{u, v_2}.$$
-\item Умножение на функцию из $C^\infty.$
-$$\varphi \in C^\infty(\Omega), \, v\in \beauD'(\Omega), \, u\in \beauD(\Omega)$$
-$$\action{u, \varphi v} = \action{\varphi u, v} \quad (\varphi u \in C_0^\infty).$$
-\item Дифференциирование.
-$$\alpha \text{ --- мультииндекс, } v\in\beauD'(\Omega), \, u \in \beauD(\Omega)$$
+\item Умножение на функцию из $C^\infty$. Пусть $\varphi \in C^\infty(\Omega)$, $v\in \beauD'(\Omega)$, $u\in \beauD(\Omega)$, тогда
+$$\action{u, \varphi v} = \action{\varphi u, v}.$$
+Определение корректно, так как $\varphi u \in C_0^\infty$.
+\item Дифференцирование. Пусть $\alpha$ --- мультииндекс, $v\in\beauD'(\Omega)$, $u \in \beauD(\Omega)$. Тогда
 $$\action{u, D^\alpha v} = (-1)^{\abs{\alpha}}\action{D^\alpha u, v}.$$
-Проверим, что $D^\alpha v\in \beauD'(\Omega):$
-
-Линейность очевидна.
-
-Непрерывность: $u_k \stackrel{\beauD(\Omega)}\longrightarrow u$
-$$\action{u_k, D^\alpha v} = (-1)^{\abs{\alpha}} \action{D^\alpha u_k, v}\, \rightarrow \, (-1)^{\abs{\alpha}} \action{D^\alpha u, v} = \action{u, D^\alpha v},$$
-т.к. $D^\alpha u_k \stackrel{\beauD(\Omega)}\longrightarrow D^\alpha u, $ т.к. $D^\alpha u_k \unicom D^\alpha u \, \forall \alpha $ и $\supp D^\alpha u_k \subset K \ssubset \Omega.$
-Обобщенные функции также называют распределениями.
+Проверим, что $D^\alpha v\in \beauD'(\Omega)$. Линейность очевидна. Пусть $u_k \conv* {\beauD(\Omega)}{} u$, тогда
+$$\action{u_k, D^\alpha v} = (-1)^{\abs{\alpha}} \action{D^\alpha u_k, v} \longrightarrow (-1)^{\abs{\alpha}} \action{D^\alpha u, v} = \action{u, D^\alpha v},$$
+по свойствам сходящихся в $\beauD(\Omega)$ последовательностей.
 \end{enumerate}
-\begin{examples}
-\begin{enumerate}
-\item Об обобщенных и классических производных.
 
-Пусть $v \in C^1(\Omega) \subset L_{loc}^1(\Omega),\,v$ --- обобщенная с точностью до отождествления.
-$$\action{u, v_{x_i}}= -\action{u_{x_i}, v}=-\int\limits_\Omega \underbrace{u_{x_i}}_{\in C^\infty}\underbrace{v}_{\in C^1}dx = \int\limits_\Omega' uv_{x_i}dx - \underbrace{\int\limits_{\partial\Omega'}uv\nu_i d\sigma}_{0, \text{ т.к. }u \text{ лежит внутри } \Omega}= \action{u, v_{x_i}},$$
-где $v_{x_i}$ --- производная в классическом смысле. 
-\begin{note}$\nu_i$ --- $i$-я компонента внешней нормали к $\partial\Omega.$\end{note}
-$v_{x_i} \in C(\Omega)\subset L_{loc}^1(\Omega).$
+\begin{example}
+Пусть $v \in C^1(\Omega) \subset L_{loc}^1(\Omega)$. Тогда $v$ --- обобщенная с точностью до отождествления. Рассмотрим обобщённую функцию $v_{x_i}$:
+$$\action{u, v_{x_i}} = - \action{u_{x_i}, v }= - \int \limits_\Omega u_{x_i} v \, dx = \int \limits_\Omega u v_{x_i} \, dx - \underbrace{\int \limits_{\partial \Omega'} u v \nu_i \, d\sigma}_{=0} = \action{u, v_{x_i}},$$
+где $\partial \Omega'$ --- гладкая граница некоего множества, лежащего в $\Omega$ и окружающего носитель функции $u$.
 
-$\Omega'$ --- область с гладкой границей, $\Omega'\subset\Omega, \, \supp u\subset\Omega'$. Т.о. если $v$ --- дифференциируема, то обобщенная производная совспадает с классической.
-\item $\Omega=\real.$
+Таким образом, если $v$ непрерывно дифференцируема, то обобщённая производная совпадает с классической.
+\end{example}
+
+\begin{exercise} Пусть $\Omega = \real$. Рассмотрим обобщённую производную дельта-функции:
 $$\action{u, \delta'} = -\action{u, \delta} = -u'(0).$$
-\begin{exercise}
-$\delta'$ --- это обобщенная функция. Докажите, что ей не соответствует никакая функция и никакая мера.
+Доказать, что ей не соответствуют ни одна функция и ни одна мера.
 \end{exercise}
-\item $\Omega =\real.$
+
+\begin{example}Пусть $\Omega =\real.$ Рассмотрим функцию Хевисайда:
 \begin{equation*}
 h(x) = \quad
     \begin{cases} 
@@ -106,110 +115,137 @@ h(x) = \quad
         0,\, x < 0.
     \end{cases}
 \end{equation*}
-$h(x)$ ---функция Хевисайда.
-$$\action{u, h'}= -\action{u',h} = -\int\limits_{-\infty}^{+\infty}u'h = -\int\limits_0^{+\infty}u' = \underbrace{-u\Bigl|_0^{+\infty}}_{\text{финитная}} = 0+u(0)=\action{u,\delta},$$
-т.о. $h' = \delta$  в смысле обобщенных функций (в классическом смысле $\not\exists h'(0)$).
+Найдём её обобщённую производную:
+
+$$\action{u, h'}= -\action{u',h} = -\int\limits_{-\infty}^{+\infty}u'h = -\int\limits_0^{+\infty}u' = \underbrace{-u\Bigl|_0^{+\infty}}_{\text{финитная}} = 0+u(0)=\action{u,\delta}.$$
+Таким образом, $h' = \delta$ в смысле обобщённых функций. В классическом смысле в нуле производной не существует.
+\end{example}
 
 \begin{exercise}
-Канторова лестница п.в. имеет производную 0 в классическом смысле. Доказать, что обобщенная производная $\not\equiv0$  и является мерой на канторовом множестве.
+Канторова лестница п.в. имеет нулевую производную в классическом смысле. Доказать, что её обобщенная производная $\not\equiv0$  и является мерой, сосредоточенной на канторовом множестве.
 \end{exercise}
+
+\subsection{Фундаментальное решение уравнения Лапласа}
+Будем рассматривать уравнения Лапласа \eqref{Laplace} и Пуассона \eqref{Poisson} в смысле обобщенных функций.
+
+Пусть $\Omega = \real^n$, $u$ - обобщённая функция. В случае электростатической системы из одного заряда имеем уравнение Пуассона:
+\begin{equation}
+	-\Delta u = \delta.
+\label{comLaplace}
+\end{equation}
+
+Нам понадобятся формулы Грина (следуют из формулы интегрирования по частям):
+\begin{enumerate}
+\item $\displaystyle \int \limits_\Omega v \Delta u = \sum \limits_{i = 1}^{n} \int \limits_\Omega v u_{x_i x_i} = \sum \limits_{i = 1}^{n} \left( - \int \limits_\Omega v_{x_i} u_{x_i} \, dx + \int \limits_{\partial \Omega} v u_{x_i} \nu_i \, d\sigma \right) = - \int \limits_\Omega \nabla u \cdot \nabla v \, dx + \int \limits_{\partial \Omega} v \dfrac{\partial u}{\partial \nu} \, d\sigma.$
+\item $\displaystyle \int \limits_{\Omega} \left( u \Delta v - v \Delta u \right) \, dx = \int \limits_{\partial \Omega} \left( u \dfrac{\partial v}{\partial \nu} - v \dfrac{\partial u}{\partial \nu} \right) \, d\sigma.$
 \end{enumerate}
-\end{examples}
-
-\subsection{Фундаментальное решение уравнения Лапласа, его физический смысл}
-Рассмотрим уравнения Лапласа \eqref{Laplace} и Пуассона \eqref{Poisson} в смысле обобщенных функций, т.е. $u, f$ --- обобщенные функции, $\Delta u$ --- сумма обобщенных вторых производных.
-
-В случае системы из одного заряда получим: \begin{align}-\Delta u = \delta.\label{comLaplace}\end{align}
-
-\begin{note}
-Формулы Грина:
-$$\MakeUppercase{\romannumeral1}.\, \int\limits_\Omega v\Delta u = \sum\limits_{i = 1}^{n}\int\limits_\Omega vu_{x_i x_i} = \sum\limits_{i = 1}^{n}\left(-\int\limits_\Omega v_{x_i}u_{x_i}dx + \int\limits_{\partial\Omega}vu_{x_i}\nu_i d\sigma\right)=-\int\limits_\Omega\nabla u \nabla u dx + \int\limits_{\partial\Omega}v \dfrac{\partial u}{\partial \nu}d\sigma.$$
-$$\MakeUppercase{\romannumeral2}.\, \int\limits_{\Omega}\left(u\Delta v - v\Delta u\right)dx = \int\limits_{\partial\Omega}\left(u\dfrac{\partial v}{\partial \nu} - v\dfrac{\partial u}{\partial \nu}\right)d\sigma.$$
-\end{note}
+Ещё нам понадобятся формулы объёма шара и площади сферы:
+$$ |B_1(0)| = \frac{\sqrt{\pi^n}}{\Gamma(\frac {n} {2} + 1)} = \omega_n, \quad  |B_r(0)| = r^n \omega_n, \quad | \partial B_r(0) | = n \omega_n r^{n-1}$$
 
 Будем искать решение \eqref{comLaplace} в смысле обобщенных функций в виде:
 $$u(x) = \dfrac{c_n}{\abs{x}^{n-2}}.$$
+Пусть $\varphi \in C_0^\infty\left(\real^n\right)$. Посчитаем обобщённый лапласиан от $u$:
+\begin{align*}
+\action{\varphi, -\Delta u} &= - \action{\Delta \varphi, u} = - \int \limits_{\real^n} \Delta \varphi u \, dx = -c_n \int \limits_{\real^n} \Delta \varphi \dfrac{1}{|x|^{n-2}} \, dx \stackrel{\text{(а)}} {=} - c_n \lim_{\eps \to 0} \int \limits_{B^c_\eps (0)} \Delta \varphi \frac {1} {|x|^{n-2}} \, dx\\
+&\stackrel{\text{(б)}} {=} -c_n \lim_{\eps \to 0} \left( \int \limits_{B^c_{\eps}(0)} \varphi \Delta \dfrac{1}{|x|^{n-2}} \, dx + \int \limits_{\partial B_\eps(0)} \left( \dfrac{1}{|x|^{n-2}} \dfrac{\partial \varphi}{\partial\nu} - \varphi \dfrac{\partial}{\partial\nu} \left( \dfrac{1}{|x|^{n-2}} \right) \right) \, d\sigma \right) \\
+&\stackrel{\text{(в)}} {=} -c_n \lim_{\eps \to 0} \int \limits_{\partial B_\eps(0)} \left( \dfrac{1}{|x|^{n-2}} \pder[\varphi]{\nu} - \varphi \pder{\nu} \left( \dfrac{1}{|x|^{n-2}} \right) \right) \, d\sigma \\
+&= -c_n \lim_{\eps \to 0} \dfrac{1}{\eps^{n-2}} \int \limits_{\partial B_\eps(0)} \pder[\varphi]{\nu} \, d\sigma - \int \limits_{\partial B_\eps(0)} \varphi \pder{\nu} \left( \dfrac{1}{|x|^{n-2}} \right) \, d\sigma \\
+&\stackrel{\text{(г)}} {=} c_n \lim_{\eps \to 0} \int \limits_{\partial B_\eps(0)} \varphi \pder{\nu} \left( \dfrac{1}{|x|^{n-2}} \right) \, d\sigma \stackrel{\text{(д)}} {=} c_n\lim_{\eps \to 0} \int \limits_{\partial B_\eps(0)} - \varphi \pder{r} \left( \dfrac{1}{r^{n-2}} \right) \, d\sigma \\
+&= c_n \lim_{\eps \to 0} \int \limits_{\partial B_\eps(0)} \varphi \frac{n-2} {|x|^{n-1}} \, d\sigma =  c_n(n-2) \lim_{\eps \to 0} \dfrac{1}{\eps^{n-1}} \int \limits_{\partial B_\eps(0)} \varphi \, d\sigma \\
+&\stackrel{\text{(е)}} = c_n n(n-2) \omega_n \lim_{\eps \to 0} \dfrac{1}{| \partial B_\eps(0) |} \int \limits_{\partial B_\eps(0)}\varphi \, d\sigma = c_n n(n-2) \omega_n \lim_{\eps \to 0} \fint \limits_{\partial B_\eps(0)} \varphi \, d\sigma \\
+&= c_n n(n-2) \omega_n \varphi(0) = c_n n(n-2) \omega_n \action{\varphi, \delta}.
+\end{align*}
+Поясним вычисления:
+\begin{description}
+\item [(а)] исключили особенность в нуле
+\item [(б)] воспользовались 2 формулой Грина
+\item [(в)] воспользовались тем, что $\Delta\dfrac{1}{\abs{x}^{n-2}} = 0$, остаётся как упражнение
+\item [(г)] воспользовались тем, что $$ \Bigg\lvert \int\limits_{\partial B_\eps(0)}\dfrac{\partial\varphi}{\partial\nu} \, d\sigma \Bigg\rvert \leq C\abs{\partial B_\eps(0)} =C\eps^{n-1}, \quad 
+ \dfrac{1}{\eps^{n-2}}C\eps^{n-1} = C\eps \conv* {\eps \to 0} {} 0 $$
+\item [(д)] воспользовались тем, что $|x| = r$ и вектор нормали к шару это радиальное направление
+\item [(е)] домножили и поделили на площадь сферы радиусом $\eps$: $$|\partial B_\eps(0)| = n \omega_n \eps^{n-1}$$
+\end{description}
 
-Пусть $\varphi \in C_0^\infty\left(\real^n\right).$
-$$\action{\varphi, -\Delta u} = -\action{\Delta\varphi, u} = -\int\limits_{\real^n}\Delta\varphi u dx = -c_n \int\limits_{\real^n}\Delta\varphi\dfrac{1}{\abs{x}^{n-2}}dx \stackrel{\text{по }\MakeUppercase{\romannumeral2} \text{ ф. Грина}}= $$
-$$= -c_n\lim_{\eps\rightarrow0} \left(\int\limits_{\real^n \setminus B_{\eps}(0)}\varphi\Delta\dfrac{1}{\abs{x}^{n-2}}dx + \int\limits_{\partial B_\eps(0)} \left(\dfrac{1}{\abs{x}^{n-2}}\dfrac{\partial\varphi}{\partial\nu}-\varphi\dfrac{\partial}{\partial\nu}\left(\dfrac{1}{\abs{x}^{n-2}}\right)\right)d\sigma\right)=$$
-\begin{exercise}
-Показать, что $\Delta\dfrac{1}{\abs{x}^{n-2}} = 0.$
-\end{exercise}
-$$=-c_n\lim_{\eps\rightarrow0}\int\limits_{\partial B_\eps(0)}\left(\dfrac{1}{\abs{x}^{n-2}}\dfrac{\partial\varphi}{\partial\nu}-\varphi\dfrac{\partial}{\partial\nu}\left(\dfrac{1}{\abs{x}^{n-2}}\right)\right)d\sigma = -c_n\lim_{\eps\rightarrow0}\dfrac{1}{\eps^{n-2}}\int\limits_{\partial B_\eps(0)}\dfrac{\partial\varphi}{\partial\nu}d\sigma - \int\limits_{\partial B_\eps(0)}\varphi\dfrac{\partial}{\partial\nu}\left(\dfrac{1}{\abs{x}^{n-2}}\right)d\sigma =$$
-% TODO: придумать, что делать с подобными вставками
-{ \footnotesize $$ \bigl|\int\limits_{\partial B_\eps(0)}\dfrac{\partial\varphi}{\partial\nu}d\sigma\bigl| \leq C\abs{\partial B_\eps(0)} =C\eps^{n-1}; \quad 
- \dfrac{1}{\eps^{n-2}}C\eps^{n-1} = C\eps \stackrel{\eps\rightarrow0}\longrightarrow0.$$ }
-$$= c_n\lim_{\eps\rightarrow0}\underbrace{\int\limits_{\partial B_\eps(0)}\varphi\dfrac{\partial}{\partial\nu}\left(\dfrac{1}{\abs{x}^{n-2}}\right)d\sigma}_{r = \abs{x} = \eps\text{ --- радиальное направление в шаре}}=c_n\lim_{\eps\rightarrow0}\int\limits_{\partial B_\eps(0)}\varphi\dfrac{\partial}{-\partial r}\left(\dfrac{1}{r^{n-2}}\right)d\sigma=c_n(n-2)\lim_{\eps\rightarrow0}\dfrac{1}{\eps^{n-2}}\int\limits_{\partial B_\eps(0)}\varphi d\sigma=$$
-$$=c_nn(n-2)w_n\lim_{\eps\rightarrow0}\dfrac{1}{\abs{\partial B_\eps(0)}}\int\limits_{\partial B_\eps(0)}\varphi d\sigma = c_nn(n-2)w_n\lim_{\eps\rightarrow0}\fint\limits_{\partial B_\eps(0)}\varphi d\sigma\stackrel{\text{по т.Лебега}}=c_nn(n-2)w_n\varphi(0)=$$$$ = c_nn(n-2)w_n\action{\varphi, \delta}.$$
-\begin{note}
-$w_n$ --- объём $B_1(0)$, $\abs{\partial B_r(0)}=nw_nr^{n-1}$  $r= \eps.$
+Итого, при $c_n = \dfrac{1}{n(n-2) \omega_n}$ имеем
+$$\action{\varphi, -\Delta u} = \action{\varphi, \delta} = \varphi(0) \quad \Rightarrow \quad -\Delta u = \delta.$$
+Значит, $$u(x) = \dfrac{1}{n(n-2) \omega_n}\dfrac{1}{\abs{x}^{n-2}}$$ --- обобщённое решение уравнения Лапласа \eqref{comLaplace} в $\real^n$  при $n>2$.
+
+\begin{note}При $n=3$ получим знакомую из школы формулу для потенциала единичного заряда в $\real^3$:
+$$c_3 = \dfrac{1}{4\pi}, \quad u(x) = \dfrac{1}{4\pi}\dfrac{1}{\abs{x}}.$$
 \end{note}
 
-Т.о. $\action{\varphi, -\Delta u} = \action{\varphi, \delta} = \varphi(0)$ при $c_n = \dfrac{1}{n(n-2)w_n} \, \Rightarrow \, u(x) = \dfrac{1}{n(n-2)w_n}\dfrac{1}{\abs{x}^{n-2}}$ --- решение уравнения \eqref{comLaplace} в $\real^n$  при $n>2$.
-
-Частный случай. $n=3$
-$$c_3 = \dfrac{1}{4\pi}, \, u(x) = \dfrac{1}{4\pi}\dfrac{1}{\abs{x}}.$$
 \begin{exercise}
-При $n=2$ проверить $u(x)=\dfrac{1}{2\pi}\ln\dfrac{1}{\abs{x}}$
-и $ - \Delta u =\delta$ в обобщенном смысле.
+Проверить, что $$u(x)=\dfrac{1}{2\pi}\ln\dfrac{1}{\abs{x}}$$ удовлетворяет уравнению Лапласа \eqref{comLaplace} в $\real^2$ в обобщенном смысле.
 \end{exercise}
 
-Фундаментальное решение уравнения Лапласа:
+\begin{definition}
+Фундаментальным решением уравнения Лапласа называется функция
 \begin{equation}
 \Phi(x) = 
 \begin{cases}
--\dfrac{1}{2\pi}\ln\abs{x},\quad n=2;\\
+-\dfrac{1}{2\pi}\ln\abs{x},\quad n=2,\\
 \dfrac{1}{n(n-2)w_n}\dfrac{1}{\abs{x}^{n-2}},\quad n>2.
 \end{cases}
-,\quad x\in\real^n\setminus\{0\}
 \end{equation}
+Для неё верно, что
+\begin{align*}
+& - \Delta\Phi = \delta \text{ в } \beauD'(\real^n), \\
+& - \Delta\Phi = 0 \text{ в классическом смысле в } \real^n\setminus\{0\}.
+\end{align*}
 
-$-\Delta\Phi=\delta$ в $\beauD'(\real^n),$
-
-$-\Delta\Phi =0$ в классическом смысле в $\real^n\setminus\{0\}.$
-\begin{note}
-$\MakeUppercase{\romannumeral3}$ формула Грина:
-$\Omega\subset\real^n$ --- ограниченная, с гладкой границей. Пусть $0 \in \Omega$:
-$$\int\limits_{\Omega\setminus B_\eps(0)}\left(\underbrace{u\Delta\Phi}_{0}-\Phi\Delta u\right)dx = \int\limits_{\Omega\setminus B_\eps(0)}-\Phi\Delta u \stackrel{\text{по }\MakeUppercase{\romannumeral2}\text{ ф. Грина}}=$$$$= \int\limits_{\partial(\Omega\setminus B_\eps(0))}\left(u\dfrac{\partial\Phi}{\partial\nu}-\Phi\dfrac{\partial u}{\partial\nu}\right)d\sigma = \int\limits_{\partial\Omega}\ldots + \int\limits_{\partial B_\eps(0)}\ldots \stackrel{\eps\rightarrow0}\longrightarrow \int\limits_{\Omega}-\Delta u\Phi.$$
-т.е. $\int\limits_{\Omega}-\Delta u \Phi = \int\limits_{\partial\Omega}\left(u\dfrac{\partial\Phi}{\partial\nu}-\Phi\dfrac{\partial u}{\partial\nu}\right)d\sigma + u(0).$
-
-Пусть $x_0\in\Omega$
-$$\int\limits_{\Omega}-\Delta u\Phi(x-x_0) = \int\limits_{\partial\Omega}\left(u\dfrac{\partial\Phi}{\partial\nu}(x-x_0)-\Phi(x-x_0)\dfrac{\partial u}{\partial\nu}\right)d\sigma + u(x_0) \Rightarrow$$
-$$u(x_0) = \int\limits_{\partial\Omega}\Phi(x-x_0)\dfrac{\partial u}{\partial\nu}d\sigma-\int\limits_{\partial\Omega}u\dfrac{\partial\Phi}{\partial\nu}(x-x_0)d\sigma-\int\limits_{\Omega}\Delta u\Phi(x-x_0).$$
-
-$-\Delta u=\delta\,\Rightarrow\,u=\Phi(x);$
-
-$-\Delta u =\delta_{x_0}\,\Rightarrow\,u=\Phi(x-x_0).$
-
-Единственности нет, т.к. $u+C$ и $u+v,$ где $v$ --- гармоническая функция ($-\Delta v=0$), тоже решения.
-\end{note}
+\end{definition}
 
 \subsection{Представление частного решения уравнения Пуассона в пространстве при помощи фундаментального решения}
-$ $
 
-$-\Delta u = \alpha_1\delta_{x_1} + \alpha_2\delta_{x_2} \, \Rightarrow \, u = \alpha_1\Phi(x-x_1) + \alpha_2\Phi(x-x_2);$
+\begin{note} [Вывод 3 формулы Грина] Пусть $\Omega\subset\real^n$ --- ограниченная область с гладкой границей, и $0 \in \Omega$. Тогда по 2 формуле Грина:
+\begin{align*}
+\int \limits_{B^c_\eps(0)} \left( \underbrace{u\Delta\Phi}_{0} - \Phi\Delta u \right) \, dx &= \int \limits_{B^c_\eps(0)} - \Phi \Delta u \, dx = \int \limits_{\partial B^c_\eps(0)} \left( u \dfrac{\partial\Phi}{\partial\nu} - \Phi\dfrac{\partial u}{\partial\nu} \right) \,d\sigma \\
+&= \int \limits_{\partial \Omega} \left( u \dfrac{\partial\Phi}{\partial\nu} - \Phi\dfrac{\partial u}{\partial\nu} \right) \,d\sigma + \int\limits_{\partial B_\eps(0)} \left( u \dfrac{\partial\Phi}{\partial\nu} - \Phi\dfrac{\partial u}{\partial\nu} \right) \,d\sigma
+\end{align*}
+Устремим $\eps$ к нулю:
+$$ \int \limits_\Omega - \Phi \Delta u \, dx = \int \limits_{\partial \Omega} \left( u \dfrac{\partial\Phi}{\partial\nu} - \Phi\dfrac{\partial u}{\partial\nu} \right) \,d\sigma + u(0).$$
+Перенесём всё в произвольную точку $x_0\in\Omega$:
+$$ \int \limits_\Omega - \Phi (x- x_0) \Delta u \, dx = \int \limits_{\partial \Omega} \left( u \dfrac{\partial\Phi}{\partial\nu} (x-x_0) - \Phi (x - x_0) \dfrac{\partial u}{\partial\nu} \right) \,d\sigma + u(x_0).$$
+Значит,
+$$ u(x_0) = \int \limits_{\partial \Omega} \left( \Phi (x - x_0) \dfrac{\partial u}{\partial\nu} - u \dfrac{\partial\Phi}{\partial\nu} (x-x_0) \right) \,d\sigma - \int \limits_\Omega \Phi (x- x_0) \Delta u \, dx.$$
+Получили 3 формулу Грина.
+\end{note}
 
-$-\Delta u = \sum\limits_{k=1}^n\alpha_k\delta_{x_k}\,\Rightarrow\, u = \sum\limits_{k=1}^n\alpha_k\Phi(x-x_k);$
+На данный момент мы знаем, что решением уравнения
+$$-\Delta u =\delta_{x_0}$$ является функция $$ u=\Phi(x-x_0).$$ Это решение не является единственным: к нему можно добавить любую гармоническую функцию $v$, результат тоже будет решением.
 
-$-\Delta u = f,$ интуитивно считаем $u = \int\limits_{\real^n}\Phi(x-y)f(y)dy = \Phi*f.$
-
+Пусть есть уравнение
+$$ - \Delta u = \alpha_1 \delta_{x_1} + \alpha_2 \delta_{x_2},$$
+тогда его решением будет
+$$ u = \alpha_1 \Phi (x - x_1) + \alpha_2 \Phi (x - x_2).$$
+В случае конечной суммы имеем
+$$ - \Delta u = \sum_{k = 1}^n \alpha_k \delta_{x_k}, \quad u = \sum_{k=1}^n \alpha_k \Phi (x - x_k).$$
+Для произвольной функции интуитивно можно написать
+$$-\Delta u = f, \quad u = \int \limits_{\real^n} \Phi(x-y) f(y) \, dy = \Phi*f.$$
+Докажем, что при некоторых дополнительных условиях это действительно так.
 \begin{theorem}
-Пусть $f\in C_0^2(\real^n),$ тогда решением уравнения Пуассона \eqref{Poisson} является
-$$ u(x) = \int\limits_{\real^n} \Phi(x-y)f(y)dy,$$ где $\Phi(x)$ --- фундаментальное решение уравнения Лапласа.
+Пусть $f\in C_0^2(\real^n)$. Тогда
+$$ u(x) = \int\limits_{\real^n} \Phi(x-y)f(y)dy$$ будет классическим решением уравнения Пуассона в $\real^n$. 
+\begin{note} Классическое решение всегда является обобщенным, так как классические производные равны обобщенным.
+\end{note}
 \end{theorem}
-\begin{proof}
-Классическое решение всегда является обобщенным, т.к. классические производные равны обобщенным.\\ Классическое решение $=$ обобщенное решение $+$ непрерывность.\\
-$u$ два раза непрерывно дифференциируема:
-$$u(x) = \int\limits_{\real^n}\Phi(y)f(x-y)dy;$$
-$$u_{x_i}=\int\limits_{\real^n}\Phi(y)f_{x_i}(x-y)dy;$$
-$$u_{x_ix_i}=\int\limits_{\real^n}\Phi(y)f_{x_ix_i}(x-y)dy
-\quad \Rightarrow \, u\in C^2(\real^n).$$
+\begin{proof} Поменяем переменные:
+$$u(x) = \int\limits_{\real^n}\Phi(y)f(x-y)dy$$
+и продифференцируем $u$ по $x$. Производная проносится под знак интеграла:
+$$u_{x_ix_i}=\int\limits_{\real^n}\Phi(y)f_{x_ix_i}(x-y)dy.$$
+Тем самым доказана гладкость.
 
-Гладкость есть, осталось доказать обобщенность. Пусть $\varphi\in C_0^\infty(\real^n)$
-$$\action{\varphi, -\Delta u} = \int\limits_{\real^n} \varphi(x)(-\Delta u(x))dx = \int\limits_{\real^n}\varphi(x)dx\int\limits_{\real^n}\Phi(y)(-\Delta f(x-y))dy=$$
-$$=\int\limits_{\real^n}\Phi(y)dy\int\limits_{\real^n}(-\Delta\varphi(x))f(\underbrace{x-y}_z)dx = \int\limits_{\real^n}\Phi(y)dy\int\limits_{\real^n}(-\Delta\varphi(z+y))f(z)dz = $$
-$$=\int\limits_{\real^n}f(z)dz\int\limits_{\real^n}\Phi(y)(-\Delta\varphi(z+y))dy = \int\limits_{\real^n}f(z)\action{-\Delta\varphi(z+\cdot), \Phi}dz = $$
-$$= \int\limits_{\real^n}f(z)\underbrace{\action{\varphi(z+\cdot), -\Delta\Phi}}_{\varphi(z)}dz = \int\limits_{\real^n}f(z)\varphi(z)dz = \action{\varphi, f},$$
-т.о. $-\Delta u = f,$ т.е. $u$ --- классическое решение (если 2 функции равны в обобщенном смысле и они классические, то они равны в классическом смысле).
+Если 2 классические функции равны в обобщенном смысле, то они просто равны. Докажем, что $u$ - обобщённое решение уравнения Пуассона.
+
+Пусть $\varphi\in C_0^\infty(\real^n)$, тогда
+\begin{align*}
+\action{\varphi, -\Delta u} &= \int \limits_{\real^n} \varphi(x)(-\Delta u(x)) \, dx = \int \limits_{\real^n}\varphi(x) \, dx \int \limits_{\real^n} \Phi(y)(-\Delta f(x-y)) \, dy \\
+&= \int \limits_{\real^n} \Phi(y) \, dy \int \limits_{\real^n} (-\Delta\varphi(x)) f(\underbrace{x-y}_z) \, dx = \int \limits_{\real^n} \Phi(y) \, dy \int \limits_{\real^n} (-\Delta\varphi(z+y)) f(z) \, dz \\
+&= \int \limits_{\real^n} f(z) \, dz \int \limits_{\real^n} \Phi(y) (-\Delta\varphi(z+y)) \, dy = \int \limits_{\real^n} f(z) \action{-\Delta\varphi(z+\cdot), \Phi} \, dz \\
+&= \int \limits_{\real^n} f(z) \underbrace{\action{\varphi(z+\cdot), -\Delta\Phi}}_{\varphi(z)} \, dz = \int\limits_{\real^n} f(z) \varphi(z) \, dz \\
+& = \action{\varphi, f}.
+\end{align*}
+Здесь на третьем шаге мы поменяли порядок интегрирования, а потом интегрированием по частям перенесли производные.
+
+Таким образом, $u$ - классическое решение уравнения $$-\Delta u = f.$$
 \end{proof}
