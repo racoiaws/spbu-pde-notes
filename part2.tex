@@ -107,14 +107,14 @@ $$ u = \underbrace {\varphi (x+vt)}_{\text{волна направо}} + \underb
 \begin{gather*}
 	\begin{cases}
 		u(0,x) = u_0(x) = \varphi(x) + \psi(x), \\
-		u_t(0,x) = v_0(x) = v \varphi'(x) - v \psi(x),
+		u_t(0,x) = v_0(x) = v \varphi'(x) - v \psi'(x),
 	\end{cases}
 	\begin{cases}
 		\psi(x) = u_0(x) - \varphi(x), \\
-		\varphi'(x)  - vu'_0(x) + v \varphi'(x) = v_0(x).
+		v \varphi'(x)  - vu'_0(x) + v \varphi'(x) = v_0(x).
 	\end{cases} \\
-	\varphi'(x) = \frac {1} {2v} (v_0(x) + vu'_0(x)), \quad 	\varphi(x) = \frac {1} {2v} \int \limits_0^x v_0(y) + vu'_0(x) dy + C, \\
-	\psi(x) = u_0 - \frac {1} {2v} \int \limits_0^x v_0(y) + vu'_0(y) dy - C,
+	\varphi'(x) = \frac {1} {2v} (v_0(x) + vu'_0(x)), \quad 	\varphi(x) = \frac {1} {2v} \int \limits_0^x v_0(y) + vu'_0(x) \,dy + C, \\
+	\psi(x) = u_0 - \frac {1} {2v} \int \limits_0^x v_0(y) + vu'_0(y) \,dy - C,
 \end{gather*}
 Тогда
 \begin{align*}
