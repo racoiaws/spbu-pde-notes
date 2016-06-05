@@ -3,16 +3,197 @@
 % 6. Неравенство Фридрихса.
 % 7. Слабая непрерывность линейных операторов. Слабая сходимость в $H_0^1$ и в $L^2$. Слабая непрерывность оператора обобщенного дифференцирования.
 % 8. ∗ Существование точки минимума интегрального функционала в $H_0^1$.
-% 9. Существование обобщенного решения задачи Дирихле для уравнения Пуассона — вариационный метод. ∗ Единственность решения; метод конечных элементов (метод Рисса).
+% 9. Существование обобщенного решения задачи Дирихле для уравнения Пуассона — вариационный метод. ∗ Метод конечных элементов (метод Рисса).
 % 10. Точки минимума выпуклых и строго выпуклых функционалов. Единственность экстремали. Единственность обобщенного решения задачи Дирихле для уравнения Пуассона - вариационный метод.
 % 11. Существование и единственность обобщенного решения задачи Дирихле для уравнения Пуассона — использование теоремы Рисса. ∗∗ Регулярность обобщенного решения (существование классического решения) — формулировка.
 % 12. Непрерывная обратимость оператора $-\Delta : H_0^1 \to L^2$.
 
-% теорема: H - сепарабельное гильбертово пр-во
-% замечание: норма полунепрерывная снизу в слабой топологии
-% замечание: непрерывный оператор между гильбертовыми пр-вами сохраняет слабую сходимость
+% 6. Неравенство Фридрихса.
+\begin{theorem}[Неравенство Фридрихса] Пусть $\Omega \subset \real^n$ - ограниченная область, $u \in \m{H01Om}$. Тогда
+$$ \int \limits_\Omega u^2 \, dx \leq C_\Omega \int \limits_\Omega |\nabla u|^2 \, dx.$$
+\end{theorem}
+\begin{proof} Пространство $C_0^\infty(\Omega)$ плотно в $\m{H01Om}$, так что достаточно доказать для него, а потом перейти к пределу.
 
-% неравенство фридрихса: доказываем для C_0^{\infty}, переходим к пределу
+Пусть $u \in C_0^\infty(\Omega)$. Существует такое $a$, что $\Omega \subset (-a,a)^n.$ Зафиксируем все координаты, кроме $i$-ой. Тогда по неравенству Гёльдера
+\begin{align*}
+|u(x)| &\leq \int \limits_{-a}^x \Bigl\lvert \pder{x_i} u(x_1, ..., \xi_i, ..., x_n) \Bigr\rvert \, d \xi_i \\ \\
+& \leq \left( \int \limits_{-a}^a \Bigl\lvert \pder{x_i} u(x_1, ..., \xi_i, ..., x_n)  \Bigr\rvert^2 \, d\xi_i\right)^{1/2} \sqrt{2a},\\
+|u(x)|^2 &\leq 2a \int \limits_{-a}^a | u_{x_i} (x_1, ..., \xi_i, ..., x_n) | \, d\xi_i.
+\end{align*}
+Интегрируем по всем остальным координатам по $(-a, a)$. После интегрирования по всем координатам, кроме $i$-ой, получим норму $u_{x_i}$ в квадрате. Проинтегрировав её по $x_i$, получим дополнительный множитель $2a$:
+$$ \norm*{2}{u}^2 \leq 4a^2 \norm*{2}{u_{x_i}} \leq 4a^2 \norm*{2}{\nabla u}^2.$$
+Таким образом,
+$$\norm*{2}{u} \leq C_\Omega \norm*{2}{\nabla u},$$
+где константа зависит только от диаметра области.
+
+Пусть теперь $u \in \m{H01Om}$. Аппроксимируем:
+$$ \exists \{u_k \} \subset C_0^\infty(\Omega) : u_k  \conv{H1}{} u,$$
+то есть,
+$$ \norm{H1}{u_k - u}^2 = \norm*{2}{u_k - u}^2 + \norm*{2}{\nabla u_k - \nabla u}^2 \conv{}{} 0,$$
+откуда
+$$\norm*{2}{u_k} \conv{}{} \norm*{2}{u}, \quad \norm*{2}{\nabla u_k} \conv{}{} \norm*{2}{\nabla u}.$$
+Итого,
+$$ \norm*{2}{u} \leq C \norm*{2}{\nabla u},$$
+что и требовалось доказать.
+\end{proof}
+
+\begin{note}
+Впервые нам реально понадобилась ограниченность области $\Omega$.
+\end{note}
+
+\begin{note}
+На самом деле мы пользуемся ограниченностью только по одному направлению. 
+\end{note}
+
+% 7. Слабая непрерывность линейных операторов. Слабая сходимость в $H_0^1$ и в $L^2$. Слабая непрерывность оператора обобщенного дифференцирования.
+\subsection{Слабая сходимость в гильбертовом пространстве}
+Вспомним некоторые сведения из функционального анализа.
+\begin{definition}
+Пусть $H$ - гильбертово пространство. Последовательность $\{x_k \} \subset H$ называется слабо сходящейся к $x$, если
+$$\scalprod*{H}{x_k}{y} \wkconv*{H}{} \scalprod*{H}{x}{y} \quad \forall y \in H,$$
+и обозначается
+$$ x_k \wkconv*{H}{} x.$$
+\end{definition}
+
+\begin{note}
+Слабая сходимость слабее сильной:
+$$ x_k \conv{}{} x \quad \Rightarrow \quad x_k \wkconv{}{} x.$$
+\end{note}
+
+\begin{note}
+Обратное неверно.
+\end{note}
+
+\begin{example} Пусть $H = L^2(0, \pi)$, функция $f \in H$. Тогда $f$ представима в виде сходящегося в смысле $H$ ряда
+$$ f = \sum_{k=1}^\infty a_k \sin kx.$$
+Обозначим $u_k = \sin kx$. Известно равенство Парсеваля:
+$$ \sum_{k=1}^\infty a_k^2 = \frac {2} {\pi} \norm*{2}{f}^2.$$
+Значит, $|a_k| \to 0$, где
+$$ a_k = \frac {\scalprod*{H}{f}{u_k}} {\norm*{H}{u_k}^2} = \frac {2} {\pi} \scalprod*{H}{f}{u_k} \to 0.$$
+Это выполняется для всех $f$. По определению слабой сходимости
+$$ u_k \wkconv*{H}{} 0 \quad \Leftrightarrow \quad \sin kx \wkconv*{H}{k \to \infty} 0.$$
+Но сильно $\{ u_k \}$ никуда не сходится хотя бы потому, что $\displaystyle \norm*{H}{u_k} = \frac {\pi} {2}$.
+\end{example}
+
+\begin{note}
+Слабая топология в гильбертовом пространстве не задаётся никакой метрикой. Однако, шар в сепарабельном гильбертовом пространстве со слабой топологией метризуем.
+\end{note}
+
+% TODO: доказать
+\begin{note}[Слабая компактность шара] Пусть $H$ - сепарабельное гильбертово пространство. Тогда
+$$ \{ x_k \} \subset H : |x_k| \leq C \quad \Rightarrow \quad \exists \{ x_{k_n} \} : x_{k_n} \wkconv{}{} x.$$
+\end{note}
+
+% TODO: доказать
+\begin{note} В сепарабельном гильбертовом пространстве норма слабо полунепрерывна снизу:
+$$x_k \wkconv*{}{} x \quad \Rightarrow \quad \norm{}{x_k} \leq \lim \inf \norm*{}{x_k}.$$
+\end{note}
+
+% TODO: замкнутое выпуклое подмножество гильбертова пр-ва слабо замкнуто
+
+\begin{note} Непрерывный линейный оператор $A$ между гильбертовыми пространствами $H_1$ и $H_2$  сохраняет слабую сходимость:
+$$ x_k \wkconv*{H_1}{} x \quad \Rightarrow \quad Ax_k \wkconv*{H_2}{} Ax.$$
+\end{note}
+\begin{proof}
+$$ \scalprod*{H_2}{A x_k} {y} = \scalprod*{H_1}{x_k}{A^*y} \wkconv*{H_1}{} \scalprod*{H_1}{x}{A^*y} = \scalprod*{H_2}{Ax}{y}.$$
+
+\end{proof}
+
+\subsection{Слабая сходимость в $\m{L2}$ и в $\m{H01}$}
+Пусть $\Omega \subset \real^n$ - область. Рассмотрим оператор вложения
+$$\dot{\iota} : \m{H01Om} \longrightarrow \m{L2Om},$$
+$$\dot{\iota}(u) := u.$$
+
+Оператор $\dot{\iota}$ непрерывен, так как
+$$ \norm*{2}{\dot{\iota}}(u)^2 = \norm*{2}{u}^2 \leq \norm{H1}{u}^2.$$
+Следовательно,
+$$ u_k \wkconv{H1}{} u \quad \Rightarrow \quad u_k \wkconv{L2}{} u.$$
+
+Рассмотрим оператор обобщённого дифференцирования по $i$-ой переменной:
+$$ \pder{x_i} : \m{H01Om} \longrightarrow \m{L2Om}.$$
+Нам уже известно, что он линеен и непрерывен. Значит, он тоже сохраняет слабую сходимость:
+$$ u_k \wkconv{H1Om}{} u \quad \Rightarrow \quad \pder[u_k]{x_i} \wkconv{L2Om}{} \pder[u_k]{x_i}.$$
+
+% 8. ∗ Существование точки минимума интегрального функционала в $H_0^1$.
+% ???
+\begin{note} В $\m{H1Om}$ функционал $F$ слабо полунепрерывен снизу:
+$$u_k \wkconv{H1}{} u \quad \Rightarrow \quad F(u) \leq \lim \inf F(u_k).$$
+\end{note}
+\begin{proof} Прежде всего заметим, что
+$$ \int \limits_\Omega f u_k \, dx = \scalprod*{2}{f}{u_k} \wkconv{L2}{} \scalprod*{2}{f}{u} =\int \limits_\Omega f u \, dx.$$
+Посмотрим на обобщённый градиент:
+\begin{align*}
+0 \leq | \nabla (u_k - u) |^2 &= | \nabla u_k - \nabla u |^2 = |\nabla u_k|^2 + |\nabla u|^2 - 2 \nabla u_k \cdot \nabla u \\
+&= |\nabla u_k|^2 - |\nabla u|^2 + 2 \nabla u \cdot (\nabla u - \nabla u_k),
+\end{align*}
+$$ |\nabla u_k|^2 - |\nabla u|^2 \geq 2 \nabla u \cdot (\nabla u_k - \nabla u).$$
+Проинтегрируем:
+$$ \int \limits_\Omega \frac {| \nabla u_k|^2} {2} \, dx - \int \limits_\Omega \frac {| \nabla u|^2} {2} \, dx \geq \int \limits_\Omega \nabla u \cdot (\nabla u_k - \nabla u) \, dx = \sum_{j=1}^n \int \limits_\Omega u_{x_j} \left( \pder[u_k]{x_j} - u_{x_j} \right) .$$
+Заметим, что
+$$ \pder[u_k]{x_j} - \pder[u]{x_j} \wkconv{L2}{} 0 \quad \Rightarrow \quad u_{x_j} (\hdots) \conv{}{k \to \infty} 0,$$
+то есть,
+$$ \lim \inf \frac {1} {2} \int \limits_\Omega |\nabla u_k|^2 \, dx \geq \frac {1} {2} \int \limits_\Omega |\nabla u|^2 \, dx.$$
+Итого
+\begin{align*}
+\lim \inf F(u_k) &= \lim \inf \left( \frac {1}{2} \int \limits_\Omega |\nabla u_k|^2 \, dx - \int \limits_\Omega fu_k \, dx \right) \\
+&\geq \lim \inf \frac {1} {2} \int \limits_\Omega |\nabla u_k|^2 \, dx - \lim \inf \int \limits_\Omega fu_k \, dx \\
+&\geq \frac {1} {2} \int \limits_\Omega |\nabla u|^2 \, dx - \int \limits_\Omega fu \, dx = F(u),
+\end{align*}
+что и требовалось доказать.
+
+\end{proof}
+
+% 9. Существование обобщенного решения задачи Дирихле для уравнения Пуассона — вариационный метод. ∗ Метод конечных элементов (метод Рисса).
+\begin{theorem}[Существование обобщённого решения задачи Дирихле для уравнения Пуассона - вариационный метод] Пусть $\Omega \subset \real^n$ - ограниченная область, $f \in L^2(\Omega)$, и задан фунцкионал 
+$$F(u) = \frac {1} {2} \int \limits_\Omega | \nabla u |^2 \, dx - \int \limits_\Omega fu \, dx.$$
+Тогда существует $u \in \m{H01Om}$ такая, что 
+$$ F(u) = \inf_{v \in \m{H01Om}} F(v).$$
+\end{theorem}
+\begin{note} Функционал $F$ определён на $\m{H01Om}$: если понимать градиент как обобщённый, то выражение имеет смысл.
+\end{note}
+\begin{proof}[Доказательство теоремы]
+Воспользуемся методом Тонелли. Рассмотрим минимизирующую последовательность $\{ u_k \} \subset \m{H01Om}$:
+$$ F(u_k) \conv{}{} \inf_{\m{H01Om}} F.$$
+Заметим, что верно (например, $C = 0$ при $u \equiv 0$):
+$$F(u_k) = \frac {1} {2} \int \limits_\Omega | \nabla u_k |^2 \, dx - \int \limits_\Omega f u_k \, dx \leq C.$$
+Заметим, что :
+\begin{align*}
+F(u_k) &\stackrel{\text{(а)}}{\geq} \frac {1} {2} \norm*{2}{\nabla u_k}^2 - \frac{1} {2 \eps} \norm*{2}{f}^2 - \frac{\eps^2}{2} \norm*{2}{u_k}^2 \\
+& \stackrel{\text{(б)}}{\geq} \frac {1} {2} \norm*{2}{ \nabla u_k } - \frac {1} {2\eps} \norm*{2}{ u_k}^2 - \frac {\eps^2} {2} C_\Omega \norm*{2}{ \nabla u_k}^2.
+\end{align*}
+В первом переходе воспользовались тем, что 
+$$ ab \leq \frac {a^2 + b^2} {2} \quad \Rightarrow \quad \Biggl\lvert \int \limits_\Omega \frac {f} {\eps} \eps u_k \, dx \Biggr\rvert \leq \frac {1} {2} \left( \frac {1} {\eps^2} \norm*{2}{f}^2 + \eps^2 \norm*{2}{u_k}^2 \right).$$
+Имеем:
+$$C \geq F(u_k) \geq \frac {1} {2} \left(1 - \eps^2 C_\Omega \right) \norm*{2}{ \nabla u_k }^2 - \frac {1} {2 \eps^2} \norm*{2}{f}^2.$$
+Тогда
+$$ \frac {1} {2} \left( 1 - \eps^2 C_\Omega \right) \norm*{2}{ \nabla u_k}^2 \leq \underbrace {C + \frac {1} {2 \eps^2} \norm*{2}{f}^2}_{=C}.$$
+Можно выбрать такое $\eps$, что $ \eps^2 C_\Omega < 1$. Тогда 
+$$ \norm*{2}{\nabla u_k}^2 \leq C,$$
+и
+$$ \norm*{2}{u_k}^2 \leq C_\Omega \norm*{2}{ \nabla u_k}^2 \leq C.$$
+Таким образом, $\{ u_k \}$ ограничена в $\m{H01Om}$:
+$$ \norm{H1}{u_k} \leq C,$$ 
+то есть, $\{ u_k \}$ лежит в некотором шаре в $\m{H1Om}$.
+
+В стандартной топологии шар не компактен, зато компактен в слабой топологии. Значит, существует такая подпоследовательность $\left\{ u_{k_m} \right\} \subset \left\{ u_k \right\}$, что 
+$$u_{k_m} \wkconv{H1Om}{m \to \infty} u \in \m{H01Om}.$$ 
+Заметим, что слабая сходимость в $\m{H1Om}$ влечёт слабую сходимость в $\m{L2Om}$, а оператор обобщённого дифференцирования слабо непрерывен. Значит,
+$$ u_{k_m} \wkconv{L2Om}{} u, \quad \pder[u_{k_m}]{x_i} \wkconv{L2Om}{} \pder[u]{x_i},$$
+и
+$$ \int \limits_\Omega f u_{k_m} \, dx \longrightarrow \int \limits_\Omega fu \, dx.$$
+
+\begin{lemma} Если  $v_k \wkconv{H1}{} v$, то 
+$$ \int \limits_\Omega | \nabla v| ^2 \, dx \leq \lim_{k \to \infty} \inf \int \limits_\Omega | \nabla v_k|^2 \, dx.$$
+\end{lemma}
+Первая часть функционала непрерывна, а вторая часть функционала по лемме полунепрерывна снизу. Значит,
+$$ F(u) \leq \lim \inf \left( \int \limits_\Omega | \nabla u_{k_m}|^2 \, dx - \int \limits_\Omega f u_{k_m} \, dx \right) = \inf F.$$
+
+Итого,
+$$ F(u) = \inf F.$$
+
+\end{proof}
+
+% метод конечных элементов - ???
 
 % два упражднения
 
