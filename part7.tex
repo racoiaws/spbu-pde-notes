@@ -55,6 +55,10 @@ $$ u_k\Big\rvert_{\partial \Omega} = 0, \quad F(u_k) \conv* {} {k \to \infty} \i
 
 % 2. Соболевские классы $H_0^1$, $H^1$ - определения, примеры.
 \section{Соболевcкие классы}
+
+\begin{definition} Соболевские классы $W^{k,p}$ это такие множества:
+$$ W^{k,p} := \left\{ u \in L^p : \quad D^\alpha u \in L^p \quad \forall |\alpha| \leq k \right\}.$$ 
+
 \begin{definition} Пусть $\Omega \subset \real^n$ - область. Тогда $\m{H1Om}$ это множество таких квадратично интегрируемых функций, у которых обобщённые производные тоже квадратично интегрируемы:
 	$$\m{H1Om}:= \left\{ u \in \m{L2Om}: \pder[u_k]{x_i} \in \m{L2Om} \right\} = W^{1,2}.$$
 \end{definition}
@@ -71,11 +75,14 @@ $$ u_k\Big\rvert_{\partial \Omega} = 0, \quad F(u_k) \conv* {} {k \to \infty} \i
 \end{note}
 
 % 3. Гильбертовы пространства $H_0^1$, $H^1$, скалярное произведение, полнота.
+
 \begin{note} Очевидно, $\m{H01Om}$ и $\m{H1Om}$ - линейные пространства, и
 $$ \m{H01Om} \subset \m{H1Om}.$$
 \end{note}
 
-\begin{definition}[Норма в $\m{H1Om}$] Пусть $u \in \m{H1Om}$. Тогда
+\subsection{Гильбертовость пространств $\m{H01}$ и $\m{H1}$}
+
+\begin{definition}Пусть $u \in \m{H1Om}$. Тогда
 $$ \norm{H1Om}{u} := \left( \norm{L2Om}{u}^2 + \sum_{i=1}^n \norm{L2Om}{u_{x_i}}^2 \right)^{1/2} = \left( \norm*{2}{u}^2 + \int \limits_\Omega | \nabla u|^2 \, dx \right)^{1/2}.$$
 \end{definition}
 \begin{note} На самом деле это полунорма. Чтобы получить норму, аналогично определению нормы в $L^p (\Omega)$ профакторизуем наше пространство. То есть, объявим эквивалентными функции, совпадающие на множестве полной лебеговой меры и будем рассматривать классы эквивалентности.
@@ -90,9 +97,6 @@ $$ \exists u_k \in \m{C0iOm} : \quad \norm{H1Om}{u_k - u} \conv*{}{k \to \infty}
 то есть,
 $$ \m{H01Om} = \overline{\m{C0iOm}} \quad \text{по норме в } \m{H1Om}.$$
 \end{note}
-
-\begin{definition} Соболевские классы $W^{k,p}$ это
-$$ W^{k,p} := \left\{ u \in L^p : \quad D^\alpha u \in L^p \quad \forall |\alpha| \leq k \right\}.$$ 
 
 \end{definition}
 \begin{theorem} Пространства $\m{H1Om}$ и $\m{H01Om}$ - полные.
@@ -116,6 +120,7 @@ $$ \norm{H1}{u - u_k} \conv{}{k \to \infty} 0 \quad \Rightarrow u_k \conv{H1}{} 
 
 % 4. Непрерывные вложения пространств $H_0^1 \subset H^1 \subset L^2$. Непрерывность обобщенного дифференцирования. ∗ Сепарабельность пространств $H_0^1$, $H^1$.
 % TODO: непрерывные вложения (хотя вроде очевидно)
+\subsection{Сепарабельность пространств $\m{H01}$ и $\m{H1}$}
 
 \begin{note} Из доказательства очевидно, что оператор обобщённого дифференцирования
 $$ \pder{x_i}: \, \m{H1Om} \longrightarrow \m{L2Om}$$
@@ -131,8 +136,7 @@ $$A: \, X \longrightarrow Y$$
 
 \end{proof}
 
-
-\begin{theorem} Пространства $\m{H01Om}$ и  $\m{H1Om}$ - сепарабельные\footnote{существует всюду плотное не более чем счётное подмножество} гильбертовы пространства.
+\begin{theorem} Пространства $\m{H01Om}$ и $\m{H1Om}$ - сепарабельные\footnote{существует всюду плотное не более чем счётное подмножество} гильбертовы пространства.
 \end{theorem}
 \begin{proof}
 Введём оператор
@@ -152,6 +156,7 @@ $$ \norm*{}{J} = 1.$$
 \end{proof}
 
 % 5. Соболевское пространство $H_0^1(a,b)$ (непрерывность, дифференцируемость, значение на границе, ∗∗ абсолютная непрерывность). ∗ Вложение $H^1(a, b) \subset C([a, b])$ (формулировка).
+\subsection{Соболевское пространство $\m{H01}(a,b)$}
 
 \begin{theorem} В каждом классе функций из $\m{H01}(a,b)$ есть непрерывная:
  $$ \m{H01}(a,b) \subset C([a,b]) .$$

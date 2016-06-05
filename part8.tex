@@ -9,7 +9,8 @@
 % 12. Непрерывная обратимость оператора $-\Delta : H_0^1 \to L^2$.
 
 % 6. Неравенство Фридрихса.
-\begin{theorem}[Неравенство Фридрихса] Пусть $\Omega \subset \real^n$ - ограниченная область, $u \in \m{H01Om}$. Тогда
+\subsection{Неравенство Фридрихса}
+\begin{theorem} Пусть $\Omega \subset \real^n$ - ограниченная область, $u \in \m{H01Om}$. Тогда
 $$ \int \limits_\Omega u^2 \, dx \leq C_\Omega \int \limits_\Omega |\nabla u|^2 \, dx.$$
 \end{theorem}
 \begin{proof} Пространство $C_0^\infty(\Omega)$ плотно в $\m{H01Om}$, так что достаточно доказать для него, а потом перейти к пределу.
@@ -115,10 +116,10 @@ $$ \pder{x_i} : \m{H01Om} \longrightarrow \m{L2Om}.$$
 $$ u_k \wkconv{H1Om}{} u \quad \Rightarrow \quad \pder[u_k]{x_i} \wkconv{L2Om}{} \pder[u_k]{x_i}.$$
 
 % 8. ∗ Существование точки минимума интегрального функционала в $H_0^1$.
-% ???
-\begin{note} В $\m{H1Om}$ функционал $F$ слабо полунепрерывен снизу:
+\subsection{Существование точки минимума интегрального функционала в $\m{H01}$}
+\begin{lemma} В $\m{H1Om}$ функционал $F$ слабо полунепрерывен снизу:
 $$u_k \wkconv{H1}{} u \quad \Rightarrow \quad F(u) \leq \lim \inf F(u_k).$$
-\end{note}
+\end{lemma}
 \begin{proof} Прежде всего заметим, что
 $$ \int \limits_\Omega f u_k \, dx = \scalprod*{2}{f}{u_k} \wkconv{L2}{} \scalprod*{2}{f}{u} =\int \limits_\Omega f u \, dx.$$
 Посмотрим на обобщённый градиент:
@@ -143,8 +144,7 @@ $$ \lim \inf \frac {1} {2} \int \limits_\Omega |\nabla u_k|^2 \, dx \geq \frac {
 
 \end{proof}
 
-% 9. Существование обобщенного решения задачи Дирихле для уравнения Пуассона — вариационный метод. ∗ Метод конечных элементов (метод Рисса).
-\begin{theorem}[Существование обобщённого решения задачи Дирихле для уравнения Пуассона - вариационный метод] Пусть $\Omega \subset \real^n$ - ограниченная область, $f \in L^2(\Omega)$, и задан фунцкионал 
+\begin{theorem}[Существование точки минимума интегрального функционала] Пусть $\Omega \subset \real^n$ - ограниченная область, $f \in L^2(\Omega)$, и задан фунцкионал 
 $$F(u) = \frac {1} {2} \int \limits_\Omega | \nabla u |^2 \, dx - \int \limits_\Omega fu \, dx.$$
 Тогда существует $u \in \m{H01Om}$ такая, что 
 $$ F(u) = \inf_{v \in \m{H01Om}} F(v).$$
@@ -182,10 +182,7 @@ $$ u_{k_m} \wkconv{L2Om}{} u, \quad \pder[u_{k_m}]{x_i} \wkconv{L2Om}{} \pder[u]
 и
 $$ \int \limits_\Omega f u_{k_m} \, dx \longrightarrow \int \limits_\Omega fu \, dx.$$
 
-\begin{lemma} Если  $v_k \wkconv{H1}{} v$, то 
-$$ \int \limits_\Omega | \nabla v| ^2 \, dx \leq \lim_{k \to \infty} \inf \int \limits_\Omega | \nabla v_k|^2 \, dx.$$
-\end{lemma}
-Первая часть функционала непрерывна, а вторая часть функционала по лемме полунепрерывна снизу. Значит,
+Первое слагаемое функционала непрерывно, а второе слагаемое по лемме полунепрерывно снизу. Значит,
 $$ F(u) \leq \lim \inf \left( \int \limits_\Omega | \nabla u_{k_m}|^2 \, dx - \int \limits_\Omega f u_{k_m} \, dx \right) = \inf F.$$
 
 Итого,
@@ -193,26 +190,222 @@ $$ F(u) = \inf F.$$
 
 \end{proof}
 
-% метод конечных элементов - ???
+Резюмируя: мы рассмотрели прозвольную минимизирующую последовательность для функционала. Потом достаточно примитивным трюком доказали, что она ограниченная по норме в $H^1$, используя неравенство Фридрихса. Значит, она содержит слабо сходящуюся подпоследовательность, она тоже минимизирующая. Функционал слабо (полу)непрерывен снизу, значит, в пределе получаем нижний предел $u_k$, а это в точности инфимум.
 
-% два упражднения
+% 9. Существование обобщенного решения задачи Дирихле для уравнения Пуассона — вариационный метод. ∗ Метод конечных элементов (метод Рисса).
+\subsection{Вариационный метод}
+\begin{theorem} Пусть $u \in \m{H01Om}$ - минимум $F$, тогда $u$ - решение уравнения Пуассона:
+$$- \Delta u = f.$$
+\end{theorem}
+\begin{proof} Если $u$ - минимум $F$, то
+$$F'(u)v = \int \limits_\Omega \nabla u \cdot \nabla v \, dx - \int \limits_\Omega f v \, dx = 0 \quad \forall v \in \m{H01Om}.$$
+В частности, это выполняется и для всех $v$ из $C_0^\infty (\Omega)$. Тогда
+\begin{align*}
+	0 &= \int \limits_\Omega \nabla u \cdot \nabla v \, dx - \int \limits_\Omega f v \, dx = \sum_{k=1}^n \int \limits_\Omega u_{x_k} v_{x_k} \, dx - \int \limits_\Omega f v \, dx \\
+	&= \sum_{k=1}^n \action{v_{x_k}, u_{x_k}} - \action{v,f} = - \sum_{k=1}^n \action{v, u_{x_k x_k}} - \action{v,f} \\
+	&= - \action{v, \underbrace{\Delta u}_{\text{обобщ}}} - \action{v, f} = \action{v, -\Delta u -f} = 0.
+\end{align*}
+Значит, минимум функционала $F$ удовлетворяет уравнению Пуассона в обобщённом смысле 
+$$ - \Delta u = f.$$
 
-% необходимое условие существования минимума функционала на H_0^1
+\end{proof}
 
-% предложение: u = argmin F(u) в \H_0^1, тогда - \Delta u = f
-% предложение: - \Delta u  =f, u \in H_0^1, тогда u = argmin F(u) в H_0^1
+А минимум существует по предыдущей теореме. Значит решение уравнения Пуассона  существует. А что же с единственностью?
 
-% лемма: - \Delta u = f в обобщ смысле и u \in H_0^1, тогда \int ... - \int ... = 0 \forall v \in H_0^1
-% лемма: (что-то про минимум выпуклого функционала)
+% 10. Точки минимума выпуклых и строго выпуклых функционалов. Единственность экстремали. Единственность обобщенного решения задачи Дирихле для уравнения Пуассона - вариационный метод.
 
-% непрерывная обратимость оператора - \Delta
+\begin{definition} Вещественный функционал $G$ на гильбертовом пространстве, удовлетворяющий условию
+$$ G(\lambda_1 u_1 + \lambda_2 u_2) \leq \lambda_1 G(u_1) + \lambda_2 G(u_2), \quad \lambda_1,\lambda_2 \geq 0, \quad \lambda_1 + \lambda_2 = 1,$$
+называется выпуклым.
+\end{definition}
 
-% лемма (Lax-Milgram)
+\begin{exercise}
+$$ F(u) = \frac {1} {2} \int \limits_\Omega |\nabla u|^2 \, dx - \int \limits_\Omega fu \, dx \quad \text{--- выпуклый.}$$
+\end{exercise}
 
-% новая норма в H_0^1, наблюдение: эта норма непрерывна
+\begin{definition} Вещественный функционал $G$ на гильбертовом пространстве, удовлетворяющий условию
+$$ G(\lambda_1 u_1 + \lambda_2 u_2) < \lambda_1 G(u_1) + \lambda_2 G(u_2), \quad \lambda_1,\lambda_2 > 0, \quad \lambda_1 + \lambda_2 = 1,$$
+называется строго выпуклым.
+\end{definition}
 
-% второе док-во чего-то там
+\begin{exercise}
+Если $G$ --- строго выпуклый, то у него единственная точка минимума.
+\end{exercise}
 
+Таким образом, подобное $F$ интегральное условие является обобщённым аналогом условия Дирихле.
+
+Докажем единственность. Нам понадобятся две вспомогательные леммы.
+
+\begin{lemma}
+Если $-\Delta u = f$ в обобщённом смысле, и $u \in \m{H01Om}$, то
+$$ \int \limits_\Omega \nabla u \cdot \nabla v \, dx - \int \limits_\Omega fv \, dx = 0 \quad \forall v \in \m{H01Om}.$$
+\end{lemma}
+\begin{proof} Надо доказать в обратную сторону предыдущую цепочку равенств. Из условия леммы следует, что 
+$$ \action{\varphi, -\Delta u} = \action{\varphi, f} \quad \forall \varphi \in C_0^\infty(\Omega).$$
+Тогда 
+\begin{align*}
+- \sum_{k=1}^n \action{\varphi, u_{x_k x_k}} &= \sum_{k=1}^n \action{\varphi_{x_k}, u_{x_k}} = \sum_{k=1}^n \int \limits_\Omega \varphi_{x_k} u_{x_k} \, dx \\
+&= \int \limits_\Omega \nabla \varphi \cdot \nabla u \, dx = \int \limits_\Omega \varphi f \, dx \quad \forall \varphi \in C_0^\infty(\Omega).
+\end{align*}
+Теперь рассмотрим $v$ из $\m{H01Om}$. По определению,
+$$ \exists \{ \varphi_k \} \subset C_0^\infty(\Omega) : \varphi_k \conv{H1}{} v.$$
+Значит, по непрерывности оператора вложения
+$$ \varphi_k \conv{L2}{} v, \quad \pder[\varphi_k]{x_j} \conv{L2}{} \pder[v]{x_j}, \quad \nabla \varphi_k \conv{L2}{} \nabla v.$$
+
+В пределе получаем
+$$ \int \limits_\Omega \nabla v \cdot \nabla u \, dx - \int \limits_\Omega fv \, dx = 0.$$
+
+\end{proof}
+
+\begin{note} Попутно доказали равносильность задач! Если $f$ из $\m{L2Om}$, $u$ из $\m{H01Om}$, то
+$$ -\Delta u = f \quad \Leftrightarrow \quad \int \limits_\Omega \nabla v \cdot \nabla u \, dx = \int \limits_\Omega fv \, dx \quad \forall v \in \m{H01Om}.$$
+\end{note}
+
+\begin{lemma} Пусть $F$ - выпуклый вещественный функционал на гильбертовом пространстве $H$, у которого всюду существует первая вариация
+$$ \exists F'(u) v \quad \forall v \in H,$$ и пусть имеется $u$ из $\m{H01Om}$ такое, что
+$$ F'(u)v = 0 \quad \forall v \in H.$$
+Тогда $u$ - точка минимума $F$:
+$$ F(u) = \inf_{\m{H01Om}} F. $$
+% ???? странное условие
+\end{lemma}
+\begin{proof}
+Рассмотрим выпуклую функцию
+$$ g(t) = F(u+tv) \quad t\in \real.$$
+Тогда
+$$F'(u)v = \frac{d}{dt} F(u+tv)\Big\rvert_{t=0} = g'(0),$$
+и $g(t)$ лежит выше касательной:
+$$g(t) \geq g(0) + tg'(0) \quad \forall t \in \real.$$
+Рассмотрим такое $w \in H$, что
+$$ w = u + tv \quad \Rightarrow \quad v = \frac {w-u} {t}.$$
+Тогда
+$$ F(w) \geq F(u) + t F'(u) \frac{w-u}{t} = F(u) + F'(u)(w-u).$$
+Итого
+$$ F'(u)(w-u) = 0 \quad \Rightarrow F(u) \leq F(w) \quad \forall w,$$
+значит, $u$ - минимум $F$.
+
+\end{proof}
+Теперь мы готовы доказать
+\begin{prop}
+Если $u \in \m{H01Om}$ удовлетворяет уравнению
+$$ - \Delta u = f,$$
+то $$F(u) = \min_{\m{H01Om}} F.$$ 
+\end{prop}
+\begin{proof}
+В силу первой леммы
+$$F(u) = \int \limits_\Omega \nabla u \cdot \nabla v \, dx - \int \limits_\Omega fu \, dx = 0.$$
+У $F$ по любому направлению существует производная Гато $F'(u)v$. Рассмотрим $u$ такое, что 
+$$ F'(u) v = 0 \quad \forall v.$$
+Тогда по второй лемме $u$ - минимум $F$.
+
+\end{proof}
+
+Таким образом, мы доказали, что уравнение Пуассона имеет единственное решение, совпадающее с минимумом функционала $F$.
+
+% 11. Существование и единственность обобщенного решения задачи Дирихле для уравнения Пуассона — использование теоремы Рисса. ∗∗ Регулярность обобщенного решения (существование классического решения) — формулировка.
+
+\subsection{Использование теоремы Рисса}
+
+Пусть $\Omega \subset \real^n$ - ограниченная область, $f$ из $\m{L2Om}$, и поставлена задача Дирихле для уравнения Пуассона:
+\begin{align*}
+\begin{cases*}
+	- \Delta u = f, \\
+	u \in \m{H01Om}.
+\end{cases*}
+\end{align*}
+При помощи вариационного метода мы доказали существование и единственность решения. Докажем то же самое, опираясь на теорему Рисса.
+
+\begin{reminder}[Теорема Рисса] Пусть $H$ - гильбертово пространство, $f$ - непрерывный линейный функционал на $H$. Тогда существует единственный $y \in H$ такой, что 
+$$ f(x) = \scalprod*{H}{y}{x} \quad \forall x \in H.$$
+То есть, любой линейный функционал на $H$ есть скалярное произведение с некоторым $y$ из $H$.
+Кроме того,
+$$ \norm*{H}{y} = \norm*{H^*}{f}.$$
+\end{reminder}
+
+\begin{lemma}[Лакс-Мильграм] Пусть $\widehat{H}$ и $H$ --- гильбертовы пространства и первое непрерывно вложено во второе:
+$$ \widehat{H} \hookrightarrow H. $$
+Тогда
+$$ \forall y \in H \quad \exists ! x \in \widehat{H}: \scalprod*{\widehat{H}}{x}{z} = \scalprod*{H}{y}{z} \quad \forall z \in \widehat{H}.$$
+\end{lemma}
+\begin{proof}
+Пусть $y \in H$. Рассмотрим функционал
+\begin{gather*}
+f_y : \widehat{H} \longrightarrow \real, \\
+f_y(z) := \scalprod*{H}{y}{z}.
+\end{gather*}
+Очевидно, он линеен. Проверим непрерывность:
+$$ |f_y(z)| = | \scalprod*{H}{y}{z} \leq \norm*{H}{y} \cdot \norm*{H}{z} \leq \norm*{H}{y} \cdot \norm*{\widehat{H}}{z} C = C_y \norm*{\widehat{H}}{z}.$$
+Функционал $f_y$ непрерывен на $\widehat{H}$. Тогда по теореме Рисса в $\widehat{H}$
+$$ \exists ! \, x \in \widehat{H}: \scalprod*{\widehat{H}}{x}{z} = f_y(z) = \scalprod*{H}{y}{z} \quad \forall z \in \widehat{H}.$$
+
+\end{proof}
+
+\begin{note}
+Фактически, мы определили оператор $A$:
+\begin{gather*}
+A : H \longrightarrow \widehat{H}, \\
+Ay = x, \quad \scalprod*{H}{y}{z} = \scalprod*{\widehat{H}}{x}{z}.
+\end{gather*}
+Очевидно, он линеен. Покажем, что он непрерывен. Для начала,
+$$ | \scalprod*{\widehat{H}}{x}{z} | = | \scalprod*{H}{y}{Z} | \leq C \norm*{H}{y} \cdot \norm*{\widehat{H}}{z}.$$
+Отсюда
+$$ \frac {| \scalprod*{\widehat{H}}{x}{z} |} {\norm*{\widehat{H}}{z}} \leq C \norm*{H}{y} \quad \Rightarrow \quad \sup_{z \in \widehat{H}} \frac {| \scalprod*{\widehat{H}}{x}{z} |} {\norm*{\widehat{H}}{z}} \leq C \norm*{H}{y} \quad \Rightarrow \quad \norm*{\widehat{H}}{x} \leq C \norm*{H}{y}.$$
+То есть,
+$$ \norm*{\widehat{H}}{Ay} \leq C \norm*{H}{y} \quad \Rightarrow \quad A \text{ --- непрерывный}.$$
+\end{note}
+
+
+\begin{theorem} Пусть $f$ из $\m{L2Om}$. Тогда обобщённое решение задачи Дирихле для уравнения Пуассона существует и единственно.
+\end{theorem}
+\begin{proof} Здесь
+$$ H = \m{L2Om}, \quad \widehat{H} = \m{H01Om}.$$
+Введём новую норму в $\widehat{H}$:
+$$\norm*{\widehat{H}}{u} = \sqrt{\int \limits_\Omega | \nabla u |^2 \, dx } = \norm*{2}{\nabla u}.$$
+Очевидно,
+$$ \norm*{2}{\nabla u} = \norm*{\widehat{H}}{u} \leq \norm{H1}{u}.$$
+В то же время,
+$$ \norm*{2}{u} \leq C \norm*{2}{\nabla u} \quad \Rightarrow \quad \norm*{H1}{u} \leq C \norm*{2}{\nabla u} = C \norm*{\widehat{H}}{u}.$$
+Значит, введённая норма эквивалентна старой, и $\widehat{H}$ --- сепарабельное гильбертово пространство. В то же время, вложение $\widehat{H} \hookrightarrow H$ непрерывно:
+$$ \norm*{H}{u} = \norm*{2}{u} \leq C \norm*{2}{\nabla u} = C \norm*{\widehat{H}}{u}.$$
+Применяем лемму. Для любого $f$ из $\m{L2Om}$ 
+$$ \exists! \, u \in \m{H01Om}: \scalprod{H01}{u}{v} = \scalprod{L2}{f}{v} \quad \forall v \in \m{H01Om}.$$
+В интегральной форме: существует такой $f$ из $\m{L2Om}$, что
+$$ \exists ! u \in \m{H01Om} : \int \limits_\Omega \nabla u \cdot \nabla v \, dx = \int \limits_\Omega f v \, dx \quad \forall v \in \m{H01Om},$$
+а это равносильно существованию и единственности решения задачи Дирихле для уравнения Пуассона.
+
+\end{proof}
+
+Недостаток этого подхода заключается в том, что он неконструктивен.
+% ????????????
+% ∗∗ Регулярность обобщенного решения (существование классического решения) — формулировка.
+
+\subsection{Свойства лапласиана}
+% 12. Непрерывная обратимость оператора $-\Delta : H_0^1 \to L^2$.
+
+\begin{theorem}
+Пусть $\Omega \subset \real^n$ - ограниченная область. Для любого $f$ из $\m{L2Om}$ существует единственное $u$ из $\m{H01Om}$ такое, что
+$$ - \Delta u = f \quad \Rightarrow \quad u = (-\Delta)^{-1} f.$$
+Значит, определён оператор
+$$ (-\Delta)^{-1}: \m{L2Om} \longrightarrow \m{H01Om}.$$
+Этот оператор непрерывен.
+\end{theorem}
+\begin{proof}
+Очевидно, этот оператор линеен. Нам нужно доказать, что
+$$ \norm{H1}{(-\Delta)^{-1} f} \leq C \norm*{2}{f}, \quad \text{или, что то же самое,} \quad \norm{H1}{u} \leq C\norm*{2}{f}.$$
+Если $u$ - решение уравнения Пуассона, то 
+$$ \int \limits_\Omega \nabla u \cdot \nabla v \, dx = \int \limits_\Omega fv \, dx \quad \forall v \in \m{H01Om}.$$
+В частности, при $v= u$
+\begin{align*}
+\norm*{2}{\nabla u}^2 = \int \limits_\Omega |\nabla u|^2 \, dx = \int \limits_\Omega fu \, dx \leq \norm*{2}{f} \cdot \norm*{2}{u} \leq C \norm*{2}{f} \cdot \norm*{2}{\nabla u}
+\end{align*}
+Сначала мы воспользовались неравенством Гёльдера, а потом неравенством Фридрихса. Тогда
+$$ \norm*{2}{\nabla u} \leq C \norm*{2}{f} \quad \text{и} \quad \norm*{2}{u} \leq C\norm*{2}{f}.$$
+Итого,
+$$ \norm{H1}{u} = \sqrt{\norm*{2}{u}^2 + \norm*{2}{\nabla u}^2} \leq C \norm*{2}{f},$$
+что и требовалось доказать.
+
+\end{proof}
+
+% метод Рисса
 % теорема реллиха-кондрашова: H_0^1 компактно вложено в H^1 (без док-ва)
 % компактность вложения H_0^1 в L^2
 % следствие: (?) слабая сходимость в H_0^1 влечёт сильную сходимость в L^2
