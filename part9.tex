@@ -7,21 +7,284 @@
 % 17. Теорема Фредгольма для компактных самосопряженных операторов в гильбертовом пространстве.
 % 18. Сведение задачи Дирихле для уравнения $−\Delta u + \lambda u = f$ к уравнению Фредгольма второго рода с самосопряженным, компактным, положительным оператором. Теорема об альтернативе.
 
-% отступление про интегральные операторы, инт оператор T
-% вспомнить теорему асколи-арцела
-% теорема: K \in C( \overline{\Omega} \times \overline{\Omega}), T \in L(L^2, L^2) и T компактен
-% следствие про операторы со слабой особенностью: оператор с ядром со слабой особенностью является линейным ограниченным оператором
+\subsection*{Некоторые определения и факты из курса функционального анализа}
 
-% теорема: A = \int k u, где k - ядро со слабой особенностью, компактен
-% факт из ф.а.: предкомпакт <=> сущ. кон. \eps-сеть (с док-вом)
+\begin{definition}
+Множество называется предкомпактным, если его замыкание компактно.
+\end{definition}
 
-% лемма про гладкую функцию с компактным носителем
-% обобщение на функцию из H_0^1
+\begin{definition} Пусть $X$ - метрическое пространство, $A \subset X$ и $\eps > 0$. Множество  $F \subset X$ называется $\eps$-сетью, если
+$$ A \subset \bigcup_{x \in F} B_\eps (x).$$
+\end{definition}
 
-% доказательство теоремы реллиха-кондрашова (мы доказали что-то с её помощью, а потом вводили необходимый мат.аппарат для доказательства собственно теоремы)
+\begin{definition}
+Множество вполне ограничено, если для любого $\eps > 0$ существует конечная $\eps$-сеть.
+\end{definition}
+
+\begin{theorem}[Хаусдорф]
+Множество в метрическом пространстве компактно тогда и только тогда, когда оно полное и вполне ограниченное. 
+\end{theorem}
+
+\begin{corollary}
+У множества в полном метрическом пространстве для любого $\eps > 0$ тогда и только тогда существует конечная $\eps$-сеть, когда оно предкомпактно.
+\end{corollary}
+
+\begin{definition}
+Оператор между банаховыми пространствами называется компактным, если он переводит ограниченное множество в предкомпактное.
+\end{definition}
+
+\begin{definition}
+Семество непрерывных функций равностепенно ограничено, если существует единая для всех функций семейства константа, которой ограничены все функции семейства.
+\end{definition}
+
+\begin{definition}
+Семейство непрерывных функций $F \subset C(\overline{\Omega})$ равностепенно непрерывно, если для любого $\eps >0$  существует $\delta >0$ такая, что
+$$ \forall f \in F \quad \forall x_1,x_2 \in \overline{\Omega} : | x_1 - x_2 | < \delta \quad \Rightarrow \quad |f(x) - f(y)| < \eps .$$ 
+\end{definition}
+
+\begin{theorem}[Асколи-Арцела]
+Семейство непрерывных функций предкомпактно в $C(\overline{\Omega})$ тогда и только тогда, когда оно равномерно ограничено и равностепенно непрерывно.
+\end{theorem}
+
+\begin{definition}
+Оператор между банаховыми пространствами называется компактным, если он переводит ограниченное множество в предкомпактное.
+\end{definition}
+
+\subsection{Интегральные операторы}
+Пусть $\Omega \subset \real^n$ - ограниченная область.
+Рассмотрим интегральный оператор $T$, определённый формулой
+$$ (Tu)(x) = \int \limits_\Omega K(x,y) u(y) \, dy,$$
+где $K$ - функция, называемая ядром\footnote{Не путать с ядром оператора в смысле теории операторов. Здесь ядро от слова nucleus, в теории операторов ядро от слова kernel.}:
+$$ K : \Omega \times \Omega \longrightarrow \real.$$
+
+% 13. Непрерывность и компактность интегрального оператора в $L^2$ с непрерывным ядром.
+\begin{theorem} Если ядро $K$ непрерывно на $C(\overline{\Omega} \times \overline{\Omega})$, то соответствующий интегральный оператор
+$$ T: \m{L2Om} \longrightarrow C(\overline{\Omega}) $$
+непрерывен и компактен.
+\end{theorem}
+\begin{proof} Для докательства непрерывности достаточно проверить, что оператор переводит шар из $\m{L2Om}$ в ограниченное множество. Пусть
+$$ u \in B_R(0), \quad \norm*{2}{u} \leq R.$$
+Посчитаем $\norm*{\infty}{Tu}$:
+\begin{align*}
+| Tu(x) | &\leq \int \limits_\Omega |K(x,y)| \cdot |u(y)| \, dy \leq C \int \limits_\Omega |u(y)| \, dy \\
+& \leq C \norm*{2}{u} \cdot \norm*{2}{\mathds{1}_\Omega} \leq CR.
+\end{align*}
+То есть, оператор $T$ --- ограниченный.
+
+Проверим компактность. Надо доказать, что множество
+$$ \left\{ v = Tu \, \Big| \norm*{2}{u} \leq R \right\} $$ предкомпактно в $C(\overline{\Omega})$. Воспользуемся теоремой Асколи-Арцела. Равномерную ограниченность мы только что доказали, достаточно проверить равностепенную непрерывность. Ядро $K$ непрерывно на компакте, значит, по теореме Кантора оно равномерно непрерывно:
+$$\forall \eps \, \exists \delta: \quad \forall x_1, x_2 \in \overline{\Omega} \quad |x_1 - x_2| < \delta \quad \Rightarrow \quad |K(x_1,y) - K(x_2,y)| \leq \eps.$$
+Заметим, что
+\begin{align*}
+|Tu(x_1) - Tu(x_2)| \leq \int \limits_\Omega | K(x_1,y) - K(x_2,y)| \cdot |u(y)| \, dy \leq \eps \int \limits_\Omega |u(y)| \, dy \leq \eps CR,
+\end{align*}
+для всех $u$ из нашего шара. Значит,
+$$ \forall \eps \, \exists \delta : \quad \forall x_1, x_2 \in \overline{\Omega} \quad |x_1 - x_2| < \delta \quad \Rightarrow \quad |Tu(x_1) - Tu(x_2)| \leq \eps,$$
+что и требовалось. Оператор $T$ компактен.
+
+\end{proof}
+
+\begin{corollary} Если ядро $K \in C(\overline{\Omega} \times \overline{\Omega})$, тогда оператор
+$$ T : \m{L2Om} \longrightarrow \m{L2Om},$$
+$$(Tu)(x) := \int \limits_\Omega K(x,y) u(y) \, dy $$
+непрерывен и компактен.
+\end{corollary}
+\begin{proof}
+Пусть 
+$$ T_1 : \m{L2Om} \longrightarrow C(\overline{\Omega}), \quad T_2 : \m{L2Om} \longrightarrow \m{L2Om}$$
+--- интегральные операторы с ядром $K$ и формулой из условия, а
+$$ \dot{\iota} : C(\overline{\Omega}) \longrightarrow \m{L2Om}$$
+--- оператор вложения. Тогда $T_2 = \dot{\iota} \circ T_1$. Оператор $T_1$ компактен, вложение непрерывно, а композиция непрерывного и компактного компактна.
+
+\end{proof}
+
+% 14. Непрерывность интегрального оператора в $L^2$ со слабой особенностью.
+\subsection{Интегральные операторы со слабой особенностью}
+Как и раньше, $\Omega \subset \real^n$ - ограниченная область.
+
+\begin{definition} Функция $K$ называется ядром со слабой особенностью, если
+$$ K = \frac {B(x,y)} {|x-y|^\alpha},$$
+где $B$ ограничена на $\overline{\Omega} \times \overline{\Omega}$, а также
+$$B \in C(\overline{\Omega} \times \overline{\Omega} \setminus \{ x = y \}), \quad 0 < \alpha < n.$$
+\end{definition}
+
+\begin{note} Если $K$ - ядро со слабой особенностью, то $K$ представима в виде
+$$ K = \frac {B'(x,y)} {|x-y|^{\alpha'}}, \quad \text{где } B' \in C(\overline{\Omega} \times \overline{\Omega}), \quad \quad 0 < \alpha' < n.$$
+\end{note}
+\begin{proof}
+$$ K = \frac {B(x,y)} {|x-y|^\alpha} \cdot \frac {|x-y|^\eps} {|x-y|^\eps} = \frac {B'(x,y)} {|x-y|^{\alpha + \eps}}, \quad 0 < \alpha + \eps < n.$$
+Получившийся $B'(x,y)$, очевидно, будет ограниченным везде. Вне диагонали непрерывность есть, на диагонали $\displaystyle |x-y|^\eps \conv{}{x \to y} 0$. Так как нечто ограниченное, умноженное на нечто стремящееся к нулю, тоже стремится к нулю, то $B'(x,y) = 0$ на диагонали и непрерывна.
+
+\end{proof}
+
+\begin{theorem} Если $K$ - ядро со слабой особенностью, то интегральный оператор
+$$A: \m{L2Om} \longrightarrow \m{L2Om}$$
+с ядром $K$ --- линейный и ограниченный.
+\end{theorem}
+\begin{proof}
+Линейность очевидна. Покажем ограниченность.
+\begin{align*}
+|Au(x)| &\leq \int \limits_\Omega |K(x,y)| \cdot |u(y)| \, dy = \int \limits_\Omega \frac {|B(x,y)|} {|x-y|^\alpha} \cdot |u(y)| \, dy \\
+&\leq C \int \limits_\Omega \frac {|u(y)|} {|x-y|^\alpha} \, dy = C \int \limits_\Omega \frac {1} {|x-y|^{\alpha/2}} \cdot \frac {|u(y)|} {|x-y|^{\alpha/2}} \, dy \\ 
+&\leq C \left( \int \limits_\Omega \frac {|u(y)|^2}{|x-y|^\alpha} \, dy \right)^{1/2}.
+\end{align*}
+Мы воспользовались неравенством Гёльдера и тем, что 
+$$\int \limits_{|y| \leq \rho} \frac {1} {|y|^\alpha} \, dy = \int \limits_0^\rho n \omega_n \frac {1} {r^\alpha} r^{n-1} \, dr  = C \int \limits_0^\rho r^{n-1-\alpha} \, dr = C r^{n-\alpha} \Big\rvert_0^\rho = C \rho^{n-\alpha}, \quad \rho = \diam(\Omega)$$
+Возведём в квадрат и проинтегрируем обе части неравенства по $x$:
+\begin{align*}
+\norm*{2}{Au(x)}^2 &= \int \limits_\Omega |Au(x)|^2 \, dx \leq C \int \limits_\Omega dx \int \limits_\Omega \frac {|u(y)|^2} {|x-y|^\alpha} \, dy \\
+&\leq C \int \limits_\Omega |u(y)|^2 \, dy \underbrace {\int \limits_\Omega \frac {dx} {|x-y|^\alpha} }_{\leq C} \leq C \int \limits_\Omega |u(y)|^2 \, dy = C \norm*{2}{u}^2.  
+\end{align*}
+Таким образом, $A$ - ограниченный.
+
+\end{proof}
+
+% 15. Замкнутость класса компактных линейных непрерывных операторов. Компактность интегрального оператора в $L^2$ со слабой особенностью.
+
+\begin{note}[Замкнутость класса компактных операторов]
+Пусть $K_m$ - компактные линейные непрерывные операторы на банаховом пространстве $X$. Если
+$$ K_m \conv*{\mathscr{L} (X)}{m \to \infty} K,$$
+то $K$ - компактный.
+\end{note}
+\begin{proof}
+В полном пространстве множество предкомпактно тогда и только тогда, когда для любого $\eps > 0$ существует конечная $\eps$-сеть. По условию, для любого $\eps > 0$ найдётся такое $m$, что
+$$ \norm*{\mathscr{L} (X)}{A_m - A} < \eps.$$
+В то же время, для любых $\eps > 0$ и $m$ у множества $A_m (B_R(0))$ найдётся конечная $\eps$-сеть. Значит, у множества $A(B_R(0))$ тоже найдётся конечная $\eps$-сеть для любого $\eps > 0$. 
+
+\end{proof}
+
+\begin{theorem} Пусть $K$ --- ядро со слабой особенностью. Тогда интегральный оператор
+$$ A : \m{L2Om} \longrightarrow \m{L2Om}$$
+с этим ядром компактен.
+\end{theorem}
+\begin{proof} По замечанию,
+$$ K(x,y) = \frac{B(x,y)} {|x-y|^\alpha}, \quad B \in C(\overline{\Omega} \times \overline{\Omega}), \quad 0 < \alpha < n.$$
+Рассмотрим последовательность ядер $K_m$:
+\begin{gather*}
+K_m(x,y) =
+	\begin{cases*}
+		\dfrac {B(x,y)} {|x-y|^\alpha}, \quad |x-y| \geq \dfrac {1} {m} \\
+		\\
+		\dfrac {B(x,y)} {(1/m)^\alpha}, \quad |x-y| \leq \dfrac {1} {m}
+	\end{cases*}
+\end{gather*}
+Для удобства переобозначим:
+$$|x-y|_m = \min \left( \frac {1} {m} , |x-y| \right) \quad \Rightarrow \quad K_m(x,y) = \frac {B(x,y)} {|x-y|_m}.$$
+Заметим, что все $K_m$ непрерывны на $\overline{\Omega} \times \overline{\Omega}$. То есть, мы "доопределили" ядро на диагонали, тем самым вырезав особенность. По следствию из ранее доказанной теоремы, $A_m$ ограниченны и компактны как операторы, действующие в $\m{L2Om}$. Известно, что сходящаяся по операторной норме последовательность компактных операторов сходится к компактному. Докажем, что
+$$ A_m \conv*{\mathscr{L} (\m{L2Om})}{m\to \infty} A.$$
+Вне окрестности диагонали значения операторов равны, достаточно рассматривать разность только внутри диагонали:
+\begin{align*}
+| A_m u(x) - Au(x)| &= \Bigg\rvert \int \limits_{|x-y| < \frac {1} {2}} \left( \frac {B(x,y)} {|x-y|^\alpha} - \frac {B(x,y)} {(1/m)^\alpha} \right) u(y) \, dy \Biggl\lvert \\
+&\leq C \int \limits_{|x-y| < \frac {1} {2}} \Bigg\lvert \frac {1} {|x-y|^\alpha} - \frac {1} {(1/m)^\alpha} \Bigg\rvert \cdot |u(y)| \, dy \\
+&\leq 2 C \int \limits_{|x-y| < \frac {1} {m}} \frac {1} {|x-y|^\alpha} \cdot |u(y)| \, dy \\
+&\leq 2 C \left( \underbrace {\int \limits_{|x-y| < \frac {1} {m}} \frac {1} {|x-y|^\alpha} \, dy}_{\leq C \left( \frac {1} {m} \right)^{n-\alpha}} \right)^{1/2} \cdot \left( \int \limits_{|x-y| < \frac {1} {m}} \frac {|u(y)|} {|x-y|^\alpha} \, dy \right)^{1/2} \\
+&\leq C \frac {1} {m^{\frac {n-\alpha} {2}}} \left( \int \limits_\Omega \frac {|u(y)|} {|x-y|^\alpha} \, dy \right)^{1/2}.
+\end{align*}
+Возведём в квадрат и проинтегрируем:
+\begin{align*}
+\norm*{2}{A_m u(x) - Au(x)}^2 &\leq C \frac {1} {m^{n-\alpha}} \int \limits_\Omega dx \int \limits_\Omega \frac {|u(y)|} {|x-y|^\alpha} \, dy \leq C \frac {\norm*{2}{u}^2} {m^{n-\alpha}}.
+\end{align*}
+То есть,
+$$ \frac {\norm*{2} {(A_m - A)u(x)}} {\norm*{2}{u}} \leq \frac {C} {m^{\frac {n-\alpha} {2}}} \quad \Rightarrow \quad \norm*{}{A_m - A} \leq \frac {C} {m^{\frac{n-\alpha} {2}}} \conv{}{m \to \infty} 0.$$
+Значит, $A$ - компактный.
+
+\end{proof}
+
+% 16. Компактность вложения $H_0^1 \subset L^2$ (теорема Реллиха).
+
+\subsection{Компактность вложения $\m{H01}$ в $\m{L2}$}
+\begin{lemma} Пусть $\Omega \subset \real^n$ - область, $u \in C_0^\infty (\Omega)$. Тогда $u$ можно представить в виде
+$$ u(x) = \frac {1} {n \omega_n} \int \limits_\Omega \frac {(x-y) \cdot \nabla u} {|x-y|^n} \, dy \quad \forall x \in \Omega.$$
+\end{lemma}
+\begin{proof}
+Вспомним интегральную формулу для частного решения уравнения Пуассона:
+$$ u(x) = - \int \limits_\Omega \Phi(x-y) \nabla u(y) \, dy.$$
+Вырежем особенность на диагонали, чтобы можно было интегрировать по частям:
+\begin{align*}
+u(x) &= - \lim_{\eps \to 0} \int \limits_{B^c_\eps (x)} \Phi (x-y) \Delta u(y) \, dy \\
+&= - \lim_{\eps \to 0} \left( - \int \limits_{B^c_\eps (x)} \nabla \Phi(x-y) \cdot \nabla u(y) \, dy + \int \limits_{\partial B_\eps (x)} \Phi(x-y) \underbrace{\pder{n}u(y)}_{\substack{\text{внешняя} \\ \text{нормаль}} } \, d\sigma \right).
+\end{align*}
+Оценим второе слагаемое:
+\begin{align*}
+\Bigg| \int \limits_{\partial B_\eps (x)} \Phi(x-y) \pder{n}u(y) \, d\sigma \Bigg| &\leq \int \limits_{\partial B_\eps (x)} \Phi(x-y) \underbrace {\Bigg| \pder{n} u(y) \Bigg|}_{\leq C} \, d\sigma(y) \\
+&\leq C \int \limits_{\partial B_\eps (x)} \Phi(x-y) \, dy = C \int \limits_{\partial B_\eps (0)} \Phi(y') \, d\sigma(y') \\
+&\leq C \frac {1} {\eps^{n-2}} \int \limits_{\partial B_\eps(0)} \, d\sigma(y) = \frac {C} {\eps^{n-2}} \eps^{n-1} = C \eps \conv{}{\eps \to 0} 0.
+\end{align*}
+Здесь мы сделали замену и воспользовались тем, что
+$$ x-y = y', \quad \Phi(y') = \frac {C} {|y'|^{n-2}}, \quad |y| = \eps.$$
+Таким образом,
+$$ u(x) = \lim_{\eps \to 0} \int \limits_{B^c_\eps (x)} \nabla \Phi(x-y) \cdot \nabla u(y) \, dy.$$
+Посчитаем градиент $\Phi(x-y)$:
+\begin{gather*}
+\Phi(x-y) = \frac {1} {|x-y|^{n-2}} \cdot \frac {1} {n(n-2)\omega_n},\\
+\nabla \Phi(x-y) = \frac {n-2} {n(n-2)\omega_n} \cdot \frac {1} {|x-y|^{n-1}} \cdot \frac {x-y} {|x-y|} = \frac {x-y} {n \omega_n |x-y|^n}.
+\end{gather*}
+Итого,
+$$  u(x) = \frac {1} {n \omega_n} \int \limits_\Omega \frac {(x-y) \cdot \nabla u(y)} {|x-y|^n} \, dy.$$
+
+\end{proof}
+
+% TODO: здесь омега - просто область, но в этом замечании мы пользуемся утверждениями про компактные интегральные операторы, которые доказывались для ограниченных областей
+\begin{note}
+Та же самая формула верна для $u \in \m{H01Om}$.
+\end{note}
+\begin{proof}
+По определению $\m{H01Om}$ существует такая $\{ u_j \} \subset C_0^\infty(\Omega)$, что
+$$ u_j \conv{H1}{} u \quad \Rightarrow \quad u_j \conv{L2}{} u, \quad \pder[u_j]{x_i} \conv{L2}{} \pder[u]{x_j}.$$
+По лемме каждую $u_j$ можно представить в виде
+$$ u_j(x) = \frac{1}{n \omega_n} \int \limits_\Omega \frac{(x-y) \cdot \nabla u_j(y)} {|x-y|^n} \, dy = \sum_{k=1}^n K_i \pder{x_i} u(x),$$
+где $K_i$ это интегральные операторы со слабой особенностью
+$$ (K_i v)(x) = \frac {1} {n \omega_n} \int \limits_\Omega \frac{x_i - y_i}{|x-y|^n} v(y) \, dy,$$
+ядра $N_i$ которых можно представить в виде
+$$ N_i (x,y) = \frac {1} {n \omega_n} \frac {B_i (x,y)} {|x-y|^{n-1}}, \quad B_i(x,y) = \frac {x_i - y_i} {|x-y|}.$$
+Функция $B$ непрерывна вне диагонали, значит $K_i$ непрерывны. Тогда
+$$ K_i \pder[u_j]{x_i} \conv{L2}{} K_i \pder[u]{x_i},$$
+и
+$$ u(x) = \sum_{k=1}^n K_i \pder{x_i}u(x) = \frac {1} {n \omega_n} \sum_{k=1}^n \int \limits_\Omega \frac {x_i - y_i} {|x-y|^n|} \pder{x_i}u(x) \, dy = \frac {1} {n \omega_n} \int \limits_\Omega \frac {(x-y) \cdot \nabla u(y)} {|x-y|^n} \, dy. $$
+
+\end{proof} 
+
+\begin{theorem}[Реллих-Кондрашов] Пусть $\Omega \subset \real^n$ --- ограниченная область. Тогда вложение
+$$\dot{\iota} : \m{H01Om} \hookrightarrow \m{L2Om}$$
+компактно.
+\end{theorem}
+\begin{proof}
+Надо доказать, что образ шара 
+$$B_R (0) \subset \m{H01Om}.$$
+предкомпактен в $\m{L2Om}$. Пусть $u \in B_R(0)$, а оператор $K$ таков:
+$$ Kv = \sum_{k=1}^n K_i v_i, \quad (K_i w)(x) = \frac {1} {n \omega_n} \int \limits_\Omega \frac {x_i - y_i} {|x-y|^n} w(y) \, dy.$$
+Тогда, по замечанию, $K_i$ непрерывны и компактны, а $u$ представимо в виде
+$$ u = K \nabla u, \quad K : \m{L2}(\Omega ; \real^n) \longrightarrow \m{L2Om}$$
+Заметим, что производные $u$ ограничены, тогда градиент тоже ограничен. Оператор $K$ компактен. Значит, множество
+$$ \dot\iota (B_R(0)) = \left\{ K (\nabla u) \, \Big| \, u \in B_R(0) \right\}$$
+--- предкомпакт, что и требовалось доказать.
+
+\end{proof}
+
+\begin{note}
+На самом деле, теорема Реллиха-Кондрашова это намного более общий результат, мы сформулировали и доказали лишь частный случай. 
+\end{note}
+
+\begin{corollary} Пусть $\{ u_k \} \subset \m{H01Om}$. Тогда
+$$ u_k \wkconv{H01}{} u \quad \Rightarrow \quad u_k \conv{L2}{} u.$$
+\end{corollary}
+\begin{proof}
+% из Банаха-Штейнгауза?
+%Из теоремы Банаха-Штейнгауза следует, что последовательность $\{ u_k \}$ ограничена
+Последовательность $\{ u_k \}$ ограничена в $\m{H01Om}$. Тогда по теореме она предкомпактна в $\m{L2Om}$. Значит, и любая её подпоследовательность предкомпактна в $\m{L2Om}$. Из любой подпоследовательности можно извлечь подподпоследовательность, сходящуюся в сильном смысле в $\m{L2Om}$. В то же время эта подподпоследовательность слабо сходится в $\m{L2Om}$. Значит, сильный предел равен слабому пределу, который мы знаем.
+
+\end{proof}
+% вопрос №72 из курса функционального анализа
+\begin{note} Вообще говоря, компактный оператор между банаховыми пространствами переводит слабо сходящуюся последовательность в сильно сходящуюся.
+\end{note}
+
+% 17. Теорема Фредгольма для компактных самосопряженных операторов в гильбертовом пространстве.
+\subsection{Теорема Фредгольма}
+
+% 18. Сведение задачи Дирихле для уравнения $−\Delta u + \lambda u = f$ к уравнению Фредгольма второго рода с самосопряженным, компактным, положительным оператором. Теорема об альтернативе.
+\subsection{Сведение задачи Дирихле для уравнения Пуассона к уравнению Фредгольма второго рода}
+
 
 % свойства оператора K = i o (-\Delta)^{-1}
-
 % теорема Фредгольма о компактном операторе (альтернатива фредгольма)
-
 % спектр интегрального оператора
