@@ -198,7 +198,7 @@ $$ u(x) = \frac {1} {n \omega_n} \int \limits_\Omega \frac {(x-y) \cdot \nabla u
 \end{lemma}
 \begin{proof}
 Вспомним интегральную формулу для частного решения уравнения Пуассона:
-$$ u(x) = - \int \limits_\Omega \Phi(x-y) \nabla u(y) \, dy.$$
+$$ u(x) = - \int \limits_\Omega \Phi(x-y) \Delta u(y) \, dy.$$
 Вырежем особенность на диагонали, чтобы можно было интегрировать по частям:
 \begin{align*}
 u(x) &= - \lim_{\eps \to 0} \int \limits_{B^c_\eps (x)} \Phi (x-y) \Delta u(y) \, dy \\
