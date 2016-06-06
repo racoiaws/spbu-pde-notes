@@ -40,10 +40,10 @@ $$ M_+ = \sup_{\stackrel{x \in \real^n,} {t \in [0, T]}}u(t,x), \quad N_+ = \sup
 \begin{proof}
 Вспомним обозначения для оператора теплопроводности:
 $$ Lu = u_t - a^2 \Delta u.$$
-Пусть $\eps >0 $ и $u$ - решение уравнения теплопроводности во все пространстве. Рассмотрим
+Пусть $\eps >0 $ и $u$ --- решение уравнения теплопроводности во всем пространстве. Рассмотрим
 $$v_\eps(t, x) = u(t, x) - \eps(2na^2t + \abs{x}^2).$$
 Тогда
-$$Lv_\eps = Lu - \eps L(2na^2t + \abs{x}^2) = -\eps(2na^2 - 2n\Delta x^2) = -\eps(2na^2 - 2na^2) = 0.$$
+$$Lv_\eps = Lu - \eps L(2na^2t + \abs{x}^2) = -\eps(2na^2 - a^2\Delta\abs{x}^2) = -\eps(2na^2 - 2na^2) = 0.$$
 Таким образом, $v_\eps$ --- тоже решение уравнения теплопроводности во всем пространстве.
 
 Рассмотрим открытые цилиндры: $$Q_{T,R} = (0,T)\times B_R(0).$$
@@ -126,7 +126,7 @@ $$ u_t - a^2 \Delta u = 0$$
 называется фундаментательным решением уравнения теплопроводности.
 \end{definition}
 
-Заметим, что производная по $t$ первого порядка, а по $x$ - второго. Значит, решение такого уравнения "хорошо" себя ведёт при растяжении времени и координат: например, если растянуть время в $\lambda^2$ раз, а пространство в $\lambda$ раз, то решение не изменится.
+Заметим, что производная по $t$ первого порядка, а по $x$ - второго. Значит, решение такого уравнения "хорошо" себя ведёт при растяжении времени и координат: например, если растянуть время в $\lambda$ раз, а пространство в $\lambda^2$ раз, то решение не изменится.
 
 Не умаляя общности, можно считать, что $a = 1$.
 
@@ -134,8 +134,8 @@ $$ u_t - a^2 \Delta u = 0$$
 \item Ищем решение, инвариантное относительно растяжений:
 $$u(t,x) = \lambda^\alpha u(\lambda t, \lambda^\beta x) \quad \forall \lambda$$
 
-Пусть $\lambda = \dfrac{1} {t}$ и $u(1, z) = v(z)$.Тогда
-$$u(t,x) = \frac{1}{t^\alpha} \left( 1, \frac{x}{t^\beta} \right) = \frac {1} {t^\alpha} v \left( \frac{x}{t^\beta} \right).$$
+Пусть $\lambda = \dfrac{1} {t}$ и $u(1, z) = v(z)$. Тогда
+$$u(t,x) = \frac{1}{t^\alpha} u \left( 1, \frac{x}{t^\beta} \right) = \frac {1} {t^\alpha} v \left( \frac{x}{t^\beta} \right).$$
 Посчитаем $Lu$. Так как
 $$\frac{\partial}{\partial t} \left(v\left( \frac{x}{t^\beta}\right)\right) = \sum \limits_{i=1}^n \frac{ \partial v}{\partial x_i}\left(\frac{x}{t^\beta}\right) \cdot \frac{-\beta x_i}{t^{\beta + 1}} = -\frac{\beta}{t^{\beta + 1}}\nabla v\left( \frac{x}{t^\beta}\right) \cdot x,$$
 то
@@ -314,7 +314,7 @@ $$u(t,x) = \int\limits_0^tv(t,x,s)ds = \int\limits_0^t ds \int\limits_{\real^n}\
 $$ u(t, x) = \int \limits_0^t ds \int \limits_{\real^n} \Phi(s,y) f(t-s, x-y) \,dy.$$
 Теперь можем проносить производные по $x$:
 $$ \Delta u = \int \limits_0^t ds \int \limits_{\real^n} \Phi(s,y) \Delta f (t-s, x-y) \, dy.$$
-Со временем чуточку сложнее из-за переменного верхнего предела:
+Со временем немного сложнее из-за переменного верхнего предела:
 $$  u_t = \int \limits_{\real^n} \Phi(t,y) f(0, x-y) \, dy + \int \limits_0^t ds \int \limits_{\real^n} \Phi(s,y) f_t(t-s,x-y) \, dy.$$
 \item Подставляем в уравнение:
 $$ u_t - \Delta u = \int \limits_{\real^n} \Phi(t,y) f(0, x-y) \, dy +  \int \limits_0^t ds \int \limits_{\real^n} \Phi(s,y) \left( \pder{t} - \Delta_x \right) f(t-s, x-y) \, dy.$$

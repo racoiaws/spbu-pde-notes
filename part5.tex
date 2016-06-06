@@ -97,7 +97,12 @@ $$\action{u_k, D^\alpha v} = (-1)^{\abs{\alpha}} \action{D^\alpha u_k, v} \longr
 \begin{example}
 Пусть $v \in C^1(\Omega) \subset L_{loc}^1(\Omega)$. Тогда $v$ --- обобщенная с точностью до отождествления. Рассмотрим обобщённую функцию $v_{x_i}$:
 $$\action{u, v_{x_i}} = - \action{u_{x_i}, v }= - \int \limits_\Omega u_{x_i} v \, dx = \int \limits_\Omega u v_{x_i} \, dx - \underbrace{\int \limits_{\partial \Omega'} u v \nu_i \, d\sigma}_{=0} = \action{u, v_{x_i}},$$
-где $\partial \Omega'$ --- гладкая граница некоего множества, лежащего в $\Omega$ и окружающего носитель функции $u$.
+где $\partial \Omega'$ --- гладкая граница некоего множества, лежащего в $\Omega$ и окружающего носитель функции $u$. Здесь мы воспользовались формулой интегрирования по частям для многомерного случая.
+
+\begin{reminder}[Интегрирование по частям (многомерный случай)]
+$$\int \limits_{\Omega} u v_{x_i} \,dx = \int \limits_{\partial\Omega} uvn_{i} \,d\sigma - \int \limits_{\Omega} u_{x_i} v \, dx,$$
+где $n_{i}$ --- $i$-ая компонента вектора внешней нормали к $\partial\Omega$.
+\end{reminder}
 
 Таким образом, если $v$ непрерывно дифференцируема, то обобщённая производная совпадает с классической.
 \end{example}
@@ -111,7 +116,7 @@ $$\action{u, \delta'} = -\action{u, \delta} = -u'(0).$$
 \begin{equation*}
 h(x) = \quad
     \begin{cases} 
-        1, \, x\leq0\\
+        1, \, x\geq0\\
         0,\, x < 0.
     \end{cases}
 \end{equation*}
