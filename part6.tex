@@ -10,7 +10,7 @@
 % 26. Функция Грина внутренней задачи Дирихле для уравнения Пуассона. Функция Грина для шара
 
 \section{Гармонические функции}
-\begin{definition} Пусть $\Omega \subset \real^n$ - область. Функция называется гармонической в $\Omega$, если она является классическим решением уравнения Лапласа:
+\begin{definition} Пусть $\Omega \subset \real^n$ --- область. Функция называется гармонической в $\Omega$, если она является классическим решением уравнения Лапласа:
 $$-\Delta u = 0, \quad u \in C^2(\Omega)$$
 \end{definition}
 \begin{note}
@@ -19,7 +19,7 @@ $$-\Delta u = 0, \quad u \in C^2(\Omega)$$
 
 \subsection{Свойства гармонических функций}
 \begin{note}
-Пусть $\Omega \subset \real^n$ - ограниченная область, а $u \in C^2(\Omega)\cap C(\overline{\Omega})$ - гармоническая. Тогда 
+Пусть $\Omega \subset \real^n$ --- ограниченная область, а $u \in C^2(\Omega)\cap C(\overline{\Omega})$ - гармоническая. Тогда 
 $$0 = \int \limits_\Omega \Delta \, u dx = -\int \limits_\Omega \underbrace {\nabla 1}_{0} \cdot \nabla u dx + \int \limits_{\partial\Omega} 1 \cdot \dfrac{\partial u}{\partial \nu}d\sigma\,\Rightarrow\, \int\limits_{\partial\Omega}\dfrac{\partial u}{\partial \nu}d\sigma = 0.$$
 Дадим физическую интерпретацию этому замечанию. Уравнение Лапласа задаёт стационарное температурное поле без источников и стоков теплоты. Чтобы такое поле существовало, необходимо, чтобы суммарный поток тепла через границу области должен быть равен нулю.
 \end{note}
@@ -61,7 +61,7 @@ $$u(x_0) = \fint \limits_{B_{\eps} (x_0)} u dx.$$
 \end{proof}
 
 \begin{theorem}[Обратная теорема о среднем]
-Пусть $\Omega \subset \real^n$ - область, $u \in C(\Omega)$. Если для любого шара $B_\rho (x_0)$, замыкание которого лежит в $\Omega$, выполняется
+Пусть $\Omega \subset \real^n$ --- область, $u \in C(\Omega)$. Если для любого шара $B_\rho (x_0)$, замыкание которого лежит в $\Omega$, выполняется
 $$ u(x_0) = \fint \limits_{B_\rho(x_0)} u(x) dx,$$
 то $u$ - гармоническая. 
 \end{theorem}
@@ -127,11 +127,11 @@ u_\eps (x) &= u(x) \int \limits_{\real^n} \varphi_\eps = u(x) \quad \text{на }
 \end{proof}
 
 \begin{corollary}
-Если $u$ - гармоническая в $\Omega$, то $u \in C^{\infty} (\Omega)$.
+Если $u$ --- гармоническая в $\Omega$, то $u \in C^{\infty} (\Omega)$.
 \end{corollary}
 
 \begin{corollary}
-Любая производная гармонической функции - тоже гармоническая функция.
+Любая производная гармонической функции --- тоже гармоническая функция.
 \end{corollary}
 
 \begin{corollary} Пусть $u$ - гармоническая, тогда
@@ -156,7 +156,7 @@ $$ \abs{D^{\alpha} u(x)} \leq \frac {C_n^{\abs{\alpha}}} {d(x, \partial \Omega)^
 Функция называется вещественно аналитической, когда она представима в виде своего ряда Тейлора в окрестности всякой точки. При этом в каждой точке ряд равномерно сходится.
 \end{definition}
 \begin{corollary}
-Если $u$ - гармоническая, то она вещественно аналитическая.
+Если $u$ --- гармоническая, то она вещественно аналитическая.
 \end{corollary}
 \begin{proof}
 Запишем ряд Тейлора:
@@ -179,7 +179,7 @@ $$ \sum \limits_\alpha \frac {D^{\alpha} u(x_0)} {\abs{\alpha}!} (x - x_0)^{\alp
 \end{note}
 
 \begin{corollary}[Теорема Лиувилля]
-Пусть $\Omega = \real^n$, а функция $u$ - гармоническая и ограниченная. Тогда $u \equiv \const$.
+Пусть $\Omega = \real^n$, а функция $u$ --- гармоническая и ограниченная. Тогда $u \equiv \const$.
 \end{corollary}
 \begin{proof}
 Воспользуемся предыдущим следствием:
@@ -191,8 +191,8 @@ $$ \abs{u_{x_i} (x_0)} = 0 \quad \forall x_0 \, \forall i$$
 \end{proof}
 
 \begin{theorem}[Принцип максимума]
-Пусть $\Omega$ - связная область, а $u$ - гармоническая в ней. Если
-$$ \exists x_0 \in \Omega: \, u(x_0) = \sup_\Omega u(x),$$
+Пусть $\Omega$ --- связная область, а $u$ --- гармоническая в ней. Если
+$$ \exists \, x_0 \in \Omega: \, u(x_0) = \sup_\Omega u(x),$$
  то $$u \equiv u(x_0).$$
 \end{theorem}
 \begin{proof}
@@ -213,7 +213,7 @@ $$ \exists x_0 \in \Omega: \, u(x_0) = \sup_\Omega u(x),$$
 \begin{note} Заменой $u$ на $-u$ и супремума на инфимум получается принцип минимума.
 \end{note}
 
-\begin{corollary} Пусть $\Omega$ - ограниченная область в $\real^n$ и поставлена задача Дирихле для уравнения Пуассона:
+\begin{corollary} Пусть $\Omega$ --- ограниченная область в $\real^n$ и поставлена задача Дирихле для уравнения Пуассона:
 \begin{align*}
 	\begin{cases*}
 		- \Delta u = f,\\
@@ -232,7 +232,7 @@ $$ u \in C^2(\Omega) \cap C(\overline{\Omega})$$
 		u\Big\rvert_{\partial \Omega} = 0.
 	\end{cases*}
 \end{align*}
-Получается, что $u$ - непрерывная вплоть до границы гармоническая функция. Значит, она имеет и максимум, и минимум. Далее возможны два случая:
+Получается, что $u$ --- непрерывная вплоть до границы гармоническая функция. Значит, она имеет и максимум, и минимум. Далее возможны два случая:
 \begin{enumerate}
 \item Максимум достигается внутри области. Тогда внутри каждой компоненты связности $u \equiv 0$, но при этом имеем $0$ на границе. Значит, $u \equiv 0$.
 \item Максимум и минимум достигаются на границе. Там она $0$. Значит, $u \equiv 0$.
@@ -241,7 +241,7 @@ $$ u \in C^2(\Omega) \cap C(\overline{\Omega})$$
 
 \section{Функция Грина внутренней задачи Дирихле для уравнения Пуассона}
 \subsection{Формулы Грина}
-Пусть $\Omega \subset \real^n$ - ограниченная область с гладкой границей. Тогда верны формулы Грина:
+Пусть $\Omega \subset \real^n$ --- ограниченная область с гладкой границей. Тогда верны формулы Грина:
 \begin{enumerate}
 \item $\displaystyle \int \limits_\Omega v \Delta u = - \int \limits_\Omega \nabla v \cdot \nabla u \, dx + \int \limits_{\partial \Omega} v \pder[u]{n} \, d\sigma,$
 \item $\displaystyle \int \limits_\Omega u \Delta v - v \Delta u = \int \limits_{\partial \Omega} u \pder[v]{n} - v \pder[u]{n} \, d\sigma,$
@@ -252,7 +252,7 @@ $$ \Phi(x) = \frac {1} {n (n-2) \omega_n} \cdot \frac {1} {\abs{x}^{n-2}}$$
 --- фундаментальное решение уравнения $$-\Delta \Phi = \delta.$$
 
 \subsection{Определение}
-Пусть $\Omega \subset \real^n$ - ограниченная область с гладкой границей, $u \in C^2(\Omega) \cap C(\overline{\Omega})$. Рассмотрим уравнение Пуассона в $\Omega$:
+Пусть $\Omega \subset \real^n$ --- ограниченная область с гладкой границей, $u \in C^2(\Omega) \cap C(\overline{\Omega})$. Рассмотрим уравнение Пуассона в $\Omega$:
 \begin{align*}
 	\begin{cases*}
 		- \Delta u = f, \\
@@ -285,9 +285,9 @@ $$G(x,y) = \Phi (x-y) + v^y (x),$$
 	\end{cases*}
 \end{align*}
 
-Функция $\Phi(x-y)$ - потенциал поля заряда в точке $y$ в открытом пространстве. А если поставить сюда железную границу (заземлить), то потенциал изменится. Создастся некий дополнительный заряд, компенсирующий потенциал, создаваемый зарядом $y$ в открытом пространстве.
+Функция $\Phi(x-y)$ --- потенциал поля заряда в точке $y$ в открытом пространстве. А если поставить сюда железную границу (заземлить), то потенциал изменится. Создастся некий дополнительный заряд, компенсирующий потенциал, создаваемый зарядом $y$ в открытом пространстве.
 
-Значит, $v^y$ - потенциал собственной системы, компенсирующей заряд. На поверхности $\Omega$ он будет равен минус потенциалу, созданному электростатическим полем от заряда в точке $y$ в свободном пространстве.
+Значит, $v^y$ --- потенциал собственной системы, компенсирующей заряд. На поверхности $\Omega$ он будет равен минус потенциалу, созданному электростатическим полем от заряда в точке $y$ в свободном пространстве.
 
 Предположим, что $v^y$ удалось найти. Запишем третью формулу Грина:
 $$ u(y) = \int \limits_{\partial \Omega} \pder[u]{n} \Phi (x-y) - u \pder[\Phi(x-y)]{n_x} \, d\sigma(x) - \int \limits_\Omega \Phi (x -y) \Delta u(x) \, dx.$$
@@ -307,7 +307,7 @@ $$ u(y) = - \int \limits_{\partial \Omega} u_0(x) \pder{n_x} G(x,y) \, d\sigma(x
 \end{note}
 
 \subsection{Общие свойства}
-Пусть $\Omega \subset \real^n$ - ограниченная область, и функция $G(x,y)$ для $\Omega$ существует. Тогда:
+Пусть $\Omega \subset \real^n$ --- ограниченная область, и функция $G(x,y)$ для $\Omega$ существует. Тогда:
 
 \begin{enumerate}
 \item $G(x,y) \geq 0$ всюду. 
@@ -335,7 +335,7 @@ $$ G(x, y) = \underbrace{\Phi(x-y)}_{\substack{\text{сколь угодно} \\
 \begin{proof}Видно из доказательства предыдущего свойства.
 
 \end{proof}
-\item $G(x, y) = G(y, x)$ - функция Грина симметрична.
+\item $G(x, y) = G(y, x)$ --- функция Грина симметрична.
 \begin{proof}
 Пусть
 $$ u(x) = G(x,y), \quad v(x) = G(x,z).$$
@@ -419,7 +419,7 @@ $$u(y) = - \int \limits_{\partial \Omega} u_0 \pder{n_x} G(x,y) \, d\sigma(x) + 
 где
 $$ k (x,y) = - \pder{n_x} G(x,y) = \frac {1 - \abs{y}^2} {n \omega_n} \frac {1} {\abs{x-y}^n} = - \nabla_x G(x,y) \cdot \underbrace{x}_{\substack{\text{направление} \\ \text{нормали}} } \quad \text{--- ядро Пуассона}.$$
 
-\begin{exercise} Показать, что полученное $u$ - действительно решение.
+\begin{exercise} Показать, что полученное $u$ --- действительно решение.
 \end{exercise}
 \begin{note}Так как
 % TODO: дописать про пронос лапласиана под знак интеграла
@@ -434,7 +434,7 @@ $$ \lim_{\substack{y \to x_0 \\ \abs{x_0} = 1}} k(x, y) = 0 \quad x_0 \neq x$$
 $$ k( x, \cdot) \notin C(\overline{\Omega}) \quad \forall x.$$
 \end{exercise}
 
-\begin{note}Пусть $Q$ - матрица поворота. Тогда
+\begin{note}Пусть $Q$ --- матрица поворота. Тогда
 $$ u(Qy) = u(y),$$
 то есть $u$ радиально симметрична.
 \end{note}
