@@ -1,18 +1,8 @@
 % !TEX encoding = UTF-8 Unicode
-% когда-нибудь тут будут оформлены решения
 % обычно решение задачи опирается на решение или идею из предыдущих
 \chapter{Упражнения}
 Некоторые упражнения с последних лекций, а также сопутствующие леммы и теоремы.
 \section*{23.04.16}
-\begin{lemma}
-Сходящиеся в смысле обобщённых функций ряды можно дифференцировать сколько угодно раз. Получающиеся ряды из производных сходятся к соответствующим обобщенным производным.
-\end{lemma}
-
-\begin{exercise}[Первая собственная функция]
-Если $$\int \limits_{\Omega} \abs{\nabla u}^2 = \lambda_1, \quad \int \limits_{\Omega} u^2 = 1, \quad u \in H_0^1(\Omega),$$
-тогда $$ - \Delta u = \lambda_1 u.$$
-\end{exercise}
-
 \begin{exercise}
 Найти обобщенную производную функции $f$:
 \begin{gather*}
@@ -25,6 +15,30 @@ f(x) =
 	\end{cases*}
 \end{gather*}
 \end{exercise}
+
+\begin{lemma}
+Сходящиеся в смысле обобщённых функций ряды можно дифференцировать сколько угодно раз. Получающиеся ряды из производных сходятся к соответствующим обобщенным производным.
+\end{lemma}
+\begin{proof} Пусть $\Omega \subset \real^n$ --- область, семейство $\{u_k\} \subset \beauD'(\Omega)$, и
+$$ \sum_{k=1}^\infty u_k = u \quad \text{в смысле }\beauD'(\Omega).$$ Докажем, что ряд из обобщённых производных сходится к соответствующей производной:
+$$ \sum_{k=1}^\infty \pder[u_k]{x_i} = \pder[u]{x_i}.$$
+Посчитаем:
+\begin{align*}
+\action{\varphi , \pder[u]{x_i}} &= - \action{\pder[\varphi]{x_i}, u} = - \action{\pder[\varphi]{x_i}, \sum_{k=1}^\infty u_k} = \lim_{n \to \infty} - \action{\pder[u]{x_i}, \sum_{k=1}^n u_k} \\ 
+&= \lim_{ n \to \infty} - \sum_{k=1}^n \action{\pder[u]{x_i}, u_k} = \lim_{n \to \infty} \sum_{k=1}^n \action{\varphi, \pder[u_k]{x_i}} = \lim_{n \to \infty} \action{\varphi, \sum_{k=1}^n \pder[u_k]{x_i}}.
+\end{align*}
+Что и требовалось доказать.
+
+\end{proof}
+
+\begin{note} Пусть $\Omega = (0, 2\pi)$, функция $f$ из $C^1(\real)$ и $2\pi$-периодическая. Тогда её ряд Фурье по тригонометрическим функциям сходится поточечно:
+$$ f(x) = A_0 + \sum_{k=1}^\infty A_k \sin kx + B_k \cos kx.$$
+Найдём обобщённую производную:
+$$ f'(x) = \sum_{k=1}^\infty k(A_k \cos kx - B_k \sin kx).$$
+Ничто не гарантирует, что этот ряд сходится к $f'$ поточечно, зато он сходится к $f'$ в смысле $\m{L2}(\real)$ почти всюду. Найдём вторую производную:
+$$ f''(x) = \sum_{k=1}^\infty k^2(- A_k \sin kx - B_k \cos kx).$$
+В классическом смысле эта производная может не существовать ни в одной точке, а в обобщённом смысле всё замечательно, в $\beauD'(\real)$ ряд сходится.
+\end{note}
 
 \section*{30.04.16}
 \begin{exercise}
