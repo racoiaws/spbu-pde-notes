@@ -51,7 +51,7 @@ $$ \norm*{2}{u} \leq C \norm*{2}{\nabla u},$$
 Вспомним некоторые сведения из функционального анализа.
 \begin{definition}
 Пусть $H$ - гильбертово пространство. Последовательность $\{x_k \} \subset H$ называется слабо сходящейся к $x$, если
-$$\scalprod*{H}{x_k}{y} \conv*{H}{} \scalprod*{H}{x}{y} \quad \forall y \in H,$$
+$$\scalprod*{H}{x_k}{y} \conv*{H}{} \scalprod*{}{x}{y} \quad \forall y \in H,$$
 и обозначается
 $$ x_k \wkconv*{H}{} x.$$
 \end{definition}
@@ -81,14 +81,20 @@ $$ u_k \wkconv*{H}{} 0 \quad \Leftrightarrow \quad \sin kx \wkconv*{H}{k \to \in
 \end{note}
 
 % TODO: доказать
+% следствие из теоремы Банаха-Алаоглу
 \begin{note}[Слабая компактность шара] Пусть $H$ - сепарабельное гильбертово пространство. Тогда
 $$ \{ x_k \} \subset H : |x_k| \leq C \quad \Rightarrow \quad \exists \{ x_{k_n} \} : x_{k_n} \wkconv{}{} x.$$
 \end{note}
 
-% TODO: доказать
-\begin{note} В сепарабельном гильбертовом пространстве норма слабо полунепрерывна снизу:
-$$x_k \wkconv*{}{} x \quad \Rightarrow \quad \norm{}{x_k} \leq \lim \inf \norm*{}{x_k}.$$
+\begin{note} В сепарабельном гильбертовом пространстве $H$ норма слабо полунепрерывна снизу:
+$$x_k \wkconv*{}{} x \quad \Rightarrow \quad \norm{}{x_k} \leq \liminf_{k \to \infty} \norm*{}{x_k}.$$
 \end{note}
+\begin{proof}
+Пусть 
+$$ x_k \wkconv*{H}{} x,$$
+тогда, по неравенству Коши-Буняковского
+$$ \norm*{}{x}^2 = \lim_{k \to \infty} \scalprod*{}{x_k}{x} \leq \liminf_{k \to \infty} \norm*{}{x_k} \cdot \norm*{}{x_k}.$$
+\end{proof}
 
 % TODO: замкнутое выпуклое подмножество гильбертова пр-ва слабо замкнуто
 
@@ -96,7 +102,7 @@ $$x_k \wkconv*{}{} x \quad \Rightarrow \quad \norm{}{x_k} \leq \lim \inf \norm*{
 $$ x_k \wkconv*{H_1}{} x \quad \Rightarrow \quad Ax_k \wkconv*{H_2}{} Ax.$$
 \end{note}
 \begin{proof}
-$$ \scalprod*{H_2}{A x_k} {y} = \scalprod*{H_1}{x_k}{A^*y} \conv*{H_1}{} \scalprod*{H_1}{x}{A^*y} = \scalprod*{H_2}{Ax}{y}.$$
+$$ \scalprod*{H_2}{A x_k} {y} = \scalprod*{H_1}{x_k}{A^*y} \conv{}{} \scalprod*{H_1}{x}{A^*y} = \scalprod*{H_2}{Ax}{y}.$$
 
 \end{proof}
 
@@ -118,7 +124,7 @@ $$ u_k \wkconv{H1Om}{} u \quad \Rightarrow \quad \pder[u_k]{x_i} \wkconv{L2Om}{}
 % 8. ∗ Существование точки минимума интегрального функционала в $H_0^1$.
 \subsection{Существование точки минимума интегрального функционала в $\m{H01}$}
 \begin{lemma} В $\m{H1Om}$ функционал $F$ слабо полунепрерывен снизу:
-$$u_k \wkconv{H1}{} u \quad \Rightarrow \quad F(u) \leq \lim \inf F(u_k).$$
+$$u_k \wkconv{H1}{} u \quad \Rightarrow \quad F(u) \leq \liminf_{k \to \infty} F(u_k).$$
 \end{lemma}
 \begin{proof} Прежде всего заметим, что
 $$ \int \limits_\Omega f u_k \, dx = \scalprod*{2}{f}{u_k} \wkconv{L2}{} \scalprod*{2}{f}{u} =\int \limits_\Omega f u \, dx.$$
@@ -133,11 +139,11 @@ $$ \int \limits_\Omega \frac {| \nabla u_k|^2} {2} \, dx - \int \limits_\Omega \
 Заметим, что
 $$ \pder[u_k]{x_j} - \pder[u]{x_j} \wkconv{L2}{} 0 \quad \Rightarrow \quad u_{x_j} (\hdots) \conv{}{k \to \infty} 0,$$
 то есть,
-$$ \lim \inf \frac {1} {2} \int \limits_\Omega |\nabla u_k|^2 \, dx \geq \frac {1} {2} \int \limits_\Omega |\nabla u|^2 \, dx.$$
+$$ \liminf_{k \to \infty} \frac {1} {2} \int \limits_\Omega |\nabla u_k|^2 \, dx \geq \frac {1} {2} \int \limits_\Omega |\nabla u|^2 \, dx.$$
 Итого
 \begin{align*}
-\lim \inf F(u_k) &= \lim \inf \left( \frac {1}{2} \int \limits_\Omega |\nabla u_k|^2 \, dx - \int \limits_\Omega fu_k \, dx \right) \\
-&\geq \lim \inf \frac {1} {2} \int \limits_\Omega |\nabla u_k|^2 \, dx - \lim \inf \int \limits_\Omega fu_k \, dx \\
+\liminf_{k \to \infty} F(u_k) &= \liminf_{k \to \infty}\left( \frac {1}{2} \int \limits_\Omega |\nabla u_k|^2 \, dx - \int \limits_\Omega fu_k \, dx \right) \\
+&\geq \liminf_{k \to \infty} \frac {1} {2} \int \limits_\Omega |\nabla u_k|^2 \, dx - \liminf_{k \to \infty} \int \limits_\Omega fu_k \, dx \\
 &\geq \frac {1} {2} \int \limits_\Omega |\nabla u|^2 \, dx - \int \limits_\Omega fu \, dx = F(u),
 \end{align*}
 что и требовалось доказать.
@@ -183,7 +189,7 @@ $$ u_{k_m} \wkconv{L2Om}{} u, \quad \pder[u_{k_m}]{x_i} \wkconv{L2Om}{} \pder[u]
 $$ \int \limits_\Omega f u_{k_m} \, dx \longrightarrow \int \limits_\Omega fu \, dx.$$
 
 Первое слагаемое функционала непрерывно, а второе слагаемое по лемме полунепрерывно снизу. Значит,
-$$ F(u) \leq \lim \inf \left( \int \limits_\Omega | \nabla u_{k_m}|^2 \, dx - \int \limits_\Omega f u_{k_m} \, dx \right) = \inf F.$$
+$$ F(u) \leq \liminf_{m \to \infty} \left( \int \limits_\Omega | \nabla u_{k_m}|^2 \, dx - \int \limits_\Omega f u_{k_m} \, dx \right) = \inf F.$$
 
 Итого,
 $$ F(u) = \inf F.$$
@@ -243,7 +249,7 @@ $$ -\Delta u = f \quad \Leftrightarrow \quad \int \limits_\Omega \nabla v \cdot 
 
 \subsection{Метод конечных элементов} Пусть $\Omega \subset \real^2$ - ограниченная область. Задача Дирихле для уравнения Пуассона в обобщённом смысле эквивалентентна вариационной задаче
 $$ F(u) = \frac {1}{2} \int \limits_\Omega |\nabla u|^2\ \,dx - \int \limits_\Omega fu \, dx \rightarrow \min.$$
-Знаем, что у $F$ существует минимум. Тогда у задачи Дирихле для уравнения Пуассона существует решение (чуть далее мы докажем, что минимум и решение единственны. Вариационный метод подсказывает, как можно найти приближённое решение.
+Знаем, что у $F$ существует минимум. Тогда у задачи Дирихле для уравнения Пуассона существует решение (далее мы докажем, что минимум и решение единственны). Вариационный метод подсказывает, как можно найти приближённое решение.
 
 Триангулируем $\Omega$ - разобьём её на $m$ достаточно малых треугольников. Скажем, что на $k$-ом треугольнике действует линейная функция $u_k$, приближающая $u$ в этой части области. Линейная функция на треугольнике определяется своими значениями в вершинах треугольника. Таким образом, неизвестная функция $u_k$ заменяется на неизвестные функции $u_k$, которые определяются неизвестными значениями в узлах треугольников. В узлах на границе положим $u = 0$. Тогда $F$ - квадратичная функция на $\real^m$, она выпукла.
 
