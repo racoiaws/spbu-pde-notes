@@ -39,16 +39,12 @@ $$ A \subset \bigcup_{x \in F} B_\eps (x).$$
 
 \begin{definition}
 Семейство непрерывных функций $F \subset C(\overline{\Omega})$ равностепенно непрерывно, если для любого $\eps >0$  существует $\delta >0$ такая, что
-$$ \forall f \in F \quad \forall x_1,x_2 \in \overline{\Omega} : | x_1 - x_2 | < \delta \quad \Rightarrow \quad |f(x) - f(y)| < \eps .$$ 
+$$ \forall f \in F \quad \forall x_1,x_2 \in \overline{\Omega} : | x_1 - x_2 | < \delta \quad \Rightarrow \quad |f(x_1) - f(x_2)| < \eps .$$ 
 \end{definition}
 
 \begin{theorem}[Асколи-Арцела]
 Семейство непрерывных функций предкомпактно в $C(\overline{\Omega})$ тогда и только тогда, когда оно равномерно ограничено и равностепенно непрерывно.
 \end{theorem}
-
-\begin{definition}
-Оператор между банаховыми пространствами называется компактным, если он переводит ограниченное множество в предкомпактное.
-\end{definition}
 
 \subsection{Интегральные операторы}
 Пусть $\Omega \subset \real^n$ --- ограниченная область.
@@ -58,7 +54,7 @@ $$ (Tu)(x) = \int \limits_\Omega K(x,y) u(y) \, dy,$$
 $$ K : \Omega \times \Omega \longrightarrow \real.$$
 
 % 13. Непрерывность и компактность интегрального оператора в $L^2$ с непрерывным ядром.
-\begin{theorem} Если ядро $K$ непрерывно на $C(\overline{\Omega} \times \overline{\Omega})$, то соответствующий интегральный оператор
+\begin{theorem} Если ядро $K \in C(\overline{\Omega} \times \overline{\Omega})$, то соответствующий интегральный оператор
 $$ T: \m{L2Om} \longrightarrow C(\overline{\Omega}) $$
 непрерывен и компактен.
 \end{theorem}
@@ -169,7 +165,7 @@ K_m(x,y) =
 	\end{cases*}
 \end{gather*}
 Для удобства переобозначим:
-$$|x-y|_m = \min \left( \frac {1} {m} , |x-y| \right) \quad \Rightarrow \quad K_m(x,y) = \frac {B(x,y)} {|x-y|_m}.$$
+$$|x-y|_m = \min \left( \frac {1} {m} , |x-y| \right) \quad \Rightarrow \quad K_m(x,y) = \frac {B(x,y)} {|x-y|_m^\alpha}.$$
 Заметим, что все $K_m$ непрерывны на $\overline{\Omega} \times \overline{\Omega}$. То есть, мы "доопределили" ядро на диагонали, тем самым вырезав особенность. По следствию из ранее доказанной теоремы, $A_m$ ограниченны и компактны как операторы, действующие в $\m{L2Om}$. Известно, что сходящаяся по операторной норме последовательность компактных операторов сходится к компактному. Докажем, что
 $$ A_m \conv*{\mathscr{L} (\m{L2Om})}{m\to \infty} A.$$
 Вне окрестности диагонали значения операторов равны, достаточно рассматривать разность только внутри диагонали:
