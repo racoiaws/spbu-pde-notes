@@ -205,7 +205,7 @@ $$ \Phi(t, x) = \frac {1} {\sqrt{(4 \pi t)^n}} e ^ {- \frac {|x|^2} {4t}}.$$
 
 \begin{theorem}[Интегральная формула для решения задачи Коши]
 Пусть $\varphi\in C_b(\real^n)$ --- ограниченная и непрерывная (начальное распределение), а $u$ задаётся формулой
-$$u(t,x) = (\Phi(t) * \varphi) (x) =  \int\limits_{\real^n}\Phi(t, x-y)\varphi(y)dy.$$
+$$u(t,x) = (\Phi(t) * \varphi) (x) =  \int\limits_{\real^n}\Phi(t, x-y)\varphi(y) \, dy.$$
 Тогда $u$
 \begin{enumerate}
 \item бесконечно гладкая: $$u \in C^\infty\left(\left(0, +\infty\right)\times \real^n\right)$$
@@ -221,7 +221,7 @@ $$u(t,x) = (\Phi(t) * \varphi) (x) =  \int\limits_{\real^n}\Phi(t, x-y)\varphi(y
 \item Очевидно, $\Phi \in  C^\infty\left(\left(0, +\infty\right)\times \real^n\right)$. Производные проносятся под интеграл:
 $$u_t = \int\limits_{\real^n} \Phi_t(t,x-y)\varphi(y) \, dy, \quad u_{x_i} = \int\limits_{\real^n} \Phi_{x_i}(t, x-y)\varphi(y) \, dy$$
 Значит, $u \in C^\infty.$
-\item Применим оператор теплопроводности: $$Lu = u_t - \Delta u = \int\limits_{\real^n} \underbrace{(\Phi_t - \Delta \Phi)(t, x-y)}_{0}\varphi(y) dy = 0.$$
+\item Применим оператор теплопроводности: $$Lu = u_t - \Delta u = \int\limits_{\real^n} \underbrace{(\Phi_t - \Delta \Phi)(t, x-y)}_{0}\varphi(y) \, dy = 0.$$
 \item Пусть $x_0 \in \real^n$. Посчитаем предел по определению. Для начала,
 \begin{align*}
 |u(t,x) - \varphi(x_0)| &= \Bigl| \int \limits_{\real^n} \Phi(t, x-y) \varphi(y) \, dy - \varphi(x_0) \Bigl| = \\
@@ -248,7 +248,7 @@ J_\delta & \leq 2 || \varphi ||_\infty \int \limits_{B^c_\delta (x_0)} \Phi(t, x
 
 Можем выбрать такое $t$, что $$ t \leq \frac {\delta} {2}, \quad J_\delta \leq \dfrac {\eps} {2}.$$
 Суммируем $I_\delta$ и $J_\delta$. Тогда
-$$ \forall \eps >0 \quad \exists t, \delta: \quad | x- x_0| < \frac {\delta} {2}, \quad |t| < \frac {\delta} {2} \quad \Rightarrow \quad |u(t,x) - \varphi(x_0)| < \eps,$$
+$$ \forall \eps >0 \quad \exists t, \delta: \quad | x- x_0| < \frac {\delta} {2} \quad \& \quad |t| < \frac {\delta} {2} \quad \Rightarrow \quad |u(t,x) - \varphi(x_0)| < \eps,$$
 что и требовалось доказать.
 \end{enumerate}
 
@@ -294,7 +294,7 @@ $$ \forall \eps >0 \quad \exists t, \delta: \quad | x- x_0| < \frac {\delta} {2}
     \end{cases}
 \end{equation*}
 
-$$u(t,x) = \int\limits_0^tv(t,x,s)ds = \int\limits_0^t ds \int\limits_{\real^n}\Phi(t-s, x-y)f(s,y)dy.$$
+$$u(t,x) = \int\limits_0^tv(t,x,s) \, ds = \int\limits_0^t \, ds \int\limits_{\real^n}\Phi(t-s, x-y)f(s,y) \, dy.$$
 
 В некоторых случаях эта формула даёт классическое решение, рассмотрим один из них:
 

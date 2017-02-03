@@ -55,18 +55,18 @@
 \label{waveduhamel}
 \end{equation}
 тогда решением задачи $\eqref{wavehomcauchy}$ будет\footnote{Здесь важно то, что для каждого $s$ будет своя $w(t,x) = w(t,x,s)$.}
-$$ \overline{u}(t,x) = \int \limits_0^t w(t,x,s) ds.$$
+$$ \overline{u}(t,x) = \int \limits_0^t w(t,x,s) \, ds.$$
 \end{theorem}
 \begin{proof}
 Для начала проверим выполнение начальных условий:
-$$\overline{u} (0,x) = \int \limits_0^0 ... = 0, \quad \overline{u}_t (0,x) = \underbrace {w(t,x,t) \Bigg\rvert_{t=0}}_{= 0} + \int \limits_0^t w_t(t,x,s)ds \Bigg\rvert_{t=0} = 0.$$
+$$\overline{u} (0,x) = \int \limits_0^0 ... = 0, \quad \overline{u}_t (0,x) = \underbrace {w(t,x,t) \Bigg\rvert_{t=0}}_{= 0} + \int \limits_0^t w_t(t,x,s) \, ds \Bigg\rvert_{t=0} = 0.$$
 Далее посчитаем нужные производные:
 \begin{align*}
-	\overline{u}_{tt} &= \int \limits_0^t w_{tt} (t,x,s) ds + w_t (t, x, t) = \int \limits_0^t w_{tt} (t,x,s)ds + f(t,x), \\
-	\overline{u}_{xx} &= \int \limits_0^t w_{xx} (t,x,s) ds.
+	\overline{u}_{tt} &= \int \limits_0^t w_{tt} (t,x,s) \, ds + w_t (t, x, t) = \int \limits_0^t w_{tt} (t,x,s) \, ds + f(t,x), \\
+	\overline{u}_{xx} &= \int \limits_0^t w_{xx} (t,x,s) \, ds.
 \end{align*}
 Подставляем в уравнение:
-$$ \overline{u}_{tt} - v^2 \overline{u}_{xx} = \int \limits_0^t \underbrace{w_{tt}(t,x,s) - v^2 w_{xx}(t,x,s)}_{= 0} ds + f(x,t) = f(x,t).$$
+$$ \overline{u}_{tt} - v^2 \overline{u}_{xx} = \int \limits_0^t \underbrace{w_{tt}(t,x,s) - v^2 w_{xx}(t,x,s)}_{= 0} \, ds + f(x,t) = f(x,t).$$
 
 Значит, $\overline{u}$ --- действительно решение задачи $\eqref{wavehomcauchy}$.
 
@@ -74,10 +74,10 @@ $$ \overline{u}_{tt} - v^2 \overline{u}_{xx} = \int \limits_0^t \underbrace{w_{t
 Что мы сделали с точки зрения физики? Вместо того, чтобы трактовать $f(t,x)$ как возмущение, действующее в каждый момент времени $t$ в каждой точке $x$, мы сказали, что $f(s,x)$ --- это начальная скорость, действующая только в момент времени $s$. Можно сказать, что мы дизинтегрировали решение задачи $\eqref{wavehomcauchy}$ на решение семейства задач $\eqref{waveduhamel}_s$.
 
 Есть смысл выразить $w(t,x,s)$ при помощи формулы Д'Аламбера:
-$$ w(t,x,s) = \frac {1} {2v} \int \limits_{x-v(t-s)}^{x+v(t-s)} f(s,y) dy. $$
+$$ w(t,x,s) = \frac {1} {2v} \int \limits_{x-v(t-s)}^{x+v(t-s)} f(s,y) \, dy. $$
 Тогда решение задачи  $\eqref{wavehomcauchy}$ записывается как
-$$ \overline{u} (t,x) = \frac {1} {2v} \int \limits_0^t ds \int \limits_{x-v(t-s)}^{x+v(t-s)} f(s,y) dy,$$
-а полное решение записывается как $$u(t,x) = \frac {u_0 (x+vt) - u_0 (x-vt)} {2} + \frac {1} {2v} \int \limits_{x-vt}^{x+vt} v_0(y)dy + \frac {1} {2v} \int \limits_0^t ds \int \limits_{x-v(t-s)}^{x+v(t-s)} f(s,y) dy.$$
+$$ \overline{u} (t,x) = \frac {1} {2v} \int \limits_0^t ds \int \limits_{x-v(t-s)}^{x+v(t-s)} f(s,y) \, dy,$$
+а полное решение записывается как $$u(t,x) = \frac {u_0 (x+vt) - u_0 (x-vt)} {2} + \frac {1} {2v} \int \limits_{x-vt}^{x+vt} v_0(y) \, dy + \frac {1} {2v} \int \limits_0^t ds \int \limits_{x-v(t-s)}^{x+v(t-s)} f(s,y) \, dy.$$
 
 Для каких $f$ верно вышесказанное? В формуле Д'Аламбера в качестве $v_0 \in C^1$ взяли $f$. Значит, для $f \in C(\real^+ \times \real)$ и, дополнительно, $f_x \in C(\real^+ \times \real)$. Именно тогда записанное выше $u(t,x)$ --- классическое решение неоднородной задачи Коши для волнового уравнения.
 % так и не понял, почему f in C и f_x in C, а не f in C^1
@@ -95,16 +95,16 @@ $$ \overline{u} (t,x) = \frac {1} {2v} \int \limits_0^t ds \int \limits_{x-v(t-s
 
 Пусть $c$ --- теплоемкость вещества, $\rho$ --- его плотность:
 
-$$ \int \limits_t^{t +\Delta t} ds \int \limits_B  c \rho u_t dx = \underbrace {\int \limits_t^{t + \Delta t} ds \int \limits_B q(x) dx}_{\text{стоки теплоты}} - \underbrace {\int \limits_t^{t + \Delta t} ds \int \limits_{\partial B} F \cdot n d \sigma}_{\substack{\text{теплообмен со} \\ \text{внешней средой}}}.$$
+$$ \int \limits_t^{t +\Delta t} ds \int \limits_B  c \rho u_t \, dx = \underbrace {\int \limits_t^{t + \Delta t} ds \int \limits_B q(x) \, dx}_{\text{стоки теплоты}} - \underbrace {\int \limits_t^{t + \Delta t} ds \int \limits_{\partial B} F \cdot n \, d \sigma}_{\substack{\text{теплообмен со} \\ \text{внешней средой}}}.$$
 
 Поделим на $\Delta t$ и устремим $\Delta t$ к $0$:
-$$ \int \limits_B c \rho u_t dx = \int \limits_B q dx - \int \limits_{\partial B} F \cdot n d \sigma. $$
+$$ \int \limits_B c \rho u_t \, dx = \int \limits_B q \, dx - \int \limits_{\partial B} F \cdot n \, d \sigma. $$
 
 Применим формулу Гаусса-Остроградского\footnote{Формула Гаусса-Остроградского:$
-    \int_{\partial \Omega}: F \cdot n d\sigma = \int_{\Omega} \Div F dx$}
+    \dsint_{\partial \Omega} F \cdot n \, d\sigma = \dsint_{\Omega} \Div F \, dx$}
 \begin{gather*}
-    \int \limits_B c \rho u_t dx = \int \limits_B q dx - \int \limits_B \Div F dx, \\
-    \int \limits_B c \rho u_t + \Div F - q dx = 0,\quad \forall B
+    \int \limits_B c \rho u_t \, dx = \int \limits_B q \, dx - \int \limits_B \Div F \, dx, \\
+    \int \limits_B c \rho u_t + \Div F - q \, dx = 0,\quad \forall B
 \end{gather*}
 Значит,
 $$ c \rho u_t + \Div F = q.$$

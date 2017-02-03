@@ -9,32 +9,32 @@
 Решение выведем двумя способами.
 \subsubsection{Вывод решения при помощи транспортного уравнения}
 \begin{gather*}
-	u_{tt} - v^2 u_{xx} = (\pder{t} - v \pder{x}) \underbrace {(\pder[u]{t} + v \pder[u]{x})}_{= w} = 0, \\
+	u_{tt} - v^2 u_{xx} = \left( \pder{t} - v \pder{x} \right ) \underbrace {\left(\pder[u]{t} + v \pder[u]{x} \right)}_{= w} = 0, \\
  	\pder[w]{t} - v \pder[w]{x} = 0.
 \end{gather*}
 
 Получили однородное транспортное уравнение, его решение мы знаем:
 \begin{gather*}
-	w(t,x) = \psi (x + vt),\quad \psi (x) = w(0,x) \\
-	\pder[u]{t} + v \pder[u]{x} = \psi (x + vt)		
+	w(t,x) = \psi (x + vt),\quad \psi (x) = w(0,x), \\
+	\pder[u]{t} + v \pder[u]{x} = \psi (x + vt).	
 \end{gather*}
 
 Получили неоднородное транспортное уравнение, его решение мы тоже знаем:
 \begin{gather*}
-	u(t,x) = u_0 (x - vt) + \int \limits_0^t \psi(x + vs - v(t-s)) ds = u_0 (x - vt) + \int \limits_0^t \psi (x - vt + 2vs) ds, \\
+	u(t,x) = u_0 (x - vt) + \int \limits_0^t \psi(x + vs - v(t-s)) \, ds = u_0 (x - vt) + \int \limits_0^t \psi (x - vt + 2vs) \, ds, \\
 	\text{сделаем замену }y = x - vt + 2vs, \text{ тогда} \\
 \end{gather*}
 \begin{equation}
-    u(t,x) = u_0 (x - vt) + \frac {1} {2v} \int \limits_{x-vt}^{x+vt} \psi (y) dy
+    u(t,x) = u_0 (x - vt) + \frac {1} {2v} \int \limits_{x-vt}^{x+vt} \psi (y) \, dy
 \label{wavehomans}
 \end{equation}
-% Красивый номер страницы - это специально? :)
+
 \begin{exercise}
 При каких $\varphi$ и $\psi$ $\eqref{wavehomans}$ --- решение $\eqref{waveequation}$? (Ответ: $\varphi \in C^2$, $\psi \in C^1$)
 \end{exercise}
 
 \begin{theorem} Пусть $\varphi \in C^2(\real)$ и $\psi \in C^1(\real)$. Тогда
-$$ u(t, x) = \varphi (x - vt) + \frac {1} {2v} \int \limits_{x - vt}^{x+vt} \psi (y) dy$$
+$$ u(t, x) = \varphi (x - vt) + \frac {1} {2v} \int \limits_{x - vt}^{x+vt} \psi (y) \, dy$$
 --- решение одномерного волнового уравнения.
 \end{theorem}
 
@@ -57,12 +57,12 @@ $$ u(t, x) = \varphi (x - vt) + \frac {1} {2v} \int \limits_{x - vt}^{x+vt} \psi
 \end{gather*}
 Таким образом,
 \begin{align*}
-	u(t,x) &= u_0(x-vt) + \frac {1} {2v} \int \limits_{x-vt}^{x+vt} v_0(y) + vu'_0(y)dy \\
-	&= u_0(x-vt) + \frac {u_0(x+vt) - u_0(x-vt)} { 2} + \frac {1} {2v} \int \limits_{x-vt}^{x+vt} v_0(y)dy.
+	u(t,x) &= u_0(x-vt) + \frac {1} {2v} \int \limits_{x-vt}^{x+vt} v_0(y) + vu'_0(y) \, dy \\
+	&= u_0(x-vt) + \frac {u_0(x+vt) - u_0(x-vt)} { 2} + \frac {1} {2v} \int \limits_{x-vt}^{x+vt} v_0(y) \, dy.
 \end{align*}
 Отсюда легко получаем формулу Д'Аламбера
 \begin{equation}
-	u(t,x) = \frac {u_0(x+vt) + u_0(x-vt)} { 2} + \frac {1} {2v} \int \limits_{x-vt}^{x+vt} v_0(y)dy.
+	u(t,x) = \frac {u_0(x+vt) + u_0(x-vt)} { 2} + \frac {1} {2v} \int \limits_{x-vt}^{x+vt} v_0(y) \, dy.
 \label{wavedalembert}
 \end{equation}
 
@@ -211,7 +211,7 @@ $$ \Lambda^{\pm} = - \frac {b} {a} \pm \sqrt{\frac {b^2} {a^2} - \frac {c} {a}} 
 	
 \subsubsection{Классификация в случае двух независимых переменных}
 Рассмотрим дифференциальное уравнение в частных производных второго порядка с переменными коэффициентами:
-$$ \underbrace {\sum \limits_{i = 1}^2 \sum \limits_{j = 1}^2 a_{ij}(x_1, x_2) \frac {\partial^2 u} {\partial x_i \partial x_j}}_{\text{главная часть}}  + \underbrace {F(\pder[u]{x_1}, \pder[u]{x_2}, u, x_1, x_2)}_{\text{члены низшего порядка}} = 0,\quad x \in \real^2$$
+$$ \underbrace {\sum \limits_{i = 1}^2 \sum \limits_{j = 1}^2 a_{ij}(x_1, x_2) \frac {\partial^2 u} {\partial x_i \partial x_j}}_{\text{главная часть}}  + \underbrace { F \left( \pder[u]{x_1}, \pder[u]{x_2}, u, x_1, x_2 \right) }_{\text{члены низшего порядка}} = 0,\quad x \in \real^2$$
 
 Обозначим через $A$ симметричную матрицу коэффициентов $a_{ij}$.
 \begin{itemize}
@@ -227,7 +227,7 @@ $$ \frac {\partial^2 u} {\partial \xi^2} + \frac {\partial^2 u} {\partial \eta^2
 
 \subsection{Классификация уравнений второго порядка в случае многих независимых переменных}
 Рассмотрим дифференциальное уравнение в частных производных второго порядка с переменными коэффициентами:
-$$ \underbrace {\sum \limits_{i=1}^n \sum \limits_{j = 1}^n a_{ij} \frac {\partial^2 u} {\partial x_i \partial x_j}}_{\text{главная часть}}  + F(\pder[u]{x_1}, \pder[u]{x_2}, u, x_1, ..., x_n) = 0,\quad x \in \real^n$$
+$$ \underbrace {\sum \limits_{i=1}^n \sum \limits_{j = 1}^n a_{ij} \frac {\partial^2 u} {\partial x_i \partial x_j}}_{\text{главная часть}}  + F \left( \pder[u]{x_1}, \pder[u]{x_2}, u, x_1, ..., x_n \right) = 0,\quad x \in \real^n$$
 
 Обозначим через $A$ симметричную матрицу коэффициентов $a_{ij}$. Уравнение называется 
 \begin{itemize}

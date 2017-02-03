@@ -20,31 +20,31 @@ $$-\Delta u = 0, \quad u \in C^2(\Omega)$$
 \subsection{Свойства гармонических функций}
 \begin{note}
 Пусть $\Omega \subset \real^n$ --- ограниченная область, а $u \in C^2(\Omega)\cap C(\overline{\Omega})$ - гармоническая. Тогда 
-$$0 = \int \limits_\Omega \Delta \, u dx = -\int \limits_\Omega \underbrace {\nabla 1}_{0} \cdot \nabla u dx + \int \limits_{\partial\Omega} 1 \cdot \dfrac{\partial u}{\partial \nu}d\sigma\,\Rightarrow\, \int\limits_{\partial\Omega}\dfrac{\partial u}{\partial \nu}d\sigma = 0.$$
-Дадим физическую интерпретацию этому замечанию. Уравнение Лапласа задаёт стационарное температурное поле без источников и стоков теплоты. Чтобы такое поле существовало, необходимо, чтобы суммарный поток тепла через границу области должен быть равен нулю.
+$$0 = \int \limits_\Omega \Delta \, u \,dx = -\int \limits_\Omega \underbrace {\nabla 1}_{0} \cdot \nabla u \, dx + \int \limits_{\partial\Omega} 1 \cdot \dfrac{\partial u}{\partial \nu} \, d\sigma\,\Rightarrow\, \int\limits_{\partial\Omega}\dfrac{\partial u}{\partial \nu} \, d\sigma = 0.$$
+Дадим физическую интерпретацию этому замечанию. Уравнение Лапласа задаёт стационарное температурное поле без источников и стоков теплоты. Чтобы такое поле существовало, необходимо, чтобы суммарный поток тепла через границу области был равен нулю.
 \end{note}
 
 \begin{theorem}[о среднем для гармонических функций]
 Пусть $\Omega \subset \real^n$, $n > 2$, $u$ --- гармоническая в $\Omega$, тогда для любого $x_0 \in \Omega$ верно следующее:
-$$u(x_0) = \fint \limits_{\partial B_\eps(x_0)} u(x) d\sigma(x) = \fint \limits_{B_\eps(x_0)} u(x)dx, \quad \forall \eps > 0 \,:\, \overline{B}_\eps(x_0)\subset\Omega.$$
+$$u(x_0) = \fint \limits_{\partial B_\eps(x_0)} u(x) \, d\sigma(x) = \fint \limits_{B_\eps(x_0)} u(x) \, dx, \quad \forall \eps > 0 \,:\, \overline{B}_\eps(x_0)\subset\Omega.$$
 То есть, значение гармонической функции в точке равно как среднему по границе шара, так и среднему по шару с центром в этой точке для любого шара в $\Omega$.
 \end{theorem}
 
 \begin{proof}Для начала докажем первое равенство. Пользуясь третьей формулой Грина, получаем
 
 \begin{align*}
-u(x_0) & = \int \limits_{\partial B_{\eps}(x_0)} \Phi(x-x_0) \pder[u]{\nu} d\sigma - \int \limits_{\partial B_{\eps}(x_0)} u \pder[\Phi]{\nu} d\sigma - \underbrace {\int \limits_{B_{\eps}(x_0)} \Delta u \Phi (x-x_0) dx}_{=0} = \\
-& = \frac {1} {n(n-2)\omega_n}\left(\int \limits_{\partial B_{\eps}(x_0)} \frac {1} {\abs{x - x_0}}^{n-2} \pder[u]{\nu} d \sigma - \int \limits_{\partial B_{\eps}(x_0)} u \pder[]{\nu}\left(\frac {1} {\abs{x-x_0}^{n-2}}\right) d \sigma \right) = \\
-& = \frac {1} {n(n-2)\omega_n} \left( \frac {1} {\eps^{n-2}} \underbrace {\int \limits_{\partial B_{\eps}(x_0)} \pder[u]{\nu} d \sigma}_{=0 \text{ по замечанию}} - \int \limits_{\partial B_{\eps}(x_0)} u \frac {n-2} {\eps^{n-1}} d \sigma  \right) = \\
-& = \frac {1} {n \omega_n \eps^{n-1}} \int \limits_{\partial B_{\eps} (x_0)} u d \sigma = \fint \limits_{\partial B_{\eps} (x_0)} u d \sigma.
+u(x_0) & = \int \limits_{\partial B_{\eps}(x_0)} \Phi(x-x_0) \pder[u]{\nu} \, d\sigma - \int \limits_{\partial B_{\eps}(x_0)} u \pder[\Phi]{\nu} \, d\sigma - \underbrace {\int \limits_{B_{\eps}(x_0)} \Delta u \Phi (x-x_0) \, dx}_{=0} = \\
+& = \frac {1} {n(n-2)\omega_n}\left(\int \limits_{\partial B_{\eps}(x_0)} \frac {1} {\abs{x - x_0}}^{n-2} \pder[u]{\nu} \, d\sigma - \int \limits_{\partial B_{\eps}(x_0)} u \pder[]{\nu}\left(\frac {1} {\abs{x-x_0}^{n-2}}\right) \, d \sigma \right) = \\
+& = \frac {1} {n(n-2)\omega_n} \left( \frac {1} {\eps^{n-2}} \underbrace {\int \limits_{\partial B_{\eps}(x_0)} \pder[u]{\nu} \, d \sigma}_{=0 \text{ по замечанию}} - \int \limits_{\partial B_{\eps}(x_0)} u \frac {n-2} {\eps^{n-1}} \, d \sigma  \right) = \\
+& = \frac {1} {n \omega_n \eps^{n-1}} \int \limits_{\partial B_{\eps} (x_0)} u \, d \sigma = \fint \limits_{\partial B_{\eps} (x_0)} u \, d \sigma.
 \end{align*}
 Первое равенство доказано. Докажем второе. Перепишем интеграл по шару в сферической системе координат:
 \begin{align*}
-\int \limits_{B_{\eps} (x_0)} u dx &= \int \limits_0^\eps r^{n-1} dr \int \limits_{\partial B_1 (0)} u(\underbrace {x_0 + rs}_{=z}) d \sigma(s) = \int \limits_0^\eps dr \underbrace {\int \limits_{\partial B_r (x_0)} u(z) d \sigma(z)}_{\text{площадь поверхности } \cdot u(x_0)} = \\
-& = \int \limits_0^\eps u(x_0) \sigma(\partial B_r(x_0)) dr = u(x_0) \abs{B_\eps (x_0)}.
+\int \limits_{B_{\eps} (x_0)} u \, dx &= \int \limits_0^\eps r^{n-1} \, dr \int \limits_{\partial B_1 (0)} u(\underbrace {x_0 + rs}_{=z}) \, d \sigma(s) = \int \limits_0^\eps \, dr \underbrace {\int \limits_{\partial B_r (x_0)} u(z) \, d \sigma(z)}_{\text{площадь поверхности } \cdot u(x_0)} = \\
+& = \int \limits_0^\eps u(x_0) \sigma(\partial B_r(x_0)) \, dr = u(x_0) \abs{B_\eps (x_0)}.
 \end{align*}
 Итого,
-$$u(x_0) = \fint \limits_{B_{\eps} (x_0)} u dx.$$
+$$u(x_0) = \fint \limits_{B_{\eps} (x_0)} u \, dx.$$
 
 \end{proof}
 
@@ -62,22 +62,22 @@ $$u(x_0) = \fint \limits_{B_{\eps} (x_0)} u dx.$$
 
 \begin{theorem}[Обратная теорема о среднем]
 Пусть $\Omega \subset \real^n$ --- область, $u \in C(\Omega)$. Если для любого шара $B_\rho (x_0)$, замыкание которого лежит в $\Omega$, выполняется
-$$ u(x_0) = \fint \limits_{B_\rho(x_0)} u(x) dx,$$
+$$ u(x_0) = \fint \limits_{B_\rho(x_0)} u(x) \, dx,$$
 то $u$ --- гармоническая. 
 \end{theorem}
 \begin{note}
 Пусть выполняются условия теоремы, тогда $u$ удовлетворяет соотношению
-$$ u(x_0) = \fint \limits_{\partial B_\rho(x_0)} u(x) d\sigma(x)$$
+$$ u(x_0) = \fint \limits_{\partial B_\rho(x_0)} u(x) \, d\sigma(x)$$
 \end{note}
 \begin{proof}[Доказательство первого замечания]
 Снова воспользуемся сферическими координатами:
-$$u(x_0) \cdot \abs{B_\rho (x_0)} = \int \limits_{B_\rho (x_0)} u(x) dx = \int \limits_0^\rho dr \int \limits_{\partial B_r (x_0)} u(z) d \sigma(z).$$
+$$u(x_0) \cdot \abs{B_\rho (x_0)} = \int \limits_{B_\rho (x_0)} u(x) \, dx = \int \limits_0^\rho \, dr \int \limits_{\partial B_r (x_0)} u(z) \, d \sigma(z).$$
 В то же время
 $$ u(x_0) \cdot \abs{B_\rho (x_0)} = u(x_0) \cdot \omega_n \rho^n.$$
 Приравняем и продифференцируем по $\rho$:
-$$ u(x_0) \cdot \underbrace {\omega_n n \rho^{n-1}}_{= \sigma(\partial B_\rho (x_0))} = \int \limits_{\partial B_\rho (x_0)} u(z) d\sigma(z).$$
+$$ u(x_0) \cdot \underbrace {\omega_n n \rho^{n-1}}_{= \sigma(\partial B_\rho (x_0))} = \int \limits_{\partial B_\rho (x_0)} u(z) \, d\sigma(z).$$
 Итого
-$$ u(x_0) = \fint \limits_{\partial B_\rho (x_0)} u(z) d\sigma(z).$$
+$$ u(x_0) = \fint \limits_{\partial B_\rho (x_0)} u(z) \, d\sigma(z).$$
 
 \end{proof}
 
@@ -87,12 +87,12 @@ $$ u(x_0) = \fint \limits_{\partial B_\rho (x_0)} u(z) d\sigma(z).$$
 \begin{proof}[Доказательство второго замечания]
 Дифференцируем соотношение из условия теоремы по $\rho$:
 \begin{align*}
-0 &= \frac {d} {d\rho} \left( \frac {1} {n \omega_n \rho^{n-1}} \int \limits_{\partial B_\rho (x_0)} u(x) d\sigma(x) \right) = 
- \frac {d} {d\rho} \left( \frac {1} {n \omega_n} \int \limits_{\partial B_1(0)} u(x_0 + \rho s) d\sigma(s) \right) = \\
-&= \frac {1} {n \omega_n} \int \limits_{\partial B_1 (0)} \nabla u(x_0 + \rho s) \cdot s d\sigma(s) = 
- \frac {1} {n \omega_n} \int \limits_{\partial B_1 (0)} \pder[u]{s}(x_0 +\rho_s) d\sigma(s) = \\
-&= \frac {1} {n \omega_n \rho^{n-1}} \int \limits_{\partial B_\rho (x_0)} \pder[u]{n}(z) d\sigma(z) = 
- \frac {1} {n \omega_n \rho^{n-1}} \int \limits_{B_\rho (x_0)} \Delta u (z) dz = 0, \quad \forall \rho
+0 &= \frac {d} {d\rho} \left( \frac {1} {n \omega_n \rho^{n-1}} \int \limits_{\partial B_\rho (x_0)} u(x) \, d\sigma(x) \right) = 
+ \frac {d} {d\rho} \left( \frac {1} {n \omega_n} \int \limits_{\partial B_1(0)} u(x_0 + \rho s) \, d\sigma(s) \right) = \\
+&= \frac {1} {n \omega_n} \int \limits_{\partial B_1 (0)} \nabla u(x_0 + \rho s) \cdot s \, d\sigma(s) = 
+ \frac {1} {n \omega_n} \int \limits_{\partial B_1 (0)} \pder[u]{s}(x_0 +\rho_s) \, d\sigma(s) = \\
+&= \frac {1} {n \omega_n \rho^{n-1}} \int \limits_{\partial B_\rho (x_0)} \pder[u]{n}(z) \, d\sigma(z) = 
+ \frac {1} {n \omega_n \rho^{n-1}} \int \limits_{B_\rho (x_0)} \Delta u (z) \, dz = 0, \quad \forall \rho
 \end{align*}
 Таким образом,
 $$\Delta u(x_0) = 0, \quad \forall x_0 \in \Omega$$
@@ -103,9 +103,9 @@ $$\Delta u(x_0) = 0, \quad \forall x_0 \in \Omega$$
 Имеем функцию $u \in C(\Omega)$. Сгладим её. Для начала рассмотрим функцию
 $$ \psi \in C_0^{\infty} (\real), \quad \psi(-x) = \psi(x), \quad \int \limits_{\real} \psi = 1, \quad \supp \psi \subset B_1(0).$$
 Теперь введём аппроксимативную единицу $\varphi_\eps$:
-$$ \eps >0, \quad \varphi_\eps(x) = \frac {1} {\eps^n} \psi (\frac {\abs{x}} {\eps}). $$
+$$ \eps >0, \quad \varphi_\eps(x) = \frac {1} {\eps^n} \psi \left( \frac {\abs{x}} {\eps} \right). $$
 Определим $u_\eps$:
-$$ u_\eps = u * \varphi_\eps$$
+$$ u_\eps = u * \varphi_\eps .$$
 Заметим, что $u_\eps$ определена не на всём $\Omega$, а только на его подмножестве $\Omega_\eps$, расстояние от которого до границы $\Omega$ равно $\eps$. % здесь можно вставить рисунок
 
 Распишем $u_\eps(x)$:
@@ -116,11 +116,11 @@ $$ u_\eps = u * \varphi_\eps$$
 Функция $\varphi_\eps$ радиальна, значит, можем вынести её за интеграл по $d\sigma(s)$:
 \begin{align*}
 	u_\eps (x) &= \int \limits_0^\eps r^{n-1} \frac {\psi (\frac {r} {\eps})} {\eps^n} \, dr \int \limits_{\partial B_1 (0)} u(x+rs) \, d\sigma(s) = \int \limits_0^\eps \frac {\psi(\frac {r} {\eps})} {\eps^n} \, dr \int \limits_{\partial B_r(x)} u(z) \, d\sigma(z) =  \\% по первому замечанию 
-	&= \int \limits_0^\eps \frac {\psi (\frac {r} {\eps})} {\eps^n} u(x) \omega_n n r^{n-1} \, dr = u(x) \underbrace {\int \limits_0^\eps \frac {r^{n-1}} {\eps^n} \psi \left( \frac {r} {\eps} \right) \omega_n n \, dr}_{\int_{\real^n} \varphi_\eps}
+	&= \int \limits_0^\eps \frac {\psi (\frac {r} {\eps})} {\eps^n} u(x) \omega_n n r^{n-1} \, dr = u(x) \int \limits_0^\eps \frac {r^{n-1}} {\eps^n} \psi \left( \frac {r} {\eps} \right) \omega_n n \, dr.
 \end{align*}
 Получили
 \begin{align*}
-u_\eps (x) &= u(x) \int \limits_{\real^n} \varphi_\eps = u(x) \quad \text{на } \Omega_\eps \, \forall \eps 
+u_\eps (x) &= u(x) \int \limits_{\real^n} \varphi_\eps \, dx = u(x) \quad \text{на } \Omega_\eps \quad \forall \eps 
 \end{align*}
 % уточнить
 % u_\eps \in C_0^\infty
@@ -139,7 +139,7 @@ $$\abs{D^{\alpha} u(x)} \leq \frac {C_n^{\abs{\alpha}}} {r^{\abs{\alpha}}} \max_
 \end{corollary}
 \begin{proof}
 По теореме о среднем:
-$$ u_{x_i} (x) = \frac {1} {\omega_n r^n} \int \limits_{B_r (x)} u_{x_i} (x) = \frac {1} {\omega_n r^n} \int \limits_{\partial B_r (x)} u n_i \, d\sigma.$$
+$$ u_{x_i} (x) = \frac {1} {\omega_n r^n} \int \limits_{B_r (x)} u_{x_i} (x) \, dx = \frac {1} {\omega_n r^n} \int \limits_{\partial B_r (x)} u n_i \, d\sigma.$$
 Тогда
 $$ \abs{u_{x_i} (x)} \leq \frac {1} {\omega_n r^n} n \omega_n r^{n-1} \max_{B_r (x)} u(x) = \frac {n} {r} \max_{B_r (x)} u(x).$$
 Для произвольного мультииндекса $\alpha$ оценивание можно проделать соответствующее количество раз, тогда:
@@ -244,8 +244,8 @@ $$ u \in C^2(\Omega) \cap C(\overline{\Omega})$$
 \subsection{Формулы Грина}
 Пусть $\Omega \subset \real^n$ --- ограниченная область с гладкой границей. Тогда верны формулы Грина:
 \begin{enumerate}
-\item $\displaystyle \int \limits_\Omega v \Delta u = - \int \limits_\Omega \nabla v \cdot \nabla u \, dx + \int \limits_{\partial \Omega} v \pder[u]{n} \, d\sigma,$
-\item $\displaystyle \int \limits_\Omega u \Delta v - v \Delta u = \int \limits_{\partial \Omega} u \pder[v]{n} - v \pder[u]{n} \, d\sigma,$
+\item $\displaystyle \int \limits_\Omega v \Delta u \, dx = - \int \limits_\Omega \nabla v \cdot \nabla u \, dx + \int \limits_{\partial \Omega} v \pder[u]{n} \, d\sigma,$
+\item $\displaystyle \int \limits_\Omega u \Delta v - v \Delta u \, dx = \int \limits_{\partial \Omega} u \pder[v]{n} - v \pder[u]{n} \, d\sigma,$
 \item $\displaystyle u(x_0) = \int \limits_{\partial \Omega} \Phi (x-x_0) \pder[u]{n} \, d\sigma - \int \limits_{\partial \Omega} u \pder[\Phi]{n} (x-x_0) \, d\sigma - \int \limits_\Omega \Delta u \Phi (x - x_0) \, dx,$
 \end{enumerate}
 где 
@@ -499,7 +499,8 @@ $$ \lim_{y \to x_0} |u(y) - u_0(x_0)| \leq \delta \cdot 1 + 0 \quad \forall \eps
 \item * Решить в обобщенных функциях (на $\real$) уравнения $x u = 0$ и $x^2 u=0$ относительно неизвестной $u$. (Кстати: тут написано произведение обобщенной функции на бесконечно дифференцируемую. Как его естественно определить?)
 \item Докажите, что функция, гармоническая в области, в окрестности каждой точки области представима сходящимся степенным рядом. Оцените радиус сходимости ряда. Указание: используйте оценки производных гармонической функции (в лекциях обсуждалось, как).
 \item Пусть $u$ --- непрерывная ограниченная функция в пространстве $\real^n$. Рассмотрим две произвольные точки $x, y$. Доказать, что средние $u$ по шарам $B_r(x)$, $B_r(y)$ ''почти равны'', если $r>>1$ (т.е. очень большое число). Вывести отсюда теорему Лиувилля для ограниченных гармонических функций.
-\item Пусть $\Omega\subset \real^n$ --- ограниченная область, $k$: $\bar\Omega\times\partial\Omega\to \real^+$ --- непрерывная функция, определённая всюду, кроме диагонали $\{x=y\}$, причем $\int_{\partial \Omega}k(\cdot,y)\, d\sigma(y)=1$, и $k(x,y)\to 0$, если $x\to x_0\in \partial \Omega$, равномерно по $y\in B_\delta (x_0)$ (для любого $\delta>0$). Пусть $g$ --- непрерывная функция на $\partial \Omega$. Доказать, что $\int_{\partial \Omega}k(x,y)g(y)\, d\sigma(y) \to g(x_0)$, если $x\to x_0\in \partial \Omega$ (это, собственно, и проделывается в обосновании формулы Пуассона).
+\item Пусть $\Omega\subset \real^n$ --- ограниченная область, $k$: $\bar\Omega\times\partial\Omega\to \real^+$ --- непрерывная функция, определённая всюду, кроме диагонали $\{x=y\}$, причем $\dsint_{\partial \Omega}k(\cdot,y) \, d\sigma(y)=1$, и $k(x,y)\to 0$, если $x\to x_0\in \partial \Omega$, равномерно по $y\in B_\delta (x_0)$ (для любого $\delta>0$).
+\item Пусть $g$ --- непрерывная функция на $\partial \Omega$. Доказать, что $\dsint_{\partial \Omega}k(x,y)g(y) \, d\sigma(y) \to g(x_0)$, если $x\to x_0\in \partial \Omega$ (это, собственно, и проделывается в обосновании формулы Пуассона).
 \item Пусть $\Phi$ --- ядро теплопроводности в $\real^+\times \real^n$. Доказать, что $\Phi(\eps, x)\to \delta_0$ в смысле обобщенных функций в $\real^n$, если $\eps \to 0^+$.
 
 \end{enumerate}
